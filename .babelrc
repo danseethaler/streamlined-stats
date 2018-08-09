@@ -1,0 +1,7 @@
+{
+  "presets": ["env"],
+  "plugins": [
+    ["emotion", {"autoLabel": true}, {"labelFormat": "[filename]--[local]"}],
+    "transform-react-jsx"
+  ]
+}
