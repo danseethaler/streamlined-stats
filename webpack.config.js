@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = (env, options) => {
   const isDev = options.mode === 'development';
@@ -9,6 +10,25 @@ module.exports = (env, options) => {
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html',
+    }),
+    new FaviconsWebpackPlugin({
+      logo: './src/assets/favicon.png',
+      persistentCache: true,
+      emitStats: false,
+      inject: true,
+      title: 'Web Base',
+      icons: {
+        android: false,
+        appleIcon: false,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: false,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false,
+      },
     }),
   ];
 

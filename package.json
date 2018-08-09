@@ -6,6 +6,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "precommit": "lint-staged",
     "format": "prettier-package-json --write ./package.json && prettier --config ./.prettierrc --write '{src,__{tests,mocks}__}/**/*.{js,jsx,css,json}'",
     "start": "webpack-dev-server --mode development",
     "test": "jest"
@@ -28,10 +29,12 @@
     "babel-plugin-transform-react-jsx": "6.24.1",
     "babel-preset-env": "1.7.0",
     "css-loader": "1.0.0",
+    "favicons-webpack-plugin": "0.0.9",
     "html-loader": "0.5.5",
     "html-webpack-plugin": "3.2.0",
     "husky": "0.14.3",
     "jest": "23.4.2",
+    "lint-staged": "7.2.0",
     "prettier": "1.14.1",
     "prettier-package-json": "1.6.0",
     "style-loader": "0.22.1",
@@ -40,5 +43,11 @@
     "webpack-cli": "3.1.0",
     "webpack-dev-server": "3.1.5"
   },
-  "keywords": []
+  "keywords": [],
+  "lint-staged": {
+    "*.{js,jsx,json,css,md}": [
+      "npm run format && npm run lint",
+      "git add"
+    ]
+  }
 }
