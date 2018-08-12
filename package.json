@@ -8,7 +8,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "format": "prettier-package-json --write ./package.json && prettier --config ./.prettierrc --write '{src,__{tests,mocks}__}/**/*.{js,jsx,css,json}'",
-    "start": "webpack-dev-server --open --mode development",
+    "start": "webpack-dev-server --open --host 0.0.0.0 --hot --mode development",
     "test": "jest"
   },
   "dependencies": {
