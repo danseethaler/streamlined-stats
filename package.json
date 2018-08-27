@@ -12,6 +12,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/jest": "23.3.1",
+    "@types/lodash": "4.14.116",
+    "@types/react": "16.4.12",
+    "@types/react-router-dom": "4.3.0",
     "babel-polyfill": "6.26.0",
     "emotion": "9.2.6",
     "immer": "1.5.0",
@@ -22,7 +26,11 @@
     "react-router-dom": "4.3.1",
     "react-testing-library": "4.1.7",
     "react-transition-group": "2.4.0",
-    "redux": "4.0.0"
+    "redux": "4.0.0",
+    "ts-loader": "4.5.0",
+    "tslint": "5.11.0",
+    "tslint-config-prettier": "1.15.0",
+    "typescript-babel-jest": "1.0.5"
   },
   "devDependencies": {
     "babel-loader": "7.1.5",
@@ -44,8 +52,13 @@
     "webpack-dev-server": "3.1.5"
   },
   "keywords": [],
+  "jest": {
+    "transform": {
+      "^.+\\.(js|ts)x?$": "typescript-babel-jest"
+    }
+  },
   "lint-staged": {
-    "*.{js,jsx,json,css,md}": [
+    "*.{ts,tsx,js,json,css,md}": [
       "npm run format && npm run lint",
       "git add"
     ]

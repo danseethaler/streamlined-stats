@@ -39,7 +39,7 @@ module.exports = (env, options) => {
       publicPath: '/',
     },
     resolve: {
-      extensions: ['.jsx', '.js', '.json'],
+      extensions: ['.ts', '.tsx', '.js', '.json'],
       mainFiles: ['index'],
     },
     module: {
@@ -59,6 +59,18 @@ module.exports = (env, options) => {
               options: {minimize: true},
             },
           ],
+        },
+        {
+          test: /\.tsx?$/,
+          use: [
+            {
+              loader: 'babel-loader',
+            },
+            {
+              loader: 'ts-loader',
+            },
+          ],
+          exclude: /node_modules/,
         },
         {
           test: /\.jsx?$/,
