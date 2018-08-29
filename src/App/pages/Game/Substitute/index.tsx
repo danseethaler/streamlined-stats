@@ -41,7 +41,6 @@ class Substitute extends React.Component<SubstituteProps, SubstituteState> {
     if (!currentGame) {
       return null;
     }
-    console.log(JSON.stringify(currentGame, null, 4));
     return (
       <div>
         <ColumnContainer>

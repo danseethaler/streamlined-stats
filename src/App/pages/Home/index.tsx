@@ -3,6 +3,7 @@ import {clearState, loadState} from '../../../redux/localStorage';
 import Modal from '../../components/Modal';
 import Games from '../Games';
 import AddGame from './AddGame';
+import download from '../../services/download';
 
 interface HomeState {
   addGameModalOpen: boolean;
@@ -41,6 +42,13 @@ class Home extends React.Component<{}, HomeState> {
           }}
         >
           Clear stored state
+        </button>
+        <button
+          onClick={() => {
+            download();
+          }}
+        >
+          Download Data
         </button>
         <Modal
           open={addGameModalOpen}
