@@ -8,7 +8,9 @@ import {
   StatType,
   StatTypes,
 } from '../../../redux/redux.definitions';
-import {Headline6} from '../../components/Typography';
+import {colors} from '../../components/theme';
+import {Headline5} from '../../components/Typography';
+import {StatButton} from './components';
 
 interface AddPlayerStatProps {
   game: string;
@@ -27,10 +29,18 @@ class AddPlayerStat extends React.Component<AddPlayerStatProps> {
     return (
       <div>
         {map(categoryStats, (categoryStatList, category) => (
-          <div key={category} style={{marginBottom: '1em'}}>
-            <Headline6>{category}</Headline6>
+          <div key={category}>
+            <Headline5
+              style={{
+                padding: '2px',
+                backgroundColor: colors.darkCoolGray,
+                color: colors.white,
+              }}
+            >
+              {category}
+            </Headline5>
             {categoryStatList.map(stat => (
-              <button
+              <StatButton
                 key={stat.shorthand}
                 onClick={() => {
                   const playerStat: PlayerStat = {
@@ -43,7 +53,7 @@ class AddPlayerStat extends React.Component<AddPlayerStatProps> {
                 }}
               >
                 {stat.name}
-              </button>
+              </StatButton>
             ))}
           </div>
         ))}

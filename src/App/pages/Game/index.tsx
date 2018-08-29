@@ -7,7 +7,7 @@ import {Column, ColumnContainer} from '../../components/Bits';
 import Modal from '../../components/Modal';
 import {Headline3} from '../../components/Typography';
 import AddPlayerStat from './AddPlayerStat';
-import {StatDisplay} from './components';
+import {SelectRow, StatDisplay} from './components';
 import Substitute from './Substitute';
 
 interface GameProps extends RouteComponentProps<any> {
@@ -35,40 +35,49 @@ class Game extends React.Component<GameProps, GameState> {
         </Headline3>
         <ColumnContainer>
           <Column>
+            <button
+              onClick={() => {
+                this.setState({subModalOpen: true});
+              }}
+            >
+              Substitute a Player
+            </button>
             {game.rotation.map(player => (
-              <div key={player}>
-                <button
-                  onClick={() => {
-                    this.setState({statModalPlayer: player});
-                  }}
-                >
-                  {player}
-                </button>
-              </div>
+              <SelectRow
+                key={player}
+                selected={this.state.statModalPlayer === player}
+                onClick={() => {
+                  this.setState({statModalPlayer: player});
+                }}
+              >
+                {player}
+              </SelectRow>
             ))}
           </Column>
           <Column>
+            {this.state.statModalPlayer && (
+              <AddPlayerStat
+                onComplete={() => {
+                  this.setState({statModalPlayer: null});
+                }}
+                game={game.id}
+                player={this.state.statModalPlayer}
+              />
+            )}
+          </Column>
+          <Column>
+            <button
+              onClick={() => {
+                this.props.undoLastStat(game.id);
+              }}
+            >
+              Undo last stat
+            </button>
             {game.stats.map((stat, index) => (
               <StatDisplay key={index} {...stat} />
             ))}
           </Column>
-
-          <button
-            onClick={() => {
-              this.props.undoLastStat(game.id);
-            }}
-          >
-            Undo last stat
-          </button>
         </ColumnContainer>
-
-        <button
-          onClick={() => {
-            this.setState({subModalOpen: true});
-          }}
-        >
-          Substitution
-        </button>
 
         <Modal
           // pageSized
@@ -82,26 +91,6 @@ class Game extends React.Component<GameProps, GameState> {
               onComplete={() => {
                 this.setState({subModalOpen: false});
               }}
-            />
-          }
-        />
-
-        <Modal
-          // pageSized
-          open={!!this.state.statModalPlayer}
-          overlayClickCallback={() => {
-            this.setState({
-              statModalPlayer: null,
-            });
-          }}
-          title={this.state.statModalPlayer || ''}
-          content={
-            <AddPlayerStat
-              onComplete={() => {
-                this.setState({statModalPlayer: null});
-              }}
-              game={game.id}
-              player={this.state.statModalPlayer}
             />
           }
         />

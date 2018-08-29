@@ -6,6 +6,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --mode development",
     "precommit": "lint-staged",
     "format": "prettier-package-json --write ./package.json && prettier --config ./.prettierrc --write '{src,__{tests,mocks}__}/**/*.{js,jsx,css,json}'",
     "start": "webpack-dev-server --host=0.0.0.0 --port=3000 --hot --mode development",

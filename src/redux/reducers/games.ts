@@ -34,8 +34,8 @@ export default (state = initialState, action): GamesRedux =>
 
         if (lastStat && lastStat.type === StatTypes.substitute) {
           // Reverse the substitution
-          remove(undoGame.rotation, player => player === action.stat.subIn);
-          undoGame.rotation.push(action.stat.subOut);
+          remove(undoGame.rotation, player => player === lastStat.subIn);
+          undoGame.rotation.push(lastStat.subOut);
         }
 
         break;
