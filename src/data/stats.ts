@@ -4,7 +4,9 @@ export const enum StatShorthands {
   A = 'A', // Ace
   SE = 'SE', // Serving Error
   PTS = 'PTS', // Rotation Points
-  R = 'R', // Receptions
+  R1 = 'R1', // Receptions
+  R2 = 'R2', // Receptions
+  R3 = 'R3', // Receptions
   RE = 'RE', // Reception Errors
   BS = 'BS', // Solo Blocks
   BA = 'BA', // Assisted Blocks
@@ -81,12 +83,27 @@ const stats: StatCategoryType[] = [
     action: StatCategoryActions.calculated,
   },
   {
-    name: 'Reception',
-    shorthand: StatShorthands.R,
+    name: 'Reception - 1',
+    shorthand: StatShorthands.R1,
     description:
       'A service reception is awarded when a player continues play by successfully passing a served ball and the pass does not result in a kill (an overpass) or lead directly to a kill by a teammate (this would be an assist).',
     category: 'Receiving',
-    raking: true,
+    action: StatCategoryActions.player,
+  },
+  {
+    name: 'Reception - 2',
+    shorthand: StatShorthands.R2,
+    description:
+      'A service reception is awarded when a player continues play by successfully passing a served ball and the pass does not result in a kill (an overpass) or lead directly to a kill by a teammate (this would be an assist).',
+    category: 'Receiving',
+    action: StatCategoryActions.player,
+  },
+  {
+    name: 'Reception - 3',
+    shorthand: StatShorthands.R3,
+    description:
+      'A service reception is awarded when a player continues play by successfully passing a served ball and the pass does not result in a kill (an overpass) or lead directly to a kill by a teammate (this would be an assist).',
+    category: 'Receiving',
     action: StatCategoryActions.player,
   },
   {

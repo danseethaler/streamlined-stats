@@ -3,10 +3,11 @@ import {connect} from 'react-redux';
 import players from '../../../../data/players';
 import {addStatAction} from '../../../../redux/actions/games';
 import {StatTypes, SubsitutionStat} from '../../../../redux/redux.definitions';
+import {Column, ColumnContainer} from '../../../components/Bits';
 import {styles} from '../../../components/theme';
 import {Headline6} from '../../../components/Typography';
 import {getCurrentGame} from '../../../services/redux';
-import {Column, ColumnContainer, Player} from './components';
+import {Player} from './components';
 
 interface SubstituteProps {
   onComplete: () => void;

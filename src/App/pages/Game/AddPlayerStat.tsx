@@ -39,7 +39,6 @@ class AddPlayerStat extends React.Component<AddPlayerStatProps> {
                     player: this.props.player,
                   };
                   this.props.addPlayerStat(this.props.game, playerStat);
-                  console.log(this.props.onComplete);
                   this.props.onComplete();
                 }}
               >

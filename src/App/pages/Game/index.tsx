@@ -1,14 +1,18 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
+import {undoLastStatAction} from '../../../redux/actions/games';
 import {GameRedux} from '../../../redux/redux.definitions';
+import {Column, ColumnContainer} from '../../components/Bits';
 import Modal from '../../components/Modal';
 import {Headline3} from '../../components/Typography';
 import AddPlayerStat from './AddPlayerStat';
+import {StatDisplay} from './components';
 import Substitute from './Substitute';
 
 interface GameProps extends RouteComponentProps<any> {
   game: GameRedux;
+  undoLastStat: (game: string) => void;
 }
 
 interface GameState {
@@ -29,19 +33,34 @@ class Game extends React.Component<GameProps, GameState> {
         <Headline3>
           {game.opponent} - Set {game.set}
         </Headline3>
-        <div>
-          {game.rotation.map(player => (
-            <div key={player}>
-              <button
-                onClick={() => {
-                  this.setState({statModalPlayer: player});
-                }}
-              >
-                {player}
-              </button>
-            </div>
-          ))}
-        </div>
+        <ColumnContainer>
+          <Column>
+            {game.rotation.map(player => (
+              <div key={player}>
+                <button
+                  onClick={() => {
+                    this.setState({statModalPlayer: player});
+                  }}
+                >
+                  {player}
+                </button>
+              </div>
+            ))}
+          </Column>
+          <Column>
+            {game.stats.map((stat, index) => (
+              <StatDisplay key={index} {...stat} />
+            ))}
+          </Column>
+
+          <button
+            onClick={() => {
+              this.props.undoLastStat(game.id);
+            }}
+          >
+            Undo last stat
+          </button>
+        </ColumnContainer>
 
         <button
           onClick={() => {
@@ -91,6 +110,9 @@ class Game extends React.Component<GameProps, GameState> {
   }
 }
 
-export default connect(({games}, props) => ({
-  game: games[props.match.params.id],
-}))(Game);
+export default connect(
+  ({games}, props) => ({
+    game: games[props.match.params.id],
+  }),
+  {undoLastStat: undoLastStatAction}
+)(Game);

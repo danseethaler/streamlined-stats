@@ -1,6 +1,6 @@
 import produce from 'immer';
 import {remove} from 'lodash';
-import {ADD_GAME, ADD_STAT} from '../constants';
+import {ADD_GAME, ADD_STAT, UNDO_LAST_STAT} from '../constants';
 import {GamesRedux, StatTypes} from '../redux.definitions';
 
 const initialState = {};
@@ -11,13 +11,11 @@ export default (state = initialState, action): GamesRedux =>
       case ADD_GAME:
         newState[action.game.id] = action.game;
         newState[action.game.id].rotation = action.game.lineup;
+        newState[action.game.id].stats = [];
         break;
 
       case ADD_STAT:
         const statGame = newState[action.game];
-        if (!statGame.stats) {
-          statGame.stats = [];
-        }
 
         // Swap out rotation players on substitute
         if (action.stat.type === StatTypes.substitute) {
@@ -26,6 +24,20 @@ export default (state = initialState, action): GamesRedux =>
         }
 
         statGame.stats.push(action.stat);
+        break;
+
+      case UNDO_LAST_STAT:
+        const undoGame = newState[action.game];
+
+        // Remove the most recent stat from the array
+        const lastStat = undoGame.stats.pop();
+
+        if (lastStat && lastStat.type === StatTypes.substitute) {
+          // Reverse the substitution
+          remove(undoGame.rotation, player => player === action.stat.subIn);
+          undoGame.rotation.push(action.stat.subOut);
+        }
+
         break;
     }
   });
