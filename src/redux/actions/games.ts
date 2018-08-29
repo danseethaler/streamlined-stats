@@ -1,6 +1,16 @@
-import {ADD_GAME} from '../constants';
+import {ADD_GAME, ADD_STAT} from '../constants';
 
-export const toggleSidebar = item => ({
+export const addGameAction = game => ({
   type: ADD_GAME,
-  item,
+  game,
 });
+
+export const addStatAction = data => {
+  const {game, ...stat} = data;
+
+  return {
+    type: ADD_STAT,
+    game,
+    stat,
+  };
+};
