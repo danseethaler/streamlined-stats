@@ -1,7 +1,12 @@
 import {combineReducers} from 'redux';
+import {GamesRedux} from '../redux.definitions';
 import games from './games';
 
-const rootReducer = combineReducers({
+interface ReducerState {
+  games: GamesRedux;
+}
+
+const rootReducer = combineReducers<ReducerState, any>({
   games,
 });
 
