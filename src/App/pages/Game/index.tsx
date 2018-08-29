@@ -60,7 +60,7 @@ class Game extends React.Component<GameProps, GameState> {
           title="Substitute a player"
           content={
             <Substitute
-              onFinished={() => {
+              onComplete={() => {
                 this.setState({subModalOpen: false});
               }}
             />

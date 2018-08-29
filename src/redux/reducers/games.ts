@@ -1,6 +1,7 @@
 import produce from 'immer';
+import {remove} from 'lodash';
 import {ADD_GAME, ADD_STAT} from '../constants';
-import {GamesRedux} from '../redux.definitions';
+import {GamesRedux, StatTypes} from '../redux.definitions';
 
 const initialState = {};
 
@@ -13,10 +14,18 @@ export default (state = initialState, action): GamesRedux =>
         break;
 
       case ADD_STAT:
-        if (!newState[action.game].stats) {
-          newState[action.game].stats = [];
+        const statGame = newState[action.game];
+        if (!statGame.stats) {
+          statGame.stats = [];
         }
-        newState[action.game].stats.push(action.stat);
+
+        // Swap out rotation players on substitute
+        if (action.stat.type === StatTypes.substitute) {
+          remove(statGame.rotation, player => player === action.stat.subOut);
+          statGame.rotation.push(action.stat.subIn);
+        }
+
+        statGame.stats.push(action.stat);
         break;
     }
   });
