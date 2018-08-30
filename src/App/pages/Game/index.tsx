@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {RouteComponentProps} from 'react-router';
+import {RouteComponentProps, Redirect} from 'react-router';
 import {undoLastStatAction} from '../../../redux/actions/games';
 import {GameRedux} from '../../../redux/redux.definitions';
 import {Column, ColumnContainer} from '../../components/Bits';
@@ -28,6 +28,9 @@ class Game extends React.Component<GameProps, GameState> {
 
   public render() {
     const {game} = this.props;
+    if (!game) {
+      return <Redirect to="/" />;
+    }
     return (
       <div>
         <Headline3>
