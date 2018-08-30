@@ -1,9 +1,10 @@
 import React from 'react';
 import {clearState, loadState} from '../../../redux/localStorage';
 import Modal from '../../components/Modal';
-import Games from '../Games';
-import AddGame from './AddGame';
 import download from '../../services/download';
+import AddGame from './AddGame';
+import Games from './Games';
+import Button, {ButtonTypes} from '../../components/Button';
 
 interface HomeState {
   addGameModalOpen: boolean;
@@ -20,36 +21,40 @@ class Home extends React.Component<{}, HomeState> {
     return (
       <div>
         <Games />
-        <button
+        <Button
+          type={ButtonTypes.primary}
           onClick={() => {
             this.setState({addGameModalOpen: true});
           }}
         >
           New Set
-        </button>
-        <button
+        </Button>
+        <Button
+          type={ButtonTypes.gray}
           onClick={() => {
             const state = loadState();
             console.log(JSON.stringify(state, null, 4));
           }}
         >
           Show stored state
-        </button>
-        <button
+        </Button>
+        <Button
+          type={ButtonTypes.danger}
           onClick={() => {
             clearState();
             window.location = window.location;
           }}
         >
           Clear stored state
-        </button>
-        <button
+        </Button>
+        <Button
+          type={ButtonTypes.gray}
           onClick={() => {
             download();
           }}
         >
           Download Data
-        </button>
+        </Button>
         <Modal
           open={addGameModalOpen}
           overlayClickCallback={() => {

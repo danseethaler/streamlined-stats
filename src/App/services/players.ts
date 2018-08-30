@@ -1,5 +1,5 @@
-export interface PlayerStat {
-  number: string;
+interface PlayerType {
+  jersey: string;
   name: string;
   year: string;
   positions: string[];
@@ -7,23 +7,23 @@ export interface PlayerStat {
   captain?: boolean;
 }
 
-const players: PlayerStat[] = [
+export default [
   {
-    number: '2',
+    jersey: '2',
     name: 'Juliann De Jesus',
     year: 'Sr.',
     positions: ['RS', 'OH'],
     height: '5-5',
   },
   {
-    number: '4',
+    jersey: '4',
     name: 'Emma Downing',
     year: 'Jr.',
     positions: ['MB', 'RS'],
     height: '5-11',
   },
   {
-    number: '5',
+    jersey: '5',
     name: 'Macy Henry',
     year: 'Sr.',
     positions: ['S', 'RS'],
@@ -31,63 +31,63 @@ const players: PlayerStat[] = [
     height: '5-8',
   },
   {
-    number: '6',
+    jersey: '6',
     name: 'Kennedy Herold-Rhoe',
     year: 'Sr.',
     positions: ['DS'],
     height: '5-7',
   },
   {
-    number: '7',
+    jersey: '7',
     name: 'Kat Dameron',
     year: 'Jr.',
     positions: ['DS'],
     height: '4-11',
   },
   {
-    number: '8',
+    jersey: '8',
     name: 'Celeste Pasley',
     year: 'Jr.',
     positions: ['OH', 'MB', 'OPP'],
     height: '5-9',
   },
   {
-    number: '9',
+    jersey: '9',
     name: 'Cailyn Thornton',
     year: 'Jr.',
     positions: ['OH', 'DS'],
     height: '5-4',
   },
   {
-    number: '10',
+    jersey: '10',
     name: 'Victoria Dalehite',
     year: 'Jr.',
     positions: ['OH', 'RS'],
     height: '5-7',
   },
   {
-    number: '11',
+    jersey: '11',
     name: 'Lydia Wood',
     year: 'Fr.',
     positions: ['MH', 'OH'],
     height: '5-11',
   },
   {
-    number: '18',
+    jersey: '18',
     name: 'Colby Rabalais',
     year: 'Sr.',
     positions: ['OH', 'DS'],
     height: '5-7',
   },
   {
-    number: '19',
+    jersey: '19',
     name: 'Sarah McCuiston',
     year: 'Sr.',
     positions: ['MB', 'OH'],
     height: '5-11',
   },
   {
-    number: '20',
+    jersey: '20',
     name: 'Rachel Tucker',
     year: 'Sr.',
     positions: ['DS'],
@@ -95,26 +95,24 @@ const players: PlayerStat[] = [
     height: '5-6',
   },
   {
-    number: '1/17',
+    jersey: '1/17',
     name: 'Marlee Rakouskas-Rhoe',
     year: 'So.',
     positions: ['DS', 'OH'],
     height: '5-5',
   },
   {
-    number: '12/14',
+    jersey: '12/14',
     name: 'Haylee Cothran',
     year: 'So.',
     positions: ['DS', 'OH'],
     height: '5-7',
   },
   {
-    number: '15/16',
+    jersey: '15/16',
     name: 'Hannah Weaks',
     year: 'Sr.',
     positions: ['RS', 'OH', 'S'],
     height: '5-8',
   },
-];
-
-export default players;
+] as PlayerType[];

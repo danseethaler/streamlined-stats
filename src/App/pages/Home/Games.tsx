@@ -2,7 +2,7 @@ import {map} from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
-import {GamesRedux} from '../../redux/redux.definitions';
+import {GamesRedux} from '../../../redux/redux.definitions';
 
 const Games = ({games}: {games: GamesRedux}) =>
   map(games, game => (

@@ -1,13 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import players from '../../../../data/players';
 import {addStatAction} from '../../../../redux/actions/games';
 import {StatTypes, SubsitutionStat} from '../../../../redux/redux.definitions';
 import {Column, ColumnContainer} from '../../../components/Bits';
 import {styles} from '../../../components/theme';
 import {Headline6} from '../../../components/Typography';
+import players from '../../../services/players';
 import {getCurrentGame} from '../../../services/redux';
 import {Player} from './components';
+import Button, {ButtonTypes} from '../../../components/Button';
 
 interface SubstituteProps {
   onComplete: () => void;
@@ -47,17 +48,16 @@ class Substitute extends React.Component<SubstituteProps, SubstituteState> {
           <Column>
             <Headline6>Going In</Headline6>
             {players
-              .map(({name}) => name)
-              .filter(player => currentGame.rotation.indexOf(player) === -1)
-              .map(player => (
+              .filter(({name}) => currentGame.rotation.indexOf(name) === -1)
+              .map(({jersey, name}) => (
                 <Player
-                  key={player}
-                  selected={this.state.subIn === player}
+                  key={jersey}
+                  selected={this.state.subIn === name}
                   onClick={() => {
-                    this.setState({subIn: player});
+                    this.setState({subIn: name});
                   }}
                 >
-                  {player}
+                  {name}
                 </Player>
               ))}
           </Column>
@@ -76,7 +76,8 @@ class Substitute extends React.Component<SubstituteProps, SubstituteState> {
             ))}
           </Column>
         </ColumnContainer>
-        <button
+        <Button
+          type={ButtonTypes.primary}
           style={{float: 'right'}}
           onClick={() => {
             this.submit(currentGame.id);
@@ -84,7 +85,7 @@ class Substitute extends React.Component<SubstituteProps, SubstituteState> {
           }}
         >
           Submit
-        </button>
+        </Button>
       </div>
     );
   }

@@ -1,7 +1,5 @@
-import {groupBy, map} from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
-import stats, {StatCategoryActions} from '../../../data/stats';
 import {addStatAction} from '../../../redux/actions/games';
 import {
   PlayerStat,
@@ -10,6 +8,7 @@ import {
 } from '../../../redux/redux.definitions';
 import {colors} from '../../components/theme';
 import {Headline5} from '../../components/Typography';
+import {getManualRecordedStats} from '../../services/stats_definitions';
 import {StatButton} from './components';
 
 interface AddPlayerStatProps {
@@ -21,15 +20,12 @@ interface AddPlayerStatProps {
 
 class AddPlayerStat extends React.Component<AddPlayerStatProps> {
   public render() {
-    const categoryStats = groupBy(
-      stats.filter(({action}) => action === StatCategoryActions.player),
-      stat => stat.category
-    );
+    const statDefinitions = getManualRecordedStats();
 
     return (
       <div>
-        {map(categoryStats, (categoryStatList, category) => (
-          <div key={category}>
+        {statDefinitions.map(category => (
+          <div key={category.name}>
             <Headline5
               style={{
                 padding: '2px',
@@ -37,9 +33,9 @@ class AddPlayerStat extends React.Component<AddPlayerStatProps> {
                 color: colors.white,
               }}
             >
-              {category}
+              {category.name}
             </Headline5>
-            {categoryStatList.map(stat => (
+            {category.stats.map(stat => (
               <StatButton
                 key={stat.shorthand}
                 onClick={() => {

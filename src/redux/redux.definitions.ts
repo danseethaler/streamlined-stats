@@ -1,19 +1,19 @@
-import {StatShorthands} from '../data/stats';
 import {GameAction} from './actions/games';
 
 export const enum StatTypes {
   substitute = 'substitute',
   timeout = 'timeout',
   playerStat = 'playerStat',
+  point = 'point',
 }
 
 export interface PlayerStat {
   type: StatTypes.playerStat;
-  shorthand: StatShorthands;
+  shorthand: string;
   player: string;
 }
 
-const enum UsOrOpponent {
+export const enum UsOrOpponent {
   us = 'us',
   opponent = 'opponent',
 }
@@ -29,7 +29,12 @@ export interface SubsitutionStat {
   subOut: string;
 }
 
-export type StatType = PlayerStat | TimeoutStat | SubsitutionStat;
+export interface PointStat {
+  type: StatTypes.point;
+  team: UsOrOpponent;
+}
+
+export type StatType = PlayerStat | TimeoutStat | SubsitutionStat | PointStat;
 
 export interface GameRedux extends GameAction {
   rotation: string[];

@@ -1,9 +1,11 @@
+import {map} from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps, withRouter} from 'react-router';
-import players from '../../../data/players';
 import {addGameAction, GameAction} from '../../../redux/actions/games';
+import players from '../../services/players';
 import {getUniqueId} from '../../services/unique_id';
+import Button, {ButtonTypes} from '../../components/Button';
 
 interface AddGameProps extends RouteComponentProps<any> {
   addGame: (game: GameAction) => void;
@@ -72,17 +74,17 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
         </div>
         <h4>Lineup</h4>
         <ul>
-          {players.map((player, index) => (
-            <label key={player.number}>
+          {map(players, (player, playerId) => (
+            <label key={player.jersey}>
               <li>
-                <input ref={this.lineupRefs[index]} type="checkbox" />
+                <input ref={this.lineupRefs[playerId]} type="checkbox" />
                 {player.name}
               </li>
             </label>
           ))}
         </ul>
-        <button
-          type="submit"
+        <Button
+          type={ButtonTypes.primary}
           onClick={() => {
             if (this.validateForm()) {
               const gameData = this.getGameData();
@@ -92,7 +94,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
           }}
         >
           Add Set
-        </button>
+        </Button>
 
         {this.state.formError && (
           <React.Fragment>

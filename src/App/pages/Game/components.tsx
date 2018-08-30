@@ -47,7 +47,18 @@ export const StatDisplay = (stat: StatType) => {
     case StatTypes.timeout:
       return (
         <StatContainer>
-          <Paragraph3>{stat.type}</Paragraph3>
+          <Paragraph3>
+            {stat.type} - {stat.team}
+          </Paragraph3>
+        </StatContainer>
+      );
+
+    case StatTypes.point:
+      return (
+        <StatContainer>
+          <Paragraph3>
+            {stat.type} - {stat.team}
+          </Paragraph3>
         </StatContainer>
       );
   }
