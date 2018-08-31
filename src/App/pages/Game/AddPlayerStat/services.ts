@@ -61,6 +61,9 @@ export const getRelevantCategories = () => {
   const statDefinitions = getManualRecordedStats();
 
   const {stats} = getCurrentGame();
+  if (!stats.length) {
+    return statDefinitions;
+  }
 
   const statistic = stats.find(firstRelevantStat);
 
