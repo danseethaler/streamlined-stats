@@ -8,6 +8,7 @@
   "scripts": {
     "build": "webpack --mode development",
     "precommit": "lint-staged",
+    "deploy": "npm run build && firebase deploy",
     "format": "prettier-package-json --write ./package.json && prettier --config ./.prettierrc --write '{src,__{tests,mocks}__}/**/*.{js,jsx,css,json}'",
     "start": "webpack-dev-server --host=0.0.0.0 --port=3000 --hot --mode development",
     "test": "jest"
