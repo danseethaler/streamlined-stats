@@ -36,7 +36,7 @@ export default (state = initialState, action): GamesRedux =>
         const undoGame = newState[action.game];
 
         // Remove the most recent stat from the array
-        const lastStat = undoGame.stats.pop();
+        const lastStat = undoGame.stats.shift();
 
         if (lastStat && lastStat.type === StatTypes.substitute) {
           // Reverse the substitution
