@@ -9,7 +9,7 @@ import {
 } from '../../../../redux/redux.definitions';
 import Button, {ButtonTypes} from '../../../components/Button';
 import Modal from '../../../components/Modal';
-import {ActionContainer, ActionHeader} from './components';
+import {ActionContainer, ActionHeader, ActionSection} from './components';
 import Substitute from './Substitute';
 
 interface GameActionsProps {
@@ -33,7 +33,7 @@ class GameActions extends React.Component<GameActionsProps, GameActionsState> {
 
     return (
       <ActionContainer>
-        <div>
+        <ActionSection>
           <ActionHeader>Record Substitute</ActionHeader>
           <Button
             type={ButtonTypes.primary}
@@ -43,9 +43,9 @@ class GameActions extends React.Component<GameActionsProps, GameActionsState> {
           >
             Substitute a Player
           </Button>
-        </div>
+        </ActionSection>
 
-        <div>
+        <ActionSection>
           <ActionHeader>Record Timeout</ActionHeader>
 
           <Button
@@ -71,9 +71,9 @@ class GameActions extends React.Component<GameActionsProps, GameActionsState> {
           >
             Them
           </Button>
-        </div>
+        </ActionSection>
 
-        <div>
+        <ActionSection>
           <ActionHeader>Adjust Points</ActionHeader>
 
           <Button
@@ -99,7 +99,7 @@ class GameActions extends React.Component<GameActionsProps, GameActionsState> {
           >
             Them
           </Button>
-        </div>
+        </ActionSection>
 
         <Modal
           // pageSized

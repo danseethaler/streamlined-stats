@@ -8,8 +8,13 @@ export const ActionContainer = styled.div({
   borderRight: `1px solid ${colors.extraLightCoolGray}`,
 });
 
+export const ActionSection = styled.div({
+  textAlign: 'center',
+  marginBottom: 8,
+});
+
 export const ActionHeader = styled.h4({
   padding: 6,
-  margin: '15px 0 2px 0',
+  margin: '0 0 4px 0',
   backgroundColor: colors.xxLightCoolGray,
 });

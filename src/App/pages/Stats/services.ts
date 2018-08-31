@@ -33,7 +33,7 @@ const getStatsByPlayer = (games: GameRedux[]) => {
 export const buildStatsTable = (games: GameRedux[]) => {
   const returnTable = {};
   const playerStats = getStatsByPlayer(games);
-  console.log('playerStats', playerStats);
+  // console.log('playerStats', playerStats);
 
   // playerStats.map(({player, shorthand}) => {
   //   if (!returnTable[player]) {

@@ -20,7 +20,7 @@ export interface StatDefinitionType {
   raking?: boolean;
 }
 
-const enum StatCategories {
+export const enum StatCategories {
   General = 'General',
   Serving = 'Serving',
   Receiving = 'Receiving',
