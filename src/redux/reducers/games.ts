@@ -1,6 +1,11 @@
 import produce from 'immer';
 import {remove} from 'lodash';
-import {ADD_GAME, ADD_STAT, UNDO_LAST_STAT} from '../constants';
+import {
+  ADD_GAME,
+  ADD_STAT,
+  UNDO_LAST_STAT,
+  UPDATE_STATS_ORDER,
+} from '../constants';
 import {GamesRedux, StatTypes} from '../redux.definitions';
 
 const initialState = {};
@@ -24,7 +29,7 @@ export default (state = initialState, action): GamesRedux =>
           statGame.rotation.sort();
         }
 
-        statGame.stats.push(action.stat);
+        statGame.stats.unshift(action.stat);
         break;
 
       case UNDO_LAST_STAT:
@@ -39,6 +44,11 @@ export default (state = initialState, action): GamesRedux =>
           undoGame.rotation.push(lastStat.subOut);
           undoGame.rotation.sort();
         }
+
+        break;
+
+      case UPDATE_STATS_ORDER:
+        newState[action.game].stats = action.stats;
 
         break;
     }

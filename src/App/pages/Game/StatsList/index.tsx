@@ -1,41 +1,49 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {arrayMove} from 'react-sortable-hoc';
-import {undoLastStatAction} from '../../../../redux/actions/games';
-import {GameRedux} from '../../../../redux/redux.definitions';
+import {arrayMove, SortableContainer} from 'react-sortable-hoc';
+import {
+  undoLastStatAction,
+  updateStatsOrderAction,
+} from '../../../../redux/actions/games';
+import {GameRedux, StatType} from '../../../../redux/redux.definitions';
 import Button, {ButtonTypes} from '../../../components/Button';
 import {SortableStatItem} from '../components';
+import {StatListContainer} from './components';
 
 interface StatListProps {
   game: GameRedux;
   undoLastStat: (game: string) => void;
+  updateStatsOrder: (game: string, stats: StatType[]) => void;
 }
 
-const StatListItems = ({game}) => (
+const StatListItems = ({items}) => (
   <div
     style={{
       display: 'flex',
-      flexDirection: 'column-reverse',
+      flexDirection: 'column',
+      userSelect: 'none',
     }}
   >
-    {game.stats.map((stat, index) => (
+    {items.map((stat, index) => (
       <SortableStatItem key={index} index={index} {...stat} />
     ))}
   </div>
 );
 
+const SortableStatListItems = SortableContainer(StatListItems);
+
 class StatList extends React.Component<StatListProps> {
   public onReorderStats = ({oldIndex, newIndex}) => {
     const orderedStats = arrayMove(this.props.game.stats, oldIndex, newIndex);
 
-    console.log(JSON.stringify(orderedStats, null, 4));
+    this.props.updateStatsOrder(this.props.game.id, orderedStats);
   };
 
   public render() {
     const {game} = this.props;
 
     return (
-      <div>
+      <StatListContainer>
         <Button
           type={ButtonTypes.danger}
           onClick={() => {
@@ -44,8 +52,13 @@ class StatList extends React.Component<StatListProps> {
         >
           Undo last stat
         </Button>
-        <StatListItems game={game} />
-      </div>
+        <SortableStatListItems
+          onSortEnd={this.onReorderStats}
+          lockAxis="y"
+          useDragHandle
+          items={game.stats}
+        />
+      </StatListContainer>
     );
   }
 }
@@ -54,5 +67,6 @@ export default connect(
   null,
   {
     undoLastStat: undoLastStatAction,
+    updateStatsOrder: updateStatsOrderAction,
   }
 )(StatList);

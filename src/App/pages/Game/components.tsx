@@ -27,10 +27,10 @@ export const StatButton = styled.div({
   },
 });
 
-const StatContainer = styled.div({
+const StatContainerStyle = styled.div({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'flex-start',
+  justifyContent: 'space-between',
   padding: '0.3em',
   marginTop: '0.3em',
   backgroundColor: colors.xxLightCoolGray,
@@ -52,50 +52,56 @@ const StatusDot = styled.div<{status: string}>(({status}) => ({
   backgroundColor: dotColors[status] || dotColors.nill,
 }));
 
-export const SortableStatItem = (stat: StatType) => {
+const SortableHandleItem = SortableHandle(() => (
+  <span style={{cursor: 'pointer'}}>:::</span>
+));
+
+const StatContainer = ({text, status}) => (
+  <StatContainerStyle>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <StatusDot status={status} />
+      <Paragraph3>{text}</Paragraph3>
+    </div>
+    <SortableHandleItem />
+  </StatContainerStyle>
+);
+
+export const SortableStatItem = SortableElement((stat: StatType) => {
   switch (stat.type) {
     case StatTypes.playerStat:
       return (
-        <StatContainer>
-          <StatusDot status={getStatDefinition(stat.shorthand).result} />
-          <Paragraph3>
-            {stat.shorthand} - {stat.player}
-          </Paragraph3>
-        </StatContainer>
+        <StatContainer
+          status={getStatDefinition(stat.shorthand).result}
+          text={`${stat.shorthand} - ${stat.player}`}
+        />
       );
 
     case StatTypes.substitute:
       return (
-        <StatContainer>
-          <StatusDot status="alternative" />
-          <Paragraph3>
-            {stat.subIn} in for {stat.subOut}
-          </Paragraph3>
-        </StatContainer>
+        <StatContainer
+          status="alternative"
+          text={`${stat.subIn} in for ${stat.subOut}`}
+        />
       );
 
     case StatTypes.timeout:
       return (
-        <StatContainer>
-          <StatusDot status="alternative" />
-          <Paragraph3>
-            {stat.type} - {stat.team}
-          </Paragraph3>
-        </StatContainer>
+        <StatContainer status="alternative" text={`Timeout - ${stat.team}`} />
       );
 
     case StatTypes.pointAdjustment:
       return (
-        <StatContainer>
-          <StatusDot
-            status={
-              stat.team === 'us' ? StatResultTypes.point : StatResultTypes.error
-            }
-          />
-          <Paragraph3>
-            {stat.type} - {stat.team}
-          </Paragraph3>
-        </StatContainer>
+        <StatContainer
+          status={
+            stat.team === 'us' ? StatResultTypes.point : StatResultTypes.error
+          }
+          text={`Point Adjustment - ${stat.team}`}
+        />
       );
   }
-};
+});

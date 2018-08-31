@@ -1,4 +1,9 @@
-import {ADD_GAME, ADD_STAT, UNDO_LAST_STAT} from '../constants';
+import {
+  ADD_GAME,
+  ADD_STAT,
+  UNDO_LAST_STAT,
+  UPDATE_STATS_ORDER,
+} from '../constants';
 import {StatType} from '../redux.definitions';
 
 export interface GameAction {
@@ -30,4 +35,10 @@ export const addStatAction = (game, stat: StatType) => dispatch => {
 export const undoLastStatAction = game => ({
   type: UNDO_LAST_STAT,
   game,
+});
+
+export const updateStatsOrderAction = (game, stats) => ({
+  type: UPDATE_STATS_ORDER,
+  game,
+  stats,
 });
