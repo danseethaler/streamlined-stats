@@ -10,7 +10,7 @@ interface MatchStatsProps {
 
 class MatchStats extends React.Component<MatchStatsProps> {
   public render() {
-    // const stats = buildStatsTable(this.props.games);
+    const stats = buildStatsTable(this.props.games);
     return null;
     // return (
     //   <Table>

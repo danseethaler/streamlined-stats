@@ -1,4 +1,4 @@
-import {flatten, groupBy} from 'lodash';
+import {flatten} from 'lodash';
 import {
   GameRedux,
   PlayerStat,
@@ -11,18 +11,29 @@ import {
 const getStatsByPlayer = (games: GameRedux[]) => {
   const statsArray = flatten(games.map(({stats}) => stats));
 
-  const playerStats = statsArray.filter(
-    ({type}) => type === StatTypes.playerStat
-  ) as PlayerStat[];
+  return statsArray.reduce((returnStats, stat) => {
+    if (stat.type !== StatTypes.playerStat) {
+      return returnStats;
+    }
 
-  const statsByPlayer = groupBy(playerStats, 'player');
+    if (!returnStats[stat.player]) {
+      returnStats[stat.player] = {};
+    }
 
-  return statsByPlayer;
+    if (!returnStats[stat.player][stat.shorthand]) {
+      returnStats[stat.player][stat.shorthand] = 0;
+    }
+
+    returnStats[stat.player][stat.shorthand]++;
+
+    return returnStats;
+  }, {});
 };
 
 export const buildStatsTable = (games: GameRedux[]) => {
   const returnTable = {};
   const playerStats = getStatsByPlayer(games);
+  console.log('playerStats', playerStats);
 
   // playerStats.map(({player, shorthand}) => {
   //   if (!returnTable[player]) {
