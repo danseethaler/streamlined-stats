@@ -19,11 +19,13 @@ export const addGameAction = game => ({
   game,
 });
 
-export const addStatAction = (game, stat: StatType) => ({
-  type: ADD_STAT,
-  game,
-  stat,
-});
+export const addStatAction = (game, stat: StatType) => dispatch => {
+  dispatch({
+    type: ADD_STAT,
+    game,
+    stat,
+  });
+};
 
 export const undoLastStatAction = game => ({
   type: UNDO_LAST_STAT,

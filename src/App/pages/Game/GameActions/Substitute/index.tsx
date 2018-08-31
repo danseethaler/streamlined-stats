@@ -1,14 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addStatAction} from '../../../../redux/actions/games';
-import {StatTypes, SubsitutionStat} from '../../../../redux/redux.definitions';
-import {Column, ColumnContainer} from '../../../components/Bits';
-import {styles} from '../../../components/theme';
-import {Headline6} from '../../../components/Typography';
-import players from '../../../services/players';
-import {getCurrentGame} from '../../../services/redux';
+import {addStatAction} from '../../../../../redux/actions/games';
+import {
+  StatTypes,
+  SubsitutionStat,
+} from '../../../../../redux/redux.definitions';
+import {Column, ColumnContainer} from '../../../../components/Bits';
+import Button, {ButtonTypes} from '../../../../components/Button';
+import {styles} from '../../../../components/theme';
+import {Headline6} from '../../../../components/Typography';
+import players from '../../../../services/players';
+import {getCurrentGame} from '../../../../services/redux';
+import {sortByName} from '../../../../services/utilities';
 import {Player} from './components';
-import Button, {ButtonTypes} from '../../../components/Button';
 
 interface SubstituteProps {
   onComplete: () => void;
@@ -47,7 +51,7 @@ class Substitute extends React.Component<SubstituteProps, SubstituteState> {
         <ColumnContainer>
           <Column>
             <Headline6>Going In</Headline6>
-            {players
+            {sortByName(players)
               .filter(({name}) => currentGame.rotation.indexOf(name) === -1)
               .map(({jersey, name}) => (
                 <Player

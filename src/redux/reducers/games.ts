@@ -10,7 +10,7 @@ export default (state = initialState, action): GamesRedux =>
     switch (action.type) {
       case ADD_GAME:
         newState[action.game.id] = action.game;
-        newState[action.game.id].rotation = action.game.lineup;
+        newState[action.game.id].rotation = action.game.lineup.sort();
         newState[action.game.id].stats = [];
         break;
 
@@ -21,6 +21,7 @@ export default (state = initialState, action): GamesRedux =>
         if (action.stat.type === StatTypes.substitute) {
           remove(statGame.rotation, player => player === action.stat.subOut);
           statGame.rotation.push(action.stat.subIn);
+          statGame.rotation.sort();
         }
 
         statGame.stats.push(action.stat);
@@ -36,6 +37,7 @@ export default (state = initialState, action): GamesRedux =>
           // Reverse the substitution
           remove(undoGame.rotation, player => player === lastStat.subIn);
           undoGame.rotation.push(lastStat.subOut);
+          undoGame.rotation.sort();
         }
 
         break;

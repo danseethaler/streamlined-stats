@@ -4,7 +4,7 @@ export const enum StatTypes {
   substitute = 'substitute',
   timeout = 'timeout',
   playerStat = 'playerStat',
-  point = 'point',
+  pointAdjustment = 'pointAdjustment',
 }
 
 export interface PlayerStat {
@@ -29,12 +29,16 @@ export interface SubsitutionStat {
   subOut: string;
 }
 
-export interface PointStat {
-  type: StatTypes.point;
+export interface PointAdjustmentStat {
+  type: StatTypes.pointAdjustment;
   team: UsOrOpponent;
 }
 
-export type StatType = PlayerStat | TimeoutStat | SubsitutionStat | PointStat;
+export type StatType =
+  | PlayerStat
+  | TimeoutStat
+  | SubsitutionStat
+  | PointAdjustmentStat;
 
 export interface GameRedux extends GameAction {
   rotation: string[];
