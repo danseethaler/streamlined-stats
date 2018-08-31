@@ -1,9 +1,9 @@
-import {map} from 'lodash';
+import {sortBy} from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {addGameAction, GameAction} from '../../../redux/actions/games';
-import players from '../../services/players';
+import players, {PlayerType} from '../../services/players';
 import {getUniqueId} from '../../services/unique_id';
 import Button, {ButtonTypes} from '../../components/Button';
 
@@ -21,13 +21,15 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
   private opponentRef: React.RefObject<HTMLInputElement>;
   private setRef: React.RefObject<HTMLInputElement>;
   private lineupRefs: any;
+  private players: PlayerType[];
 
   constructor(props) {
     super(props);
 
     this.opponentRef = React.createRef();
     this.setRef = React.createRef();
-    this.lineupRefs = players.map(() => React.createRef());
+    this.players = sortBy(players, 'name');
+    this.lineupRefs = this.players.map(() => React.createRef());
   }
 
   public validateForm = () => {
@@ -50,7 +52,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
   public getGameData = (): GameAction => {
     const opponent = this.opponentRef.current.value;
     const set = parseInt(this.setRef.current.value, 10);
-    const lineup = players
+    const lineup = this.players
       .filter((player, index) => this.lineupRefs[index].current.checked)
       .map(({name}) => name);
 
@@ -74,10 +76,10 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
         </div>
         <h4>Lineup</h4>
         <ul>
-          {map(players, (player, playerId) => (
+          {this.players.map((player, index) => (
             <label key={player.jersey}>
               <li>
-                <input ref={this.lineupRefs[playerId]} type="checkbox" />
+                <input ref={this.lineupRefs[index]} type="checkbox" />
                 {player.name}
               </li>
             </label>

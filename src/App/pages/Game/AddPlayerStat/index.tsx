@@ -18,48 +18,41 @@ interface AddPlayerStatProps {
   addPlayerStat: (game: string, stat: StatType) => void;
 }
 
-class AddPlayerStat extends React.Component<AddPlayerStatProps> {
-  public render() {
-    const relevantCategories = getRelevantCategories();
-    console.log('relevantCategories', relevantCategories);
-
-    return (
-      <div style={{display: 'flex'}}>
-        {relevantCategories.map(category => (
-          <div key={category.name} style={{flex: 1}}>
-            <Headline5
-              style={{
-                padding: '2px',
-                backgroundColor: colors.darkCoolGray,
-                color: colors.white,
-              }}
-            >
-              {category.name}
-            </Headline5>
-            {category.stats.map(stat => (
-              <StatButton
-                key={stat.shorthand}
-                onClick={() => {
-                  if (this.props.player) {
-                    const playerStat: PlayerStat = {
-                      type: StatTypes.playerStat,
-                      shorthand: stat.shorthand,
-                      player: this.props.player,
-                    };
-                    this.props.addPlayerStat(this.props.game, playerStat);
-                    this.props.onComplete();
-                  }
-                }}
-              >
-                {stat.name}
-              </StatButton>
-            ))}
-          </div>
+const AddPlayerStat = (props: AddPlayerStatProps) => (
+  <div style={{display: 'flex'}}>
+    {getRelevantCategories().map(category => (
+      <div key={category.name} style={{flex: 1}}>
+        <Headline5
+          style={{
+            padding: '2px',
+            backgroundColor: colors.darkCoolGray,
+            color: colors.white,
+          }}
+        >
+          {category.name}
+        </Headline5>
+        {category.stats.map(stat => (
+          <StatButton
+            key={stat.shorthand}
+            onClick={() => {
+              if (props.player) {
+                const playerStat: PlayerStat = {
+                  type: StatTypes.playerStat,
+                  shorthand: stat.shorthand,
+                  player: props.player,
+                };
+                props.addPlayerStat(props.game, playerStat);
+                props.onComplete();
+              }
+            }}
+          >
+            {stat.name}
+          </StatButton>
         ))}
       </div>
-    );
-  }
-}
+    ))}
+  </div>
+);
 
 export default connect(
   null,

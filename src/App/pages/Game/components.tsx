@@ -52,9 +52,11 @@ const StatusDot = styled.div<{status: string}>(({status}) => ({
   backgroundColor: dotColors[status] || dotColors.nill,
 }));
 
-const SortableHandleItem = SortableHandle(() => (
-  <span style={{cursor: 'pointer'}}>:::</span>
-));
+const SortHandler = SortableHandle(
+  styled.span({
+    cursor: 'move',
+  })
+);
 
 const StatContainer = ({text, status}) => (
   <StatContainerStyle>
@@ -67,7 +69,7 @@ const StatContainer = ({text, status}) => (
       <StatusDot status={status} />
       <Paragraph3>{text}</Paragraph3>
     </div>
-    <SortableHandleItem />
+    <SortHandler>:::</SortHandler>
   </StatContainerStyle>
 );
 

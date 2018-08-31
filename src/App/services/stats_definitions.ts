@@ -86,6 +86,42 @@ const statDefinitions: StatCategoryType[] = [
     ],
   },
   {
+    name: StatCategories.Attack,
+    stats: [
+      {
+        name: 'Attack Attempt',
+        shorthand: 'ATT',
+        result: StatResultTypes.nill,
+        description:
+          'Total number of attack attempts during the game (season). An attack attempt is recorded any time a player attempts to attack the ball into the opponents court. The ball may be spiked, set, tipped or hit in the attempt.',
+        recordingType: StatRecordingType.manual,
+      },
+      {
+        name: 'Attack Kill',
+        shorthand: 'K',
+        result: StatResultTypes.point,
+        description:
+          'Total number of kills acquired during the game (season). A kill is awarded to a player any time an attack is unreturnable by the opposing team and is a direct cause of the opposing team not returning the ball. A kill is also awarded to the attacker any time the opposing team commits a blocking error. Any time a kill is awarded, an attack attempt must also be awarded.',
+        recordingType: StatRecordingType.manual,
+      },
+      {
+        name: 'Attack Error',
+        shorthand: 'E',
+        result: StatResultTypes.error,
+        description:
+          'Total number of attack errors during the game (season). An attack error is given any time a player hits the ball out of bounds, into the antennea or into the net. An attack that is blocked and not returned by the attacking team is also an attack error. An attack error is also given if the player commits a net foul, center line violation, lift, carry, or backrow attack. An attack attempt must be given everytime an attack error is recorded.',
+        recordingType: StatRecordingType.manual,
+      },
+      {
+        name: 'Freeball',
+        shorthand: 'FB',
+        result: StatResultTypes.nill,
+        description: 'Number of free balls sent over to the opponent.',
+        recordingType: StatRecordingType.manual,
+      },
+    ],
+  },
+  {
     name: StatCategories.Receiving,
     stats: [
       {
@@ -152,27 +188,6 @@ const statDefinitions: StatCategoryType[] = [
     ],
   },
   {
-    name: StatCategories.Digs,
-    stats: [
-      {
-        name: 'Dig',
-        shorthand: 'D',
-        result: StatResultTypes.nill,
-        description:
-          'Total number of digs during the game (season). A dig is awarded when the player passed the ball that has been attacked by the opposition. When an attack is blocked back into the attacker\'s court, a pass of the blocked ball is NOT considered a dig. Passing a "free ball" (ie- a ball played over the net by an opponent simply attempting to "keep the ball in play" - not score a point) should NOT be recorded as a "dig".',
-        recordingType: StatRecordingType.manual,
-      },
-      {
-        name: 'Dig Error',
-        shorthand: 'DE',
-        result: StatResultTypes.error,
-        description:
-          'Total number of dig errors during the game (season). A dig error is given when an attacked ball hits the floor within the area of the player or the player passes an attacked ball that cannot be controlled and returned to the opposing team.',
-        recordingType: StatRecordingType.manual,
-      },
-    ],
-  },
-  {
     name: StatCategories.BallHandling,
     stats: [
       {
@@ -201,37 +216,22 @@ const statDefinitions: StatCategoryType[] = [
     ],
   },
   {
-    name: StatCategories.Attack,
+    name: StatCategories.Digs,
     stats: [
       {
-        name: 'Attack Attempt',
-        shorthand: 'ATT',
+        name: 'Dig',
+        shorthand: 'D',
         result: StatResultTypes.nill,
         description:
-          'Total number of attack attempts during the game (season). An attack attempt is recorded any time a player attempts to attack the ball into the opponents court. The ball may be spiked, set, tipped or hit in the attempt.',
+          'Total number of digs during the game (season). A dig is awarded when the player passed the ball that has been attacked by the opposition. When an attack is blocked back into the attacker\'s court, a pass of the blocked ball is NOT considered a dig. Passing a "free ball" (ie- a ball played over the net by an opponent simply attempting to "keep the ball in play" - not score a point) should NOT be recorded as a "dig".',
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Attack Kill',
-        shorthand: 'K',
-        result: StatResultTypes.point,
-        description:
-          'Total number of kills acquired during the game (season). A kill is awarded to a player any time an attack is unreturnable by the opposing team and is a direct cause of the opposing team not returning the ball. A kill is also awarded to the attacker any time the opposing team commits a blocking error. Any time a kill is awarded, an attack attempt must also be awarded.',
-        recordingType: StatRecordingType.manual,
-      },
-      {
-        name: 'Attack Error',
-        shorthand: 'E',
+        name: 'Dig Error',
+        shorthand: 'DE',
         result: StatResultTypes.error,
         description:
-          'Total number of attack errors during the game (season). An attack error is given any time a player hits the ball out of bounds, into the antennea or into the net. An attack that is blocked and not returned by the attacking team is also an attack error. An attack error is also given if the player commits a net foul, center line violation, lift, carry, or backrow attack. An attack attempt must be given everytime an attack error is recorded.',
-        recordingType: StatRecordingType.manual,
-      },
-      {
-        name: 'Freeball',
-        shorthand: 'FB',
-        result: StatResultTypes.nill,
-        description: 'Number of free balls sent over to the opponent.',
+          'Total number of dig errors during the game (season). A dig error is given when an attacked ball hits the floor within the area of the player or the player passes an attacked ball that cannot be controlled and returned to the opposing team.',
         recordingType: StatRecordingType.manual,
       },
     ],

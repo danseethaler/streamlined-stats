@@ -1,8 +1,6 @@
-import {map} from 'lodash';
 import React from 'react';
 import {GameRedux} from '../../../redux/redux.definitions';
 import {buildStatsTable} from './services';
-import {Table} from './components';
 
 interface MatchStatsProps {
   games: GameRedux[];
@@ -10,8 +8,8 @@ interface MatchStatsProps {
 
 class MatchStats extends React.Component<MatchStatsProps> {
   public render() {
-    const stats = buildStatsTable(this.props.games);
-    return null;
+    return buildStatsTable(this.props.games);
+
     // return (
     //   <Table>
     //     <thead>

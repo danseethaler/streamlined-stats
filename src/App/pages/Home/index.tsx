@@ -1,10 +1,11 @@
 import React from 'react';
 import {clearState, loadState} from '../../../redux/localStorage';
+import Button, {ButtonTypes} from '../../components/Button';
 import Modal from '../../components/Modal';
 import download from '../../services/download';
 import AddGame from './AddGame';
+import UpdateState from './components/UpdateState';
 import Games from './Games';
-import Button, {ButtonTypes} from '../../components/Button';
 
 interface HomeState {
   addGameModalOpen: boolean;
@@ -62,6 +63,8 @@ class Home extends React.Component<{}, HomeState> {
           }}
           content={<AddGame />}
         />
+        <hr />
+        <UpdateState />
       </div>
     );
   }

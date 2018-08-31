@@ -4,7 +4,6 @@ import {Redirect, RouteComponentProps} from 'react-router';
 import {GameRedux} from '../../../redux/redux.definitions';
 import {Column, ColumnContainer} from '../../components/Bits';
 import {Headline3} from '../../components/Typography';
-import Stats from '../Stats';
 import AddPlayerStat from './AddPlayerStat';
 import {SelectRow} from './components';
 import GameActions from './GameActions';
@@ -73,8 +72,6 @@ class Game extends React.Component<GameProps, GameState> {
             <StatList game={game} />
           </Column>
         </ColumnContainer>
-
-        <Stats games={[game]} />
       </div>
     );
   }

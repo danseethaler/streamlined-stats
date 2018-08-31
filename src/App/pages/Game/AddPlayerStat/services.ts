@@ -22,12 +22,12 @@ const firstRelevantStat = (stat: StatType) => {
 };
 
 const playerStatRelevantNextCategoriesMap = {
-  SA: [StatCategories.Blocking, StatCategories.Digs],
+  SA: [StatCategories.Digs, StatCategories.Blocking, StatCategories.Attack],
   A: [StatCategories.Serving],
   SE: [StatCategories.Receiving],
-  R1: [StatCategories.BallHandling, StatCategories.Attack],
-  R2: [StatCategories.BallHandling, StatCategories.Attack],
-  R3: [StatCategories.BallHandling, StatCategories.Attack],
+  R1: [StatCategories.BallHandling, StatCategories.Attack, StatCategories.Digs],
+  R2: [StatCategories.BallHandling, StatCategories.Attack, StatCategories.Digs],
+  R3: [StatCategories.BallHandling, StatCategories.Attack, StatCategories.Digs],
   RE: [StatCategories.Receiving],
   BS: [StatCategories.Serving],
   BA: [StatCategories.Serving],
@@ -37,10 +37,10 @@ const playerStatRelevantNextCategoriesMap = {
   BHA: [StatCategories.Attack],
   AST: [StatCategories.Attack],
   BHE: [StatCategories.Receiving],
-  ATT: [StatCategories.Blocking, StatCategories.Digs],
+  ATT: [StatCategories.Digs, StatCategories.Blocking],
   K: [StatCategories.Serving],
   E: [StatCategories.Receiving],
-  FB: [StatCategories.Blocking, StatCategories.Digs],
+  FB: [StatCategories.Digs, StatCategories.Blocking],
 };
 
 const getRelevantCategoryNames = stat => {
@@ -61,16 +61,16 @@ export const getRelevantCategories = () => {
   const statDefinitions = getManualRecordedStats();
 
   const {stats} = getCurrentGame();
-  if (!stats.length) {
-    return statDefinitions;
-  }
 
   const statistic = stats.find(firstRelevantStat);
 
-  const relevantCategoryNames = getRelevantCategoryNames(statistic);
-  console.log('relevantCategoryNames', relevantCategoryNames);
+  if (!statistic) {
+    return statDefinitions;
+  }
 
-  return statDefinitions.filter(
-    ({name}) => relevantCategoryNames.indexOf(name) >= 0
+  const relevantCategoryNames = getRelevantCategoryNames(statistic);
+
+  return relevantCategoryNames.map(categoryName =>
+    statDefinitions.find(({name}) => categoryName === name)
   );
 };
