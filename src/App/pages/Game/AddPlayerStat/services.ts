@@ -1,7 +1,7 @@
 import {
   getManualRecordedStats,
   StatCategories,
-} from '../../../services/stats_definitions';
+} from '../../../services/stats/definitions';
 import {getCurrentGame} from '../../../services/redux';
 import {
   StatType,
@@ -67,6 +67,9 @@ export const getRelevantCategories = () => {
   if (!statistic) {
     return statDefinitions;
   }
+
+  // TEMP
+  // return statDefinitions;
 
   const relevantCategoryNames = getRelevantCategoryNames(statistic);
 

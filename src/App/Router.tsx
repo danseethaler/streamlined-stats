@@ -1,4 +1,3 @@
-import {values} from 'lodash';
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import store from '../redux';
@@ -12,7 +11,7 @@ export default () => (
     <Route path="/game/:id" component={Game} />
     <Route
       path="/stats"
-      render={() => <Stats games={values(store.getState().games)} />}
+      render={() => <Stats games={store.getState().games} />}
     />
     <Route path="/stats-info" component={StatsInfo} />} />
     <Route component={Home} />

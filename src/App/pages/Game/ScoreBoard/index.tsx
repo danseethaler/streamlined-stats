@@ -11,7 +11,7 @@ import {ScoreBoardContainer} from './components';
 import {
   getStatDefinition,
   StatResultTypes,
-} from '../../../services/stats_definitions';
+} from '../../../services/stats/definitions';
 
 interface ScoreBoardProps {
   game: GameRedux;

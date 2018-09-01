@@ -1,58 +1,71 @@
+import {filter, map, remove} from 'lodash';
 import React from 'react';
-import {GameRedux} from '../../../redux/redux.definitions';
+import {GamesRedux} from '../../../redux/redux.definitions';
 import {buildStatsTable} from './services';
 
 interface MatchStatsProps {
-  games: GameRedux[];
+  games: GamesRedux;
 }
 
-class MatchStats extends React.Component<MatchStatsProps> {
-  public render() {
-    return buildStatsTable(this.props.games);
+interface MatchStatsState {
+  selectedGames: string[];
+}
 
-    // return (
-    //   <Table>
-    //     <thead>
-    //       <tr>
-    //         <td />
-    //         {[
-    //           'SP',
-    //           'SA',
-    //           'A',
-    //           'SE',
-    //           'PTS',
-    //           'ATT',
-    //           'K',
-    //           'E',
-    //           'R1',
-    //           'R2',
-    //           'R3',
-    //           'RE',
-    //           'BS',
-    //           'BA',
-    //           'BE',
-    //           'BHA',
-    //           'AST',
-    //           'BHE',
-    //           'D',
-    //           'DE',
-    //         ].map(header => (
-    //           <th key={header}>{header}</th>
-    //         ))}
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {map(stats, (cells, player) => (
-    //         <tr key={player}>
-    //           <th>{player}</th>
-    //           {map(cells, (value, shorthand) => (
-    //             <td key={shorthand}>{value}</td>
-    //           ))}
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </Table>
-    // );
+class MatchStats extends React.Component<MatchStatsProps, MatchStatsState> {
+  public state = {
+    selectedGames: [],
+  };
+
+  public handleInputChange = ({target}) => {
+    const {name} = target;
+
+    let selectedGames;
+    if (target.checked) {
+      selectedGames = [...this.state.selectedGames, name];
+    } else {
+      selectedGames = remove(
+        this.state.selectedGames,
+        gameId => gameId !== name
+      );
+    }
+
+    this.setState({selectedGames});
+  };
+
+  public render() {
+    const selectedGames = filter(
+      this.props.games,
+      (game, gameId) => this.state.selectedGames.indexOf(gameId) >= 0
+    );
+
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <div>
+          <ul>
+            {map(this.props.games, (game, gameId) => (
+              <li key={gameId}>
+                <label>
+                  <input
+                    name={gameId}
+                    // value={true}
+                    onChange={this.handleInputChange}
+                    type="checkbox"
+                  />
+                  {game.opponent} - {game.set}
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {buildStatsTable(selectedGames)}
+      </div>
+    );
   }
 }
 

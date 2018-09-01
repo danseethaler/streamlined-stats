@@ -7,7 +7,7 @@ import {Paragraph3} from '../../components/Typography';
 import {
   getStatDefinition,
   StatResultTypes,
-} from '../../services/stats_definitions';
+} from '../../services/stats/definitions';
 
 export const SelectRow = styled.div<{selected: boolean}>(({selected}) => ({
   backgroundColor: selected ? colors.darkCoolGray : colors.white,
@@ -55,6 +55,7 @@ const StatusDot = styled.div<{status: string}>(({status}) => ({
 const SortHandler = SortableHandle(
   styled.span({
     cursor: 'move',
+    marginLeft: 24,
   })
 );
 
