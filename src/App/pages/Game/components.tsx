@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'react-emotion';
 import {SortableElement, SortableHandle} from 'react-sortable-hoc';
-import {StatType, StatTypes} from '../../../redux/redux.definitions';
+import {
+  StatType,
+  StatTypes,
+  UsOrOpponent,
+} from '../../../redux/redux.definitions';
 import {colors} from '../../components/theme';
 import {Paragraph3} from '../../components/Typography';
 import {
@@ -29,9 +33,10 @@ export const StatButton = styled.div({
 
 const StatContainerStyle = styled.div({
   display: 'flex',
+  minWidth: '260px',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '0.3em',
+  padding: '0.3em 0.6em',
   marginTop: '0.3em',
   backgroundColor: colors.xxLightCoolGray,
   borderRadius: '24px 0 0 24px',
@@ -47,7 +52,7 @@ const dotColors = {
 const StatusDot = styled.div<{status: string}>(({status}) => ({
   height: 8,
   width: 8,
-  marginRight: 6,
+  marginRight: 8,
   borderRadius: 4,
   backgroundColor: dotColors[status] || dotColors.nill,
 }));
@@ -98,12 +103,15 @@ export const SortableStatItem = SortableElement((stat: StatType) => {
       );
 
     case StatTypes.pointAdjustment:
+      const text =
+        stat.team === UsOrOpponent.us ? 'Opponent Error' : 'Untracked point';
+
       return (
         <StatContainer
           status={
             stat.team === 'us' ? StatResultTypes.point : StatResultTypes.error
           }
-          text={`Point Adjustment - ${stat.team}`}
+          text={text}
         />
       );
   }
