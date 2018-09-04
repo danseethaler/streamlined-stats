@@ -3,9 +3,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {addGameAction, GameAction} from '../../../redux/actions/games';
+import {TextInput} from '../../components/Bits';
+import Button, {ButtonTypes} from '../../components/Button';
 import players, {PlayerType} from '../../services/players';
 import {getUniqueId} from '../../services/unique_id';
-import Button, {ButtonTypes} from '../../components/Button';
+import {Paragraph3, Headline5} from '../../components/Typography';
 
 interface AddGameProps extends RouteComponentProps<any> {
   addGame: (game: GameAction) => void;
@@ -30,6 +32,10 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
     this.setRef = React.createRef();
     this.players = sortBy(players, 'name');
     this.lineupRefs = this.players.map(() => React.createRef());
+  }
+
+  public componentDidMount() {
+    this.opponentRef.current.select();
   }
 
   public validateForm = () => {
@@ -68,16 +74,21 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
     const {history, addGame} = this.props;
     return (
       <form onSubmit={e => e.preventDefault()}>
-        <div>
-          <input ref={this.opponentRef} placeholder="Opponent" />
-        </div>
-        <div>
-          <input ref={this.setRef} placeholder="Set Number" type="number" />
-        </div>
-        <h4>Lineup</h4>
-        <ul>
+        <Paragraph3>Opponent</Paragraph3>
+        <TextInput innerRef={this.opponentRef} />
+
+        <Paragraph3>Set Number</Paragraph3>
+        <TextInput innerRef={this.setRef} type="number" />
+
+        <Headline5>Lineup</Headline5>
+        <ul style={{display: 'flex', flexWrap: 'wrap'}}>
           {this.players.map((player, index) => (
-            <label key={player.jersey}>
+            <label
+              key={player.jersey}
+              style={{
+                flex: '1 1 50%',
+              }}
+            >
               <li>
                 <input ref={this.lineupRefs[index]} type="checkbox" />
                 {player.name}

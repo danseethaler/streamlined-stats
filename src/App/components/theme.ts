@@ -1,3 +1,8 @@
+import {
+  ArrayInterpolation,
+  ClassInterpolation,
+  CSSObject,
+} from 'create-emotion';
 import {hexToRgb} from '../services/styles';
 
 export const colors = {
@@ -37,3 +42,9 @@ export const styles = {
   extraLightBoxShadow: `0 0.3em 0.5em 0 ${colors.extraLightCoolGray}`,
   sectionHeaderBoxShadow: `0 1px 2px 0 ${colors.extraLightCoolGray}`,
 };
+
+export type StyleType =
+  | TemplateStringsArray
+  | CSSObject
+  | ArrayInterpolation
+  | ClassInterpolation;

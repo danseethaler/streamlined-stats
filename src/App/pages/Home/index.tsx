@@ -58,8 +58,9 @@ class Home extends React.Component<{}, HomeState> {
         </Button>
         <Modal
           open={addGameModalOpen}
+          title="Add Set"
           overlayClickCallback={() => {
-            this.setState({addGameModalOpen: false});
+            this.setState({addGameModalOpen: !this.state.addGameModalOpen});
           }}
           content={<AddGame />}
         />
