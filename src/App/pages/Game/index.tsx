@@ -1,15 +1,15 @@
-import * as React from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-import {Redirect, RouteComponentProps} from 'react-router';
+import {Redirect} from 'react-router';
 import {GameRedux} from '../../../redux/redux.definitions';
 import {Column, ColumnContainer} from '../../components/Bits';
 import {Headline3} from '../../components/Typography';
 import AddPlayerStat from './AddPlayerStat';
-import {SelectRow} from './components';
 import GameActions from './GameActions';
 import ScoreBoard from './ScoreBoard';
 import StatList from './StatsList';
-interface GameProps extends RouteComponentProps<any> {
+
+interface GameProps {
   game: GameRedux;
 }
 
@@ -44,29 +44,8 @@ class Game extends React.Component<GameProps, GameState> {
             <GameActions game={game} />
           </Column>
 
-          <Column>
-            {game.rotation.map(player => (
-              <SelectRow
-                key={player}
-                selected={this.state.statModalPlayer === player}
-                onClick={() => {
-                  this.setState({statModalPlayer: player});
-                }}
-              >
-                {player}
-              </SelectRow>
-            ))}
-          </Column>
           <Column flex={2}>
-            {
-              <AddPlayerStat
-                onComplete={() => {
-                  this.setState({statModalPlayer: null});
-                }}
-                game={game.id}
-                player={this.state.statModalPlayer}
-              />
-            }
+            <AddPlayerStat game={game} />
           </Column>
           <Column>
             <StatList game={game} />

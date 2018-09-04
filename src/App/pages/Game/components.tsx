@@ -13,16 +13,6 @@ import {
   StatResultTypes,
 } from '../../services/stats/definitions';
 
-export const SelectRow = styled.div<{selected: boolean}>(({selected}) => ({
-  backgroundColor: selected ? colors.darkCoolGray : colors.white,
-  color: selected ? colors.white : colors.black,
-  padding: '1em',
-  cursor: 'pointer',
-  ':hover': {
-    backgroundColor: selected ? colors.darkCoolGray : colors.lightCoolGray,
-  },
-}));
-
 export const StatButton = styled.div({
   padding: '0.5em',
   cursor: 'pointer',
@@ -64,17 +54,21 @@ const SortHandler = SortableHandle(
   })
 );
 
+export const StatTextWithDot = ({text, status}) => (
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+    }}
+  >
+    <StatusDot status={status} />
+    <Paragraph3>{text}</Paragraph3>
+  </div>
+);
+
 const StatContainer = ({text, status}) => (
   <StatContainerStyle>
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
-      <StatusDot status={status} />
-      <Paragraph3>{text}</Paragraph3>
-    </div>
+    <StatTextWithDot text={text} status={status} />
     <SortHandler>:::</SortHandler>
   </StatContainerStyle>
 );

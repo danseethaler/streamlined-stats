@@ -37,7 +37,7 @@ export const enum StatCategories {
   Attack = 'Attack',
 }
 
-interface StatCategoryType {
+export interface StatCategoryType {
   name: StatCategories;
   stats: StatDefinitionType[];
 }
@@ -60,7 +60,7 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.Serving,
     stats: [
       {
-        name: 'Service Attempt',
+        name: 'Attempt',
         shorthand: 'SA',
         calculator: getStatCount(['SA', 'A', 'SE']),
         result: StatResultTypes.nill,
@@ -78,7 +78,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Serving Error',
+        name: 'Error',
         shorthand: 'SE',
         calculator: getStatCount(['SE']),
         result: StatResultTypes.error,
@@ -133,7 +133,7 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.Attack,
     stats: [
       {
-        name: 'Attack Attempt',
+        name: 'Attempt',
         shorthand: 'ATT',
         calculator: getStatCount(['ATT', 'K', 'E']),
         result: StatResultTypes.nill,
@@ -142,7 +142,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Attack Kill',
+        name: 'Kill',
         shorthand: 'K',
         calculator: getStatCount(['K']),
         result: StatResultTypes.point,
@@ -151,7 +151,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Attack Error',
+        name: 'Error',
         shorthand: 'E',
         calculator: getStatCount(['E']),
         result: StatResultTypes.error,
@@ -173,7 +173,7 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.Receiving,
     stats: [
       {
-        name: 'Reception - 1',
+        name: '1',
         shorthand: 'R1',
         calculator: getStatCount(['R1']),
         result: StatResultTypes.nill,
@@ -182,7 +182,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Reception - 2',
+        name: '2',
         shorthand: 'R2',
         calculator: getStatCount(['R2']),
         result: StatResultTypes.nill,
@@ -191,7 +191,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Reception - 3',
+        name: '3',
         shorthand: 'R3',
         calculator: getStatCount(['R3']),
         result: StatResultTypes.nill,
@@ -200,7 +200,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Reception Error',
+        name: 'Error',
         shorthand: 'RE',
         calculator: getStatCount(['RE']),
         result: StatResultTypes.error,
@@ -214,7 +214,7 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.Blocking,
     stats: [
       {
-        name: 'Solo Block',
+        name: 'Solo',
         shorthand: 'BS',
         calculator: getStatCount(['BS']),
         result: StatResultTypes.point,
@@ -223,7 +223,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Assisted Block',
+        name: 'Assisted',
         shorthand: 'BA',
         calculator: getStatCount(['BA']),
         result: StatResultTypes.point,
@@ -232,7 +232,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Block Error',
+        name: 'Error',
         shorthand: 'BE',
         calculator: getStatCount(['BE']),
         result: StatResultTypes.error,
@@ -246,7 +246,7 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.BallHandling,
     stats: [
       {
-        name: 'Ball Handling Attempt',
+        name: 'Attempt',
         shorthand: 'BHA',
         calculator: getStatCount(['BHA']),
         result: StatResultTypes.nill,
@@ -263,7 +263,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Ball Handling Error',
+        name: 'Error',
         shorthand: 'BHE',
         calculator: getStatCount(['BHE']),
         result: StatResultTypes.error,
@@ -286,7 +286,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Dig Error',
+        name: 'Error',
         shorthand: 'DE',
         calculator: getStatCount(['DE']),
         result: StatResultTypes.error,

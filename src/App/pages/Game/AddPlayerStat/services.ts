@@ -1,13 +1,14 @@
 import {
-  getManualRecordedStats,
-  StatCategories,
-} from '../../../services/stats/definitions';
-import {getCurrentGame} from '../../../services/redux';
-import {
   StatType,
   StatTypes,
   UsOrOpponent,
 } from '../../../../redux/redux.definitions';
+import {getCurrentGame} from '../../../services/redux';
+import {
+  getManualRecordedStats,
+  StatCategories,
+  StatCategoryType,
+} from '../../../services/stats/definitions';
 
 const firstRelevantStat = (stat: StatType) => {
   switch (stat.type) {
@@ -57,7 +58,7 @@ const getRelevantCategoryNames = stat => {
   }
 };
 
-export const getRelevantCategories = () => {
+export const getRelevantCategories = (): StatCategoryType[] => {
   const statDefinitions = getManualRecordedStats();
 
   const {stats} = getCurrentGame();
