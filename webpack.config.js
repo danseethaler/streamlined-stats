@@ -90,7 +90,11 @@ module.exports = (env, options) => {
           loader: 'svg-sprite-loader',
         },
         {
-          test: /\.woff$/,
+          test: /\.woff/,
+          loader: 'url-loader',
+        },
+        {
+          test: /\.png$/,
           loader: 'url-loader',
         },
       ],

@@ -9,14 +9,18 @@ import {
 } from '../../../../redux/redux.definitions';
 import {colors} from '../../../components/theme';
 import {Headline4} from '../../../components/Typography';
+import {getPlayerData} from '../../../services/players';
 import {StatTextWithDot} from '../components';
 import {
   AddStatContainer,
-  SelectRow,
+  PlayerImage,
+  PlayerRow,
+  PlayersContainer,
   SelectStatButton,
   StatCategoryItemsContainer,
   StatsCategoryContainer,
   StatsContainer,
+  SelectedCircle,
 } from './components';
 import {getRelevantCategories} from './services';
 
@@ -48,7 +52,7 @@ class AddPlayerStat extends React.Component<
       <AddStatContainer>
         <StatsContainer>
           {getRelevantCategories().map(category => (
-            <StatsCategoryContainer>
+            <StatsCategoryContainer key={category.name}>
               <Headline4
                 style={{
                   padding: '2px 0.5em',
@@ -59,7 +63,7 @@ class AddPlayerStat extends React.Component<
               >
                 {category.name}
               </Headline4>
-              <StatCategoryItemsContainer key={category.name}>
+              <StatCategoryItemsContainer>
                 {category.stats.map(({shorthand, name, result}) => (
                   <SelectStatButton
                     key={shorthand}
@@ -90,34 +94,44 @@ class AddPlayerStat extends React.Component<
             </StatsCategoryContainer>
           ))}
         </StatsContainer>
-        <div>
-          {game.rotation.map(player => (
-            <SelectRow
-              key={player}
-              selected={this.state.selectedPlayer === player}
-              onClick={() => {
-                if (this.state.selectedStat) {
-                  const playerStat: PlayerStat = {
-                    type: StatTypes.playerStat,
-                    shorthand: this.state.selectedStat,
-                    player,
-                  };
+        <PlayersContainer>
+          {game.rotation.map(player => {
+            const {jersey, photoPath} = getPlayerData(player);
 
-                  addPlayerStat(game.id, playerStat);
-                  this.setState(initialState);
-                } else {
-                  if (this.state.selectedPlayer !== player) {
-                    this.setState({selectedPlayer: player});
+            return (
+              <PlayerRow
+                key={player}
+                selected={this.state.selectedPlayer === player}
+                onClick={() => {
+                  if (this.state.selectedStat) {
+                    const playerStat: PlayerStat = {
+                      type: StatTypes.playerStat,
+                      shorthand: this.state.selectedStat,
+                      player,
+                    };
+
+                    addPlayerStat(game.id, playerStat);
+                    this.setState(initialState);
                   } else {
-                    this.setState({selectedPlayer: null});
+                    if (this.state.selectedPlayer !== player) {
+                      this.setState({selectedPlayer: player});
+                    } else {
+                      this.setState({selectedPlayer: null});
+                    }
                   }
-                }
-              }}
-            >
-              {player}
-            </SelectRow>
-          ))}
-        </div>
+                }}
+              >
+                {jersey} | {player}
+                <div style={{display: 'flex'}}>
+                  <PlayerImage src={photoPath} />
+                  <SelectedCircle
+                    selected={this.state.selectedPlayer === player}
+                  />
+                </div>
+              </PlayerRow>
+            );
+          })}
+        </PlayersContainer>
       </AddStatContainer>
     );
   }
