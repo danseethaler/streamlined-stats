@@ -2,7 +2,7 @@ import {map} from 'lodash';
 import React from 'react';
 import {GameRedux} from '../../../redux/redux.definitions';
 import players, {PlayerType} from '../../services/players';
-import {getStatCategoryDefinitions} from '../../services/stats/definitions';
+import {getStatCategoryDefinitions} from '../../services/stats/categories';
 import calculatePlayerStats from './calculatePlayerStats';
 
 interface PlayerStat {

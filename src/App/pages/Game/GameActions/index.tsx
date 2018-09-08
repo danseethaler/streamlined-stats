@@ -110,6 +110,7 @@ class GameActions extends React.Component<GameActionsProps, GameActionsState> {
           title="Substitute a player"
           content={
             <Substitute
+              game={game}
               onComplete={() => {
                 this.setState({subModalOpen: false});
               }}

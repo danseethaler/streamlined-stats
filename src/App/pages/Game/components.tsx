@@ -8,10 +8,8 @@ import {
 } from '../../../redux/redux.definitions';
 import {colors} from '../../components/theme';
 import {Paragraph3} from '../../components/Typography';
-import {
-  getStatDefinition,
-  StatResultTypes,
-} from '../../services/stats/definitions';
+import {getStatDefinition} from '../../services/stats/categories';
+import {StatResultTypes} from '../../services/stats/stats.definitions';
 
 export const StatButton = styled.div({
   padding: '0.5em',

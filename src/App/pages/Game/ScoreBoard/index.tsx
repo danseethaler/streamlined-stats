@@ -1,4 +1,3 @@
-import {groupBy} from 'lodash';
 import React from 'react';
 import {
   GameRedux,
@@ -7,11 +6,9 @@ import {
   UsOrOpponent,
 } from '../../../../redux/redux.definitions';
 import {Headline4} from '../../../components/Typography';
+import {getStatDefinition} from '../../../services/stats/categories';
+import {StatResultTypes} from '../../../services/stats/stats.definitions';
 import {ScoreBoardContainer} from './components';
-import {
-  getStatDefinition,
-  StatResultTypes,
-} from '../../../services/stats/definitions';
 
 interface ScoreBoardProps {
   game: GameRedux;

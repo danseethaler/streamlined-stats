@@ -1,5 +1,5 @@
 import {StatTypes} from '../../../../redux/redux.definitions';
-import {StatCategories} from '../../../services/stats/definitions';
+import {StatCategories} from '../../../services/stats/stats.definitions';
 import {getCurrentStatCategoryOptions} from './services';
 
 describe('getCurrentStatCategoryOptions', () => {

@@ -1,5 +1,5 @@
 import {GameRedux} from '../../../redux/redux.definitions';
-import {getStatDefinitions} from '../../services/stats/definitions';
+import {getStatDefinitions} from '../../services/stats/categories';
 
 interface PlayerStat {
   shorthand: string;

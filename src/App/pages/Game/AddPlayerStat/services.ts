@@ -1,15 +1,16 @@
 import {
-  GameRedux,
   StatType,
   StatTypes,
   UsOrOpponent,
 } from '../../../../redux/redux.definitions';
 import {
+  getCategoriesByName,
   getManualRecordedStats,
+} from '../../../services/stats/categories';
+import {
   StatCategories,
   StatCategoryType,
-  getCategoriesByName,
-} from '../../../services/stats/definitions';
+} from '../../../services/stats/stats.definitions';
 import {CurrentPlayStatus} from './add_player_stat.definitions';
 
 const getFirstRelevantStat = (stats: StatType[]) =>

@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {addStatAction} from '../../../../../redux/actions/games';
 import {
+  GameRedux,
   StatTypes,
   SubsitutionStat,
 } from '../../../../../redux/redux.definitions';
@@ -10,13 +11,13 @@ import Button, {ButtonTypes} from '../../../../components/Button';
 import {styles} from '../../../../components/theme';
 import {Headline6} from '../../../../components/Typography';
 import players from '../../../../services/players';
-import {getCurrentGame} from '../../../../services/redux';
 import {sortByName} from '../../../../services/utilities';
 import {Player} from './components';
 
 interface SubstituteProps {
   onComplete: () => void;
   substitute: (game: string, sub: SubsitutionStat) => void;
+  game: GameRedux;
 }
 
 interface SubstituteState {
@@ -42,17 +43,15 @@ class Substitute extends React.Component<SubstituteProps, SubstituteState> {
   };
 
   public render() {
-    const currentGame = getCurrentGame();
-    if (!currentGame) {
-      return null;
-    }
+    const {game} = this.props;
+
     return (
       <div>
         <ColumnContainer>
           <Column>
             <Headline6>Going In</Headline6>
             {sortByName(players)
-              .filter(({name}) => currentGame.rotation.indexOf(name) === -1)
+              .filter(({name}) => game.rotation.indexOf(name) === -1)
               .map(({jersey, name}) => (
                 <Player
                   key={jersey}
@@ -67,7 +66,7 @@ class Substitute extends React.Component<SubstituteProps, SubstituteState> {
           </Column>
           <Column style={{borderLeft: styles.lightBorder}}>
             <Headline6>Coming Out</Headline6>
-            {currentGame.rotation.map(player => (
+            {game.rotation.map(player => (
               <Player
                 key={player}
                 selected={this.state.subOut === player}
@@ -84,7 +83,7 @@ class Substitute extends React.Component<SubstituteProps, SubstituteState> {
           type={ButtonTypes.primary}
           style={{float: 'right'}}
           onClick={() => {
-            this.submit(currentGame.id);
+            this.submit(game.id);
             this.props.onComplete();
           }}
         >
