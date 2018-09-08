@@ -17,10 +17,11 @@ export const addGameAction = game => ({
   game,
 });
 
-export const addStatAction = (game, stat: StatType) => ({
+export const addStatAction = (game, stat: StatType, insertBefore = false) => ({
   type: ADD_STAT,
   game,
   stat,
+  insertBefore,
 });
 
 export const undoLastStatAction = game => ({

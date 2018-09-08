@@ -274,8 +274,25 @@ const flatStatDefinitions = statDefinitions.reduce(
   []
 );
 
-export const getStatDefinition = (shorthandArg): StatDefinitionType =>
-  flatStatDefinitions.find(({shorthand}) => shorthand === shorthandArg);
+interface StatDefinitionWithCategory extends StatDefinitionType {
+  category: StatCategories;
+}
+
+export const getStatDefinition = (shorthandArg): StatDefinitionWithCategory => {
+  let stat;
+  const category = statDefinitions.filter(({stats, name}) => {
+    const statMatch = stats.find(({shorthand}) => shorthand === shorthandArg);
+    if (statMatch) {
+      stat = statMatch;
+      return true;
+    }
+  });
+
+  return {
+    ...stat,
+    category: category[0].name,
+  };
+};
 
 export const getStatCategoryDefinitions = () => cloneDeep(statDefinitions);
 

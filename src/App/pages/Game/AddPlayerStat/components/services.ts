@@ -4,6 +4,7 @@ import {
   StatType,
   StatTypes,
   UsOrOpponent,
+  GameRedux,
 } from '../../../../../redux/redux.definitions';
 import {whoScoredFromStat} from '../../../../../redux/services';
 
@@ -13,9 +14,11 @@ const rotatePlayers = rotation => {
 };
 
 export const getFormattedRotation = (
-  rotation: string[],
+  game: GameRedux,
   swapped: boolean
 ): string[] => {
+  const rotation = getRotation(game.lineup, game.stats, game.serveFirst);
+
   if (swapped) {
     return [
       rotation[4],

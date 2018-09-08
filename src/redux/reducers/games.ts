@@ -28,7 +28,12 @@ export default (state = initialState, action): GamesRedux =>
           statGame.rotation.splice(currentPlayerIndex, 1, action.stat.subIn);
         }
 
-        statGame.stats.unshift(action.stat);
+        if (action.insertBefore) {
+          // Put the stat before the most recent stat
+          statGame.stats.splice(1, 0, action.stat);
+        } else {
+          statGame.stats.unshift(action.stat);
+        }
         break;
 
       case UNDO_LAST_STAT:

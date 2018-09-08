@@ -2,10 +2,12 @@ import {
   StatType,
   StatTypes,
   UsOrOpponent,
+  PlayerStat,
 } from '../../../../redux/redux.definitions';
 import {
   getCategoriesByName,
   getManualRecordedStats,
+  getStatDefinition,
 } from '../../../services/stats/categories';
 import {
   StatCategories,
@@ -104,4 +106,37 @@ export const getCurrentStatCategoryOptions = (
   const currentPlayStatus = getCurrentPlayStatusFromStat(firstReferenceStat);
 
   return getCategoryOptions(currentPlayStatus);
+};
+
+export const statIsMissingBallHandling = (stats: StatType[]): boolean => {
+  const playerStats = stats.filter(
+    ({type}) => type === StatTypes.playerStat
+  ) as PlayerStat[];
+
+  const [lastStat, secondToLastStat] = playerStats;
+  if (
+    lastStat &&
+    getStatDefinition(lastStat.shorthand).category === StatCategories.Attack
+  ) {
+    if (
+      !secondToLastStat ||
+      getStatDefinition(secondToLastStat.shorthand).category !==
+        StatCategories.BallHandling
+    ) {
+      return true;
+    }
+  }
+  return false;
+};
+
+export const getShorthandBallHandlingFromAttack = (shorthand: string) => {
+  switch (shorthand) {
+    case 'E':
+    case 'FB':
+    case 'ATT':
+      return 'BHA';
+
+    case 'K':
+      return 'AST';
+  }
 };
