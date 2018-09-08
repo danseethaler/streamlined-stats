@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'react-emotion';
-import {IoIosArrowRoundBack} from 'react-icons/io';
+import {IconType} from 'react-icons';
 import {TRANSITION_ALL} from '../constants';
 import {colors, styles} from '../theme';
 
@@ -8,7 +8,7 @@ const StyledBackButton = styled.button({
   background: styles.primaryButtonBackground,
   border: 'none',
   borderRadius: '2em',
-  minWidth: '250px',
+  width: 250,
   cursor: 'pointer',
   display: 'flex',
   alignItems: 'center',
@@ -36,13 +36,15 @@ const SpanSpacer = styled.span<{
   fontSize: '1.2em',
 }));
 
-const ButtonNew: React.SFC<{text: string; onClick: () => void}> = ({
-  text,
-  onClick,
-}) => (
+const ButtonNew: React.SFC<{
+  icon?: IconType;
+  text?: string;
+  onClick: () => void;
+}> = ({icon: Icon, text, onClick}) => (
   <StyledBackButton onClick={onClick}>
-    <IoIosArrowRoundBack color={colors.white} size={34} />
-    <SpanSpacer left={12}>{text}</SpanSpacer>
+    {Icon && <Icon color={colors.white} size={34} />}
+    {text && <SpanSpacer left={12}>{text}</SpanSpacer>}
   </StyledBackButton>
 );
+
 export default ButtonNew;

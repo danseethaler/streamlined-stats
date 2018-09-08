@@ -3,12 +3,16 @@ import styled from 'react-emotion';
 import {IoIosCheckmark} from 'react-icons/io';
 import {colors} from '../../../../components/theme';
 
-export const SelectPlayerContainer = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-  borderLeft: '5px solid gray',
-  paddingLeft: '0.5em',
-});
+export const SelectPlayerContainer = styled.div<{swapped: boolean}>(
+  ({swapped}) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    paddingLeft: '0.5em',
+    ...(swapped
+      ? {borderRight: '5px solid gray'}
+      : {borderLeft: '5px solid gray'}),
+  })
+);
 
 export const AddStatContainer = styled.div({
   display: 'flex',

@@ -18,10 +18,12 @@ interface AddPlayerStatProps {
 
 interface AddPlayerStatState {
   selectedStat: null | string;
+  courtSwapped: boolean;
 }
 
 const initialState = {
   selectedStat: null,
+  courtSwapped: false,
 };
 
 class AddPlayerStat extends React.Component<
@@ -30,13 +32,20 @@ class AddPlayerStat extends React.Component<
 > {
   public state = initialState;
 
+  public toggleCourtSides = () => {
+    this.setState({courtSwapped: !this.state.courtSwapped});
+  };
+
   public render() {
     const {addPlayerStat, game} = this.props;
+    const {courtSwapped} = this.state;
 
     return (
       <AddStatContainer>
         {this.state.selectedStat ? (
           <SelectPlayer
+            swapCourtSides={this.toggleCourtSides}
+            courtSwapped={courtSwapped}
             game={game}
             cancel={() => {
               this.setState(initialState);

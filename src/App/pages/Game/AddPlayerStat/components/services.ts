@@ -12,6 +12,31 @@ const rotatePlayers = rotation => {
   rotation.push(lastServer);
 };
 
+export const getFormattedRotation = (
+  rotation: string[],
+  swapped: boolean
+): string[] => {
+  if (swapped) {
+    return [
+      rotation[4],
+      rotation[3],
+      rotation[5],
+      rotation[2],
+      rotation[0],
+      rotation[1],
+    ];
+  }
+
+  return [
+    rotation[1],
+    rotation[0],
+    rotation[2],
+    rotation[5],
+    rotation[3],
+    rotation[4],
+  ];
+};
+
 export const getRotation = (
   lineup: string[],
   stats: StatType[],
