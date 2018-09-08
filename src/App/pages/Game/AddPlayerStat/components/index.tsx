@@ -3,6 +3,11 @@ import styled from 'react-emotion';
 import {IoIosCheckmark} from 'react-icons/io';
 import {colors} from '../../../../components/theme';
 
+export const SelectPlayerContainer = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+});
+
 export const AddStatContainer = styled.div({
   display: 'flex',
 });

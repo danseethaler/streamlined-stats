@@ -17,12 +17,10 @@ interface AddPlayerStatProps {
 }
 
 interface AddPlayerStatState {
-  selectedPlayer: null | string;
   selectedStat: null | string;
 }
 
 const initialState = {
-  selectedPlayer: null,
   selectedStat: null,
 };
 
@@ -40,6 +38,9 @@ class AddPlayerStat extends React.Component<
         {this.state.selectedStat ? (
           <SelectPlayer
             game={game}
+            cancel={() => {
+              this.setState(initialState);
+            }}
             selectedStat={this.state.selectedStat}
             selectPlayer={player => {
               const playerStat: PlayerStat = {
@@ -49,7 +50,7 @@ class AddPlayerStat extends React.Component<
               };
 
               addPlayerStat(game.id, playerStat);
-              this.setState({selectedStat: null});
+              this.setState(initialState);
             }}
           />
         ) : (
