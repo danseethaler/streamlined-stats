@@ -7,22 +7,9 @@ import {
   StatType,
   StatTypes,
 } from '../../../../redux/redux.definitions';
-import {colors} from '../../../components/theme';
-import {Headline4} from '../../../components/Typography';
-import {getPlayerData} from '../../../services/players';
-import {StatTextWithDot} from '../components';
-import {
-  AddStatContainer,
-  PlayerImage,
-  PlayerRow,
-  PlayersContainer,
-  SelectStatButton,
-  StatCategoryItemsContainer,
-  StatsCategoryContainer,
-  StatsContainer,
-  SelectedCircle,
-} from './components';
-import {getRelevantCategories} from './services';
+import {AddStatContainer} from './components';
+import SelectPlayer from './components/SelectPlayer';
+import SelectStat from './components/SelectStat';
 
 interface AddPlayerStatProps {
   game: GameRedux;
@@ -50,88 +37,30 @@ class AddPlayerStat extends React.Component<
 
     return (
       <AddStatContainer>
-        <StatsContainer>
-          {getRelevantCategories().map(category => (
-            <StatsCategoryContainer key={category.name}>
-              <Headline4
-                style={{
-                  padding: '2px 0.5em',
-                  backgroundColor: colors.extraLightCoolGray,
-                  color: colors.darkCoolGray,
-                  fontWeight: 400,
-                }}
-              >
-                {category.name}
-              </Headline4>
-              <StatCategoryItemsContainer>
-                {category.stats.map(({shorthand, name, result}) => (
-                  <SelectStatButton
-                    key={shorthand}
-                    selected={this.state.selectedStat === shorthand}
-                    onClick={() => {
-                      if (this.state.selectedPlayer) {
-                        const playerStat: PlayerStat = {
-                          type: StatTypes.playerStat,
-                          shorthand,
-                          player: this.state.selectedPlayer,
-                        };
+        {this.state.selectedStat ? (
+          <SelectPlayer
+            game={game}
+            selectedStat={this.state.selectedStat}
+            selectPlayer={player => {
+              const playerStat: PlayerStat = {
+                type: StatTypes.playerStat,
+                shorthand: this.state.selectedStat,
+                player,
+              };
 
-                        addPlayerStat(game.id, playerStat);
-                        this.setState(initialState);
-                      } else {
-                        if (this.state.selectedStat !== shorthand) {
-                          this.setState({selectedStat: shorthand});
-                        } else {
-                          this.setState({selectedStat: null});
-                        }
-                      }
-                    }}
-                  >
-                    <StatTextWithDot text={name} status={result} />
-                  </SelectStatButton>
-                ))}
-              </StatCategoryItemsContainer>
-            </StatsCategoryContainer>
-          ))}
-        </StatsContainer>
-        <PlayersContainer>
-          {game.rotation.map(player => {
-            const {jersey, photoPath} = getPlayerData(player);
-
-            return (
-              <PlayerRow
-                key={player}
-                selected={this.state.selectedPlayer === player}
-                onClick={() => {
-                  if (this.state.selectedStat) {
-                    const playerStat: PlayerStat = {
-                      type: StatTypes.playerStat,
-                      shorthand: this.state.selectedStat,
-                      player,
-                    };
-
-                    addPlayerStat(game.id, playerStat);
-                    this.setState(initialState);
-                  } else {
-                    if (this.state.selectedPlayer !== player) {
-                      this.setState({selectedPlayer: player});
-                    } else {
-                      this.setState({selectedPlayer: null});
-                    }
-                  }
-                }}
-              >
-                {jersey} | {player}
-                <div style={{display: 'flex'}}>
-                  <PlayerImage src={photoPath} />
-                  <SelectedCircle
-                    selected={this.state.selectedPlayer === player}
-                  />
-                </div>
-              </PlayerRow>
-            );
-          })}
-        </PlayersContainer>
+              addPlayerStat(game.id, playerStat);
+              this.setState({selectedStat: null});
+            }}
+          />
+        ) : (
+          <SelectStat
+            game={game}
+            selectedStat={this.state.selectedStat}
+            selectStat={selectedStat => {
+              this.setState({selectedStat});
+            }}
+          />
+        )}
       </AddStatContainer>
     );
   }

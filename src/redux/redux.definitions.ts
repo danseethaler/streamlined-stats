@@ -1,5 +1,3 @@
-import {GameAction} from './actions/games';
-
 export const enum StatTypes {
   substitute = 'substitute',
   timeout = 'timeout',
@@ -40,7 +38,12 @@ export type StatType =
   | SubsitutionStat
   | PointAdjustmentStat;
 
-export interface GameRedux extends GameAction {
+export interface GameRedux {
+  id: string;
+  opponent: string;
+  set: number;
+  serveFirst: boolean;
+  lineup: string[];
   rotation: string[];
   stats: StatType[];
 }

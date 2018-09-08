@@ -1,80 +1,106 @@
 import {
+  GameRedux,
   StatType,
   StatTypes,
   UsOrOpponent,
 } from '../../../../redux/redux.definitions';
-import {getCurrentGame} from '../../../services/redux';
 import {
   getManualRecordedStats,
   StatCategories,
   StatCategoryType,
+  getCategoriesByName,
 } from '../../../services/stats/definitions';
+import {CurrentPlayStatus} from './add_player_stat.definitions';
 
-const firstRelevantStat = (stat: StatType) => {
+const getFirstRelevantStat = (stats: StatType[]) =>
+  stats.find((stat: StatType) => {
+    switch (stat.type) {
+      case StatTypes.playerStat:
+      case StatTypes.pointAdjustment:
+        return true;
+
+      case StatTypes.timeout:
+      case StatTypes.substitute:
+        return false;
+    }
+  });
+
+const pointAdjustmentPlayStatusMap = {
+  [UsOrOpponent.us]: CurrentPlayStatus.serving,
+  [UsOrOpponent.opponent]: CurrentPlayStatus.receiving,
+};
+
+const playerStatPlayStatusMap = {
+  SA: CurrentPlayStatus.rallying,
+  A: CurrentPlayStatus.serving,
+  SE: CurrentPlayStatus.receiving,
+  R1: CurrentPlayStatus.rallying,
+  R2: CurrentPlayStatus.rallying,
+  R3: CurrentPlayStatus.rallying,
+  RE: CurrentPlayStatus.receiving,
+  BS: CurrentPlayStatus.serving,
+  BA: CurrentPlayStatus.serving,
+  BE: CurrentPlayStatus.receiving,
+  D: CurrentPlayStatus.rallying,
+  DE: CurrentPlayStatus.receiving,
+  BHA: CurrentPlayStatus.rallying,
+  AST: CurrentPlayStatus.rallying,
+  BHE: CurrentPlayStatus.receiving,
+  ATT: CurrentPlayStatus.rallying,
+  K: CurrentPlayStatus.serving,
+  E: CurrentPlayStatus.receiving,
+  FB: CurrentPlayStatus.rallying,
+};
+
+const getCurrentPlayStatusFromStat = (stat): CurrentPlayStatus => {
   switch (stat.type) {
-    case StatTypes.playerStat:
     case StatTypes.pointAdjustment:
-      return true;
-
-    case StatTypes.timeout:
-    case StatTypes.substitute:
-      return false;
-  }
-};
-
-const playerStatRelevantNextCategoriesMap = {
-  SA: [StatCategories.Digs, StatCategories.Blocking, StatCategories.Attack],
-  A: [StatCategories.Serving],
-  SE: [StatCategories.Receiving],
-  R1: [StatCategories.BallHandling, StatCategories.Attack, StatCategories.Digs],
-  R2: [StatCategories.BallHandling, StatCategories.Attack, StatCategories.Digs],
-  R3: [StatCategories.BallHandling, StatCategories.Attack, StatCategories.Digs],
-  RE: [StatCategories.Receiving],
-  BS: [StatCategories.Serving],
-  BA: [StatCategories.Serving],
-  BE: [StatCategories.Receiving],
-  D: [StatCategories.BallHandling, StatCategories.Attack],
-  DE: [StatCategories.Receiving],
-  BHA: [StatCategories.Attack],
-  AST: [StatCategories.Attack],
-  BHE: [StatCategories.Receiving],
-  ATT: [StatCategories.Digs, StatCategories.Blocking],
-  K: [StatCategories.Serving],
-  E: [StatCategories.Receiving],
-  FB: [StatCategories.Digs, StatCategories.Blocking],
-};
-
-const getRelevantCategoryNames = stat => {
-  switch (stat.type) {
-    case StatTypes.pointAdjustment:
-      if (stat.team === UsOrOpponent.us) {
-        return [StatCategories.Serving];
-      } else {
-        return [StatCategories.Receiving];
-      }
+      return pointAdjustmentPlayStatusMap[stat.shorthand];
 
     case StatTypes.playerStat:
-      return playerStatRelevantNextCategoriesMap[stat.shorthand];
+      return playerStatPlayStatusMap[stat.shorthand];
   }
 };
 
-export const getRelevantCategories = (): StatCategoryType[] => {
-  const statDefinitions = getManualRecordedStats();
+const getCategoryOptions = (playStatus: CurrentPlayStatus) => {
+  const statCategories = getManualRecordedStats();
+  switch (playStatus) {
+    case CurrentPlayStatus.serving:
+      return statCategories.filter(
+        ({name}) => [StatCategories.Serving].indexOf(name) >= 0
+      );
 
-  const {stats} = getCurrentGame();
+    case CurrentPlayStatus.receiving:
+      return statCategories.filter(
+        ({name}) => [StatCategories.Receiving].indexOf(name) >= 0
+      );
 
-  const statistic = stats.find(firstRelevantStat);
+    case CurrentPlayStatus.rallying:
+      return statCategories.filter(
+        ({name}) =>
+          [
+            StatCategories.Attack,
+            StatCategories.Digs,
+            StatCategories.BallHandling,
+            StatCategories.Blocking,
+          ].indexOf(name) >= 0
+      );
+  }
+};
 
-  if (!statistic) {
-    return statDefinitions;
+export const getCurrentStatCategoryOptions = (
+  stats: StatType[],
+  serveFirst: boolean
+): StatCategoryType[] => {
+  const firstReferenceStat = getFirstRelevantStat(stats);
+
+  if (!firstReferenceStat) {
+    return serveFirst
+      ? getCategoriesByName([StatCategories.Serving])
+      : getCategoriesByName([StatCategories.Receiving]);
   }
 
-  // TEMP
-  // return statDefinitions;
+  const currentPlayStatus = getCurrentPlayStatusFromStat(firstReferenceStat);
 
-  const relevantCategoryNames = getRelevantCategoryNames(statistic);
-
-  return relevantCategoryNames.map(categoryName =>
-    statDefinitions.find(({name}) => categoryName === name)
-  );
+  return getCategoryOptions(currentPlayStatus);
 };

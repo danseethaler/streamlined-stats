@@ -1,16 +1,17 @@
-import {sortBy} from 'lodash';
+import {cloneDeep, sortBy} from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps, withRouter} from 'react-router';
-import {addGameAction, GameAction} from '../../../redux/actions/games';
+import {addGameAction} from '../../../redux/actions/games';
+import {GameRedux} from '../../../redux/redux.definitions';
 import {TextInput} from '../../components/Bits';
 import Button, {ButtonTypes} from '../../components/Button';
+import {Headline5, Paragraph3} from '../../components/Typography';
 import players, {PlayerType} from '../../services/players';
 import {getUniqueId} from '../../services/unique_id';
-import {Paragraph3, Headline5} from '../../components/Typography';
 
 interface AddGameProps extends RouteComponentProps<any> {
-  addGame: (game: GameAction) => void;
+  addGame: (game: GameRedux) => void;
 }
 
 interface AddGameState {
@@ -22,6 +23,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
 
   private opponentRef: React.RefObject<HTMLInputElement>;
   private setRef: React.RefObject<HTMLInputElement>;
+  private serveFirstRef: React.RefObject<HTMLInputElement>;
   private lineupRefs: any;
   private players: PlayerType[];
 
@@ -30,6 +32,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
 
     this.opponentRef = React.createRef();
     this.setRef = React.createRef();
+    this.serveFirstRef = React.createRef();
     this.players = sortBy(players, 'name');
     this.lineupRefs = this.players.map(() => React.createRef());
   }
@@ -55,8 +58,9 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
     return true;
   };
 
-  public getGameData = (): GameAction => {
+  public getGameData = (): GameRedux => {
     const opponent = this.opponentRef.current.value;
+    const serveFirst = this.serveFirstRef.current.checked;
     const set = parseInt(this.setRef.current.value, 10);
     const lineup = this.players
       .filter((player, index) => this.lineupRefs[index].current.checked)
@@ -67,6 +71,9 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
       opponent,
       set,
       lineup,
+      stats: [],
+      rotation: cloneDeep(lineup),
+      serveFirst,
     };
   };
 
@@ -79,6 +86,9 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
 
         <Paragraph3>Set Number</Paragraph3>
         <TextInput innerRef={this.setRef} type="number" />
+
+        <Paragraph3>Serve First</Paragraph3>
+        <input ref={this.serveFirstRef} type="checkbox" />
 
         <Headline5>Lineup</Headline5>
         <ul style={{display: 'flex', flexWrap: 'wrap'}}>

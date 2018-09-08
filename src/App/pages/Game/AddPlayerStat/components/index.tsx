@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'react-emotion';
-import {colors} from '../../../components/theme';
 import {IoIosCheckmark} from 'react-icons/io';
+import {colors} from '../../../../components/theme';
 
 export const AddStatContainer = styled.div({
   display: 'flex',
@@ -48,7 +48,7 @@ export const PlayersContainer = styled.div({
   borderRadius: 10,
 });
 
-export const PlayerRow = styled.div<{selected: boolean}>(({selected}) => ({
+export const PlayerRow = styled.div({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -67,7 +67,7 @@ export const PlayerRow = styled.div<{selected: boolean}>(({selected}) => ({
   ':hover': {
     backgroundColor: '#f5f5f5',
   },
-}));
+});
 
 export const PlayerImage = styled.img({
   height: '2em',

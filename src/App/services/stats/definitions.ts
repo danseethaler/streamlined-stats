@@ -317,6 +317,14 @@ export const getStatDefinitions = () => {
   );
 };
 
+export const getCategoriesByName = (
+  categoryName: StatCategories[],
+  allStats?: boolean
+): StatCategoryType[] => {
+  const categories = allStats ? statDefinitions : getManualRecordedStats();
+  return categories.filter(({name}) => categoryName.indexOf(name) >= 0);
+};
+
 export const getManualRecordedStats = () => {
   const definitions = cloneDeep(statDefinitions);
 

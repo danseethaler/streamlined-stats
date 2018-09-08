@@ -6,13 +6,6 @@ import {
 } from '../constants';
 import {StatType} from '../redux.definitions';
 
-export interface GameAction {
-  id: string;
-  opponent: string;
-  set: number;
-  lineup: string[];
-}
-
 export interface SubstituteAction {
   subOut: string;
   subIn: string;
@@ -24,13 +17,11 @@ export const addGameAction = game => ({
   game,
 });
 
-export const addStatAction = (game, stat: StatType) => dispatch => {
-  dispatch({
-    type: ADD_STAT,
-    game,
-    stat,
-  });
-};
+export const addStatAction = (game, stat: StatType) => ({
+  type: ADD_STAT,
+  game,
+  stat,
+});
 
 export const undoLastStatAction = game => ({
   type: UNDO_LAST_STAT,

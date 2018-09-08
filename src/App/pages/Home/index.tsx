@@ -9,11 +9,13 @@ import Games from './Games';
 
 interface HomeState {
   addGameModalOpen: boolean;
+  stateString: string;
 }
 
 class Home extends React.Component<{}, HomeState> {
   public state = {
     addGameModalOpen: false,
+    stateString: '',
   };
 
   public render() {
@@ -33,8 +35,8 @@ class Home extends React.Component<{}, HomeState> {
         <Button
           type={ButtonTypes.gray}
           onClick={() => {
-            const state = loadState();
-            console.log(JSON.stringify(state, null, 4));
+            const stateString = loadState();
+            this.setState({stateString: JSON.stringify(stateString, null, 4)});
           }}
         >
           Show stored state
@@ -64,6 +66,7 @@ class Home extends React.Component<{}, HomeState> {
           }}
           content={<AddGame />}
         />
+        <textarea value={this.state.stateString} />
         <hr />
         <UpdateState />
       </div>
