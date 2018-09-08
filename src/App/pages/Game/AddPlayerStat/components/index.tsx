@@ -6,6 +6,8 @@ import {colors} from '../../../../components/theme';
 export const SelectPlayerContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
+  borderLeft: '5px solid gray',
+  paddingLeft: '0.5em',
 });
 
 export const AddStatContainer = styled.div({
@@ -48,26 +50,32 @@ export const SelectStatButton = styled.button<{selected: boolean}>(
 
 export const PlayersContainer = styled.div({
   display: 'flex',
-  flexDirection: 'column',
+  flexWrap: 'wrap',
   border: '1px solid #f5f5f5',
   borderRadius: 10,
 });
 
 export const PlayerRow = styled.div({
   display: 'flex',
+  flex: '1 1 45%',
   alignItems: 'center',
   justifyContent: 'space-between',
   color: colors.darkCoolGray,
   padding: '0.8em 1em',
-  // #f8f8fc
   cursor: 'pointer',
   fontWeight: 500,
   borderBottom: '1px solid #f5f5f5',
   ':first-child': {
-    borderRadius: '10px 10px 0 0',
+    borderRadius: '10px 0 0 0',
+  },
+  ':nth-child(2)': {
+    borderRadius: '0 10px 0 0',
+  },
+  ':nth-child(5)': {
+    borderRadius: '0 0 0 10px',
   },
   ':last-child': {
-    borderRadius: '0 0 10px 10px',
+    borderRadius: '0 0 10px 0',
   },
   ':hover': {
     backgroundColor: '#f5f5f5',

@@ -56,7 +56,7 @@ const playerStatPlayStatusMap = {
 const getCurrentPlayStatusFromStat = (stat): CurrentPlayStatus => {
   switch (stat.type) {
     case StatTypes.pointAdjustment:
-      return pointAdjustmentPlayStatusMap[stat.shorthand];
+      return pointAdjustmentPlayStatusMap[stat.team];
 
     case StatTypes.playerStat:
       return playerStatPlayStatusMap[stat.shorthand];
