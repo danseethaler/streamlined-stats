@@ -15,7 +15,7 @@ const Overlay = styled.div<{
   right: 0,
   transition: `all ${TRANSITION_DURATION}ms`,
   backgroundColor: hexToRgb(colors.extraDarkGray, opacity),
-  zIndex: 100,
+  zIndex: 5,
 }));
 
 const opacityState = {

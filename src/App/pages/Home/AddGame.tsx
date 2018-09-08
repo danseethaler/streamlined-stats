@@ -2,6 +2,7 @@ import {cloneDeep, sortBy} from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps, withRouter} from 'react-router';
+import {arrayMove, SortableContainer} from 'react-sortable-hoc';
 import {addGameAction} from '../../../redux/actions/games';
 import {GameRedux} from '../../../redux/redux.definitions';
 import {TextInput} from '../../components/Bits';
@@ -9,6 +10,8 @@ import Button, {ButtonTypes} from '../../components/Button';
 import {Headline5, Paragraph3} from '../../components/Typography';
 import players, {PlayerType} from '../../services/players';
 import {getUniqueId} from '../../services/unique_id';
+import {PlayerSortHandler, SortPlayer} from './components';
+import {PlayersContainer} from '../Game/AddPlayerStat/components';
 
 interface AddGameProps extends RouteComponentProps<any> {
   addGame: (game: GameRedux) => void;
@@ -16,16 +19,18 @@ interface AddGameProps extends RouteComponentProps<any> {
 
 interface AddGameState {
   formError: null | string;
+  players: PlayerType[];
 }
 
 class AddGame extends React.Component<AddGameProps, AddGameState> {
-  public state = {formError: null};
+  public state = {
+    formError: null,
+    players: sortBy(players, 'name'),
+  };
 
   private opponentRef: React.RefObject<HTMLInputElement>;
   private setRef: React.RefObject<HTMLInputElement>;
   private serveFirstRef: React.RefObject<HTMLInputElement>;
-  private lineupRefs: any;
-  private players: PlayerType[];
 
   constructor(props) {
     super(props);
@@ -33,13 +38,16 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
     this.opponentRef = React.createRef();
     this.setRef = React.createRef();
     this.serveFirstRef = React.createRef();
-    this.players = sortBy(players, 'name');
-    this.lineupRefs = this.players.map(() => React.createRef());
   }
 
   public componentDidMount() {
     this.opponentRef.current.select();
   }
+
+  public reorderPlayers = ({oldIndex, newIndex}) => {
+    const orderedPlayers = arrayMove(this.state.players, oldIndex, newIndex);
+    this.setState({players: orderedPlayers});
+  };
 
   public validateForm = () => {
     const gameData = this.getGameData();
@@ -62,9 +70,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
     const opponent = this.opponentRef.current.value;
     const serveFirst = this.serveFirstRef.current.checked;
     const set = parseInt(this.setRef.current.value, 10);
-    const lineup = this.players
-      .filter((player, index) => this.lineupRefs[index].current.checked)
-      .map(({name}) => name);
+    const lineup = this.state.players.slice(0, 6).map(({name}) => name);
 
     return {
       id: getUniqueId(),
@@ -79,6 +85,19 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
 
   public render() {
     const {history, addGame} = this.props;
+    const SP = ({items}) => (
+      <PlayersContainer>
+        {items.map((player, index) => (
+          <SortPlayer key={player.jersey} sortIndex={index} index={index}>
+            {player.name}
+            <PlayerSortHandler>:::</PlayerSortHandler>
+          </SortPlayer>
+        ))}
+      </PlayersContainer>
+    );
+
+    const SortablePlayers = SortableContainer(SP);
+
     return (
       <form onSubmit={e => e.preventDefault()}>
         <Paragraph3>Opponent</Paragraph3>
@@ -91,21 +110,13 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
         <input ref={this.serveFirstRef} type="checkbox" />
 
         <Headline5>Lineup</Headline5>
-        <ul style={{display: 'flex', flexWrap: 'wrap'}}>
-          {this.players.map((player, index) => (
-            <label
-              key={player.jersey}
-              style={{
-                flex: '1 1 50%',
-              }}
-            >
-              <li>
-                <input ref={this.lineupRefs[index]} type="checkbox" />
-                {player.name}
-              </li>
-            </label>
-          ))}
-        </ul>
+
+        <SortablePlayers
+          onSortEnd={this.reorderPlayers}
+          lockAxis="y"
+          useDragHandle
+          items={this.state.players}
+        />
         <Button
           type={ButtonTypes.primary}
           onClick={() => {

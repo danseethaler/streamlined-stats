@@ -6,7 +6,7 @@ import {
   UNDO_LAST_STAT,
   UPDATE_STATS_ORDER,
 } from '../constants';
-import {GamesRedux, StatTypes} from '../redux.definitions';
+import {GamesRedux, StatTypes, StatType} from '../redux.definitions';
 
 const initialState = {};
 
@@ -15,8 +15,6 @@ export default (state = initialState, action): GamesRedux =>
     switch (action.type) {
       case ADD_GAME:
         newState[action.game.id] = action.game;
-        newState[action.game.id].rotation = action.game.lineup.sort();
-        newState[action.game.id].stats = [];
         break;
 
       case ADD_STAT:
@@ -24,9 +22,10 @@ export default (state = initialState, action): GamesRedux =>
 
         // Swap out rotation players on substitute
         if (action.stat.type === StatTypes.substitute) {
-          remove(statGame.rotation, player => player === action.stat.subOut);
-          statGame.rotation.push(action.stat.subIn);
-          statGame.rotation.sort();
+          const currentPlayerIndex = statGame.rotation.findIndex(
+            name => name === action.stat.subOut
+          );
+          statGame.rotation.splice(currentPlayerIndex, 1, action.stat.subIn);
         }
 
         statGame.stats.unshift(action.stat);
@@ -36,13 +35,14 @@ export default (state = initialState, action): GamesRedux =>
         const undoGame = newState[action.game];
 
         // Remove the most recent stat from the array
-        const lastStat = undoGame.stats.shift();
+        const lastStat: StatType = undoGame.stats.shift();
 
         if (lastStat && lastStat.type === StatTypes.substitute) {
           // Reverse the substitution
-          remove(undoGame.rotation, player => player === lastStat.subIn);
-          undoGame.rotation.push(lastStat.subOut);
-          undoGame.rotation.sort();
+          const currentPlayerIndex = undoGame.rotation.findIndex(
+            name => name === lastStat.subIn
+          );
+          undoGame.rotation.splice(currentPlayerIndex, 1, lastStat.subOut);
         }
 
         break;

@@ -13,6 +13,7 @@ const UpdateState = () => (
         ) as HTMLTextAreaElement).value;
 
         localStorage.setItem(LOCAL_STORAGE_KEY, stateValue);
+        window.location = window.location;
       }}
     >
       Update State Data
