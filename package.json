@@ -23,6 +23,7 @@
     "emotion": "9.2.6",
     "immer": "1.5.0",
     "react": "16.4.2",
+    "react-dev-utils": "5.0.2",
     "react-dom": "16.4.2",
     "react-emotion": "9.2.6",
     "react-icons": "3.0.5",
@@ -61,7 +62,19 @@
   "jest": {
     "transform": {
       "^.+\\.(js|ts)x?$": "typescript-babel-jest"
-    }
+    },
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/src/test/"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(js|tsx?)$",
+    "testURL": "http://localhost/",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
   },
   "lint-staged": {
     "*.{ts,tsx,js,json,css,md}": [

@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const openBrowser = require('react-dev-utils/openBrowser');
 
 module.exports = (env, options) => {
   const isDev = options.mode === 'development';
@@ -100,6 +101,10 @@ module.exports = (env, options) => {
       ],
     },
     devServer: {
+      after() {
+        const url = `http${this.https ? 's' : ''}://localhost:${this.port}`;
+        openBrowser(url);
+      },
       // Pass any unhandled routes to index.html to allow
       // the frontend routing to handle the page
       historyApiFallback: true,
