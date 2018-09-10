@@ -1,7 +1,5 @@
-import {
-  getStatDefinition,
-  StatResultTypes,
-} from '../App/services/stats/definitions';
+import {getStatDefinition} from '../App/services/stats/categories';
+import {StatResultTypes} from '../App/services/stats/stats.definitions';
 import {StatType, StatTypes, UsOrOpponent} from './redux.definitions';
 
 export const whoScoredFromStat = (stat: StatType): null | UsOrOpponent => {
