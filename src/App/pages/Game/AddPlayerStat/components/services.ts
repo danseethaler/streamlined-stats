@@ -7,6 +7,9 @@ import {
   GameRedux,
 } from '../../../../../redux/redux.definitions';
 import {whoScoredFromStat} from '../../../../../redux/services';
+import {PlayerType} from '../../../../services/players';
+import {getStatDefinition} from '../../../../services/stats/categories';
+import {StatCategories} from '../../../../services/stats/stats.definitions';
 
 const rotatePlayers = rotation => {
   const [lastServer] = rotation.splice(0, 1);
@@ -74,3 +77,36 @@ export const getRotation = (
         return rotation;
       });
   });
+
+export const getMostLikelyStatPlayers = (stat, players: PlayerType[]) => {
+  const statDefinition = getStatDefinition(stat);
+  switch (statDefinition.category) {
+    case StatCategories.Serving:
+      return [1];
+
+    case StatCategories.Receiving:
+      return [1, 3, 5]; // Backrow
+
+    case StatCategories.Attack:
+      return players.reduce((matchedIndexes, player, index) => {
+        if (['RS', 'OH', 'MB', 'OPP', 'MH'].indexOf(player.positions[0]) >= 0) {
+          matchedIndexes.push(index);
+        }
+        return matchedIndexes;
+      }, []);
+
+    case StatCategories.Blocking:
+      return [0, 2, 4]; // Frontrow
+
+    case StatCategories.BallHandling:
+      return players.reduce((matchedIndexes, player, index) => {
+        if (['S', 'LB'].indexOf(player.positions[0]) >= 0) {
+          matchedIndexes.push(index);
+        }
+        return matchedIndexes;
+      }, []);
+
+    case StatCategories.Digs:
+      return [1, 3, 5]; // Backrow
+  }
+};

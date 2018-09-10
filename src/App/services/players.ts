@@ -9,7 +9,7 @@ export interface PlayerType {
   captain?: boolean;
 }
 
-export const getPlayerData = playerName =>
+export const getPlayerData = (playerName): PlayerType =>
   players.find(({name}) => name === playerName);
 
 const players = [
@@ -119,7 +119,7 @@ const players = [
     photoPath: require('../../assets/photos/rachel.png'),
     nameFull: 'Rachel Tucker',
     year: 'Sr.',
-    positions: ['DS'],
+    positions: ['LB'],
     captain: true,
     height: '5-6',
   },

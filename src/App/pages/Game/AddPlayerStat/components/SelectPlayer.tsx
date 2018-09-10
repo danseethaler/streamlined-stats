@@ -10,6 +10,7 @@ import {
   PlayersContainer,
   SelectPlayerContainer,
 } from './index';
+import {getMostLikelyStatPlayers} from './services';
 
 interface Props {
   rotation: string[];
@@ -20,26 +21,34 @@ interface Props {
   courtSwapped: boolean;
 }
 
-export const PlayerGrid = ({players, selectPlayer}) => (
-  <PlayersContainer>
-    {players.map(player => {
-      const {jersey, photoPath} = getPlayerData(player);
+export const PlayerGrid = ({players, selectPlayer, selectedStat}) => {
+  const playersData = players.map(player => getPlayerData(player));
 
-      return (
-        <PlayerRow
-          key={player}
-          onClick={() => {
-            selectPlayer(player);
-          }}
-        >
-          {/* {jersey} |  */}
-          {player}
-          <PlayerImage src={photoPath} />
-        </PlayerRow>
-      );
-    })}
-  </PlayersContainer>
-);
+  const highlightedPlayerIndexes = getMostLikelyStatPlayers(
+    selectedStat,
+    playersData
+  );
+
+  return (
+    <PlayersContainer>
+      {playersData.map(({jersey, photoPath, name}, index) => {
+        return (
+          <PlayerRow
+            key={name}
+            onClick={() => {
+              selectPlayer(name);
+            }}
+            recommended={highlightedPlayerIndexes.indexOf(index) >= 0}
+          >
+            {/* {jersey} |  */}
+            {name}
+            <PlayerImage src={photoPath} />
+          </PlayerRow>
+        );
+      })}
+    </PlayersContainer>
+  );
+};
 
 const SelectPlayer: React.SFC<Props> = ({
   rotation,
@@ -54,7 +63,11 @@ const SelectPlayer: React.SFC<Props> = ({
   return (
     <SelectPlayerContainer swapped={courtSwapped}>
       <Headline4 style={{margin: '6px 0'}}>{name} by...</Headline4>
-      <PlayerGrid players={rotation} selectPlayer={selectPlayer} />
+      <PlayerGrid
+        players={rotation}
+        selectPlayer={selectPlayer}
+        selectedStat={selectedStat}
+      />
 
       <ButtonNew icon={IoIosArrowRoundBack} text="Back" onClick={cancel} />
       <ButtonNew icon={IoIosSwap} text="Swap sides" onClick={swapCourtSides} />

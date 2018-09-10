@@ -77,12 +77,16 @@ class AddPlayerStat extends React.Component<
 
     let selectBallHander = null;
     if (needBallHandlingStat) {
+      const lastStat = game.stats[0] as PlayerStat;
+      const attackStat = getShorthandBallHandlingFromAttack(lastStat.shorthand);
+
       selectBallHander = (
         <AddHandlingContainer>
           <Headline5 style={{margin: '10px 0'}}>Ball handling by...</Headline5>
           <PlayerGrid
             players={rotation}
             selectPlayer={this.addBallHandlingStat}
+            selectedStat={attackStat}
           >
             selecthandler
           </PlayerGrid>
