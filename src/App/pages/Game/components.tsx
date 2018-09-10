@@ -11,11 +11,25 @@ import {Paragraph3} from '../../components/Typography';
 import {getStatDefinition} from '../../services/stats/categories';
 import {StatResultTypes} from '../../services/stats/stats.definitions';
 
+export const HeaderContainer = styled.div({
+  display: 'flex',
+  justifyContent: 'space-between',
+});
+
+export const PointsContainer = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+  padding: '0.3em 1em',
+});
+
 export const StatButton = styled.div({
   padding: '0.5em',
   cursor: 'pointer',
-  ':hover': {
-    backgroundColor: colors.lightCoolGray,
+  '@media (hover)': {
+    ':hover': {
+      backgroundColor: colors.lightCoolGray,
+    },
   },
 });
 

@@ -32,6 +32,7 @@ export const colors = {
   // Dynamic style
   boxShadow: hexToRgb('#425464', 0.2),
   green: '#58E797',
+  purple: '#4633ed',
 };
 
 export const styles = {
@@ -42,7 +43,7 @@ export const styles = {
   lightBoxShadowCompressed: '0 0 0 0 ' + colors.boxShadow,
   extraLightBoxShadow: `0 0.3em 0.5em 0 ${colors.extraLightCoolGray}`,
   sectionHeaderBoxShadow: `0 1px 2px 0 ${colors.extraLightCoolGray}`,
-  primaryButtonBackground: `linear-gradient(${colors.green}, #71eb9b)`,
+  primaryButtonBackground: `linear-gradient(135deg, ${colors.green}, #71eb9b)`,
 };
 
 export type StyleType =

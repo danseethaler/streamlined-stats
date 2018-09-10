@@ -13,13 +13,15 @@ const StyledBackButton = styled.button({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
-  padding: '10px 30px',
+  padding: '5px 20px',
   color: 'white',
   letterSpacing: '2px',
   marginTop: '0.5em',
   transition: TRANSITION_ALL,
-  ':hover': {
-    opacity: 0.75,
+  '@media (hover)': {
+    ':hover': {
+      opacity: 0.75,
+    },
   },
 });
 

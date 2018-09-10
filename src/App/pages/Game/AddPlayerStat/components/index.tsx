@@ -51,8 +51,10 @@ export const SelectStatButton = styled.button<{selected: boolean}>(
     cursor: 'pointer',
     fontWeight: 300,
     flex: '1 0 20%',
-    ':hover': {
-      backgroundColor: selected ? colors.darkCoolGray : colors.lightCoolGray,
+    '@media (hover)': {
+      ':hover': {
+        backgroundColor: selected ? colors.darkCoolGray : colors.lightCoolGray,
+      },
     },
   })
 );
@@ -70,7 +72,7 @@ export const PlayerRow = styled.div({
   alignItems: 'center',
   justifyContent: 'space-between',
   color: colors.darkCoolGray,
-  padding: '0.8em 1em',
+  padding: '0.8em',
   cursor: 'pointer',
   fontWeight: 500,
   borderBottom: '1px solid #f5f5f5',
@@ -86,8 +88,10 @@ export const PlayerRow = styled.div({
   ':last-child': {
     borderRadius: '0 0 10px 0',
   },
-  ':hover': {
-    backgroundColor: '#f5f5f5',
+  '@media (hover)': {
+    ':hover': {
+      backgroundColor: '#f5f5f5',
+    },
   },
 });
 

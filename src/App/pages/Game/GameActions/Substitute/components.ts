@@ -7,9 +7,11 @@ export const Player = styled.div<{selected: boolean}>(({selected}) => ({
   borderBottom: styles.lightBorder,
   padding: '.5em',
   cursor: 'pointer',
-  ':hover': {
-    backgroundColor: selected
-      ? colors.lightCoolGray
-      : hexToRgb(colors.white, 1, 0.95),
+  '@media (hover)': {
+    ':hover': {
+      backgroundColor: selected
+        ? colors.lightCoolGray
+        : hexToRgb(colors.white, 1, 0.95),
+    },
   },
 }));

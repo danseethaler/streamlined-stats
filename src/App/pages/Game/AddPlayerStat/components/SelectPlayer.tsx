@@ -32,7 +32,8 @@ export const PlayerGrid = ({players, selectPlayer}) => (
             selectPlayer(player);
           }}
         >
-          {jersey} | {player}
+          {/* {jersey} |  */}
+          {player}
           <PlayerImage src={photoPath} />
         </PlayerRow>
       );
