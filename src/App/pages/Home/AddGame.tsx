@@ -11,7 +11,7 @@ import {Headline5, Paragraph3} from '../../components/Typography';
 import players, {PlayerType} from '../../services/players';
 import {getUniqueId} from '../../services/unique_id';
 import {PlayerSortHandler, SortPlayer} from './components';
-import {PlayersContainer} from '../Game/AddPlayerStat/components';
+import {PlayersContainer} from './components';
 
 interface AddGameProps extends RouteComponentProps<any> {
   addGame: (game: GameRedux) => void;
