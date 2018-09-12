@@ -44,7 +44,6 @@ export interface GameRedux {
   set: number;
   serveFirst: boolean;
   lineup: string[];
-  rotation: string[];
   stats: StatType[];
 }
 

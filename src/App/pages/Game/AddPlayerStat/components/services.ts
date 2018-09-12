@@ -20,7 +20,7 @@ export const getFormattedRotation = (
   game: GameRedux,
   swapped: boolean
 ): string[] => {
-  const rotation = getRotation(game.lineup, game.stats, game.serveFirst);
+  const rotation = getRotation(game);
 
   if (swapped) {
     return [
@@ -43,11 +43,7 @@ export const getFormattedRotation = (
   ];
 };
 
-export const getRotation = (
-  lineup: string[],
-  stats: StatType[],
-  serveFirst: boolean
-): string[] =>
+export const getRotation = ({lineup, stats, serveFirst}: GameRedux): string[] =>
   produce(lineup, rotation => {
     let serving = serveFirst;
 

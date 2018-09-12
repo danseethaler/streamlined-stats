@@ -13,6 +13,7 @@ import {Headline6} from '../../../../components/Typography';
 import players from '../../../../services/players';
 import {sortByName} from '../../../../services/utilities';
 import {Player} from './components';
+import {getRotation} from '../../AddPlayerStat/components/services';
 
 interface SubstituteProps {
   onComplete: () => void;
@@ -44,6 +45,7 @@ class Substitute extends React.Component<SubstituteProps, SubstituteState> {
 
   public render() {
     const {game} = this.props;
+    const rotation = getRotation(game);
 
     return (
       <div>
@@ -51,7 +53,7 @@ class Substitute extends React.Component<SubstituteProps, SubstituteState> {
           <Column>
             <Headline6>Going In</Headline6>
             {sortByName(players)
-              .filter(({name}) => game.rotation.indexOf(name) === -1)
+              .filter(({name}) => rotation.indexOf(name) === -1)
               .map(({jersey, name}) => (
                 <Player
                   key={jersey}
@@ -66,7 +68,7 @@ class Substitute extends React.Component<SubstituteProps, SubstituteState> {
           </Column>
           <Column style={{borderLeft: styles.lightBorder}}>
             <Headline6>Coming Out</Headline6>
-            {game.rotation.map(player => (
+            {rotation.map(player => (
               <Player
                 key={player}
                 selected={this.state.subOut === player}

@@ -78,7 +78,6 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
       set,
       lineup,
       stats: [],
-      rotation: cloneDeep(lineup),
       serveFirst,
     };
   };
