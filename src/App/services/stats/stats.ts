@@ -31,6 +31,7 @@ const attackArray = [
   'kotak',
   'ataque',
   'attaque',
+  'tac',
 ];
 
 const receivingArray = [
@@ -60,7 +61,24 @@ const errorArray = [
   'errors',
 ];
 
-const attemptArray = ['attempt', 'shaka', 'tempt'];
+const attemptArray = [
+  'attempt',
+  'attendant',
+  'attempt',
+  'attempt',
+  '1/10',
+  'attempt',
+  'a tent',
+  'a temp',
+  'attempt',
+  'attempt',
+  'attempt',
+  'shaka',
+  'tempt',
+  'attempts',
+  'attempted',
+  'a temps',
+];
 
 const digArray = [
   'dig',
@@ -74,11 +92,40 @@ const digArray = [
   'big',
   'stage',
   'did you',
+  'dirty',
+  'dead',
+  'thin',
+  'dear',
+  '30',
+  '3d',
 ];
 
-const ballHandlingArray = ['ball handling'];
+const ballHandlingArray = [
+  'handling',
+  'ball handling',
+  'ball handeling',
+  'orlando',
+  'all handling',
+  'fall handling',
+  'hall handling',
+  'play annoying',
+  'hand ling',
+  'hand sing',
+  'call handling',
+  'call handeling',
+];
 
-const assistArray = ['assist'];
+const blockArray = [
+  'block',
+  'bloc',
+  'bloch',
+  'fox',
+  'lock',
+  'vox',
+  'box',
+  'blocking',
+  'locking',
+];
 
 const statDefinitions: StatCategoryType[] = [
   {
@@ -99,21 +146,7 @@ const statDefinitions: StatCategoryType[] = [
     stats: [
       {
         name: 'Attempt',
-        commandNames: [
-          serviceArray,
-          [
-            'attempt',
-            'attendant',
-            'attempt',
-            'attempt',
-            '1/10',
-            'attempt',
-            'a tent',
-            'attempt',
-            'attempt',
-            'attempt',
-          ],
-        ],
+        commandNames: [serviceArray, attemptArray],
         shorthand: 'SA',
         calculator: getStatCount(['SA', 'A', 'SE']),
         result: StatResultTypes.nill,
@@ -124,8 +157,19 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Ace',
         commandNames: [
-          serviceArray,
-          ['a', 'ace', 'eggs', 'areas', 'hayes', 'size', 'ice', "a's", 'hays'],
+          [
+            'a',
+            'ace',
+            'eggs',
+            'areas',
+            'hayes',
+            'size',
+            'ice',
+            "a's",
+            'hays',
+            'is',
+            "it's",
+          ],
         ],
         shorthand: 'A',
         calculator: getStatCount(['A']),
@@ -136,7 +180,7 @@ const statDefinitions: StatCategoryType[] = [
       },
       {
         name: 'Error',
-        commandNames: [['service'], errorArray],
+        commandNames: [serviceArray, errorArray],
         shorthand: 'SE',
         calculator: getStatCount(['SE']),
         result: StatResultTypes.error,
@@ -192,7 +236,7 @@ const statDefinitions: StatCategoryType[] = [
     stats: [
       {
         name: 'Attempt',
-        commandNames: [attackArray, attemptArray],
+        commandNames: [attemptArray],
         shorthand: 'ATT',
         calculator: getStatCount(['ATT', 'K', 'E']),
         result: StatResultTypes.nill,
@@ -202,7 +246,19 @@ const statDefinitions: StatCategoryType[] = [
       },
       {
         name: 'Kill',
-        commandNames: [attackArray, ['chill', 'jill', 'chill', 'kill']],
+        commandNames: [
+          [
+            'chill',
+            'jill',
+            'chill',
+            'kill',
+            'carol',
+            'channel',
+            'caro',
+            'cairo',
+            'general',
+          ],
+        ],
         shorthand: 'K',
         calculator: getStatCount(['K']),
         result: StatResultTypes.point,
@@ -212,7 +268,7 @@ const statDefinitions: StatCategoryType[] = [
       },
       {
         name: 'Error',
-        commandNames: [attackArray, errorArray],
+        commandNames: [errorArray],
         shorthand: 'E',
         calculator: getStatCount(['E']),
         result: StatResultTypes.error,
@@ -223,7 +279,6 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Freeball',
         commandNames: [
-          attackArray,
           [
             'freeball',
             'free ball',
@@ -236,6 +291,7 @@ const statDefinitions: StatCategoryType[] = [
             'free ball',
             'brie ball',
             'pre ball',
+            'friebel',
           ],
         ],
         shorthand: 'FB',
@@ -274,7 +330,19 @@ const statDefinitions: StatCategoryType[] = [
       },
       {
         name: '3',
-        commandNames: [receivingArray, ['tree', 'thee', 'three', '3']],
+        commandNames: [
+          receivingArray,
+          [
+            'tree',
+            'thee',
+            'three',
+            '3',
+            'in three',
+            'and 3',
+            'and three',
+            'in 3',
+          ],
+        ],
         shorthand: 'R3',
         calculator: getStatCount(['R3']),
         result: StatResultTypes.nill,
@@ -299,7 +367,7 @@ const statDefinitions: StatCategoryType[] = [
     stats: [
       {
         name: 'Solo',
-        commandNames: [['solo block']],
+        commandNames: [blockArray],
         shorthand: 'BS',
         calculator: getStatCount(['BS']),
         result: StatResultTypes.point,
@@ -309,7 +377,6 @@ const statDefinitions: StatCategoryType[] = [
       },
       {
         name: 'Assisted',
-        commandNames: [['assisted block']],
         shorthand: 'BA',
         calculator: getStatCount(['BA']),
         result: StatResultTypes.point,
@@ -319,7 +386,7 @@ const statDefinitions: StatCategoryType[] = [
       },
       {
         name: 'Error',
-        commandNames: [['blocking'], errorArray],
+        commandNames: [blockArray, errorArray],
         shorthand: 'BE',
         calculator: getStatCount(['BE']),
         result: StatResultTypes.error,
@@ -334,7 +401,7 @@ const statDefinitions: StatCategoryType[] = [
     stats: [
       {
         name: 'Attempt',
-        commandNames: [ballHandlingArray, attemptArray],
+        commandNames: [ballHandlingArray],
         shorthand: 'BHA',
         calculator: getStatCount(['BHA']),
         result: StatResultTypes.nill,
@@ -343,7 +410,6 @@ const statDefinitions: StatCategoryType[] = [
       },
       {
         name: 'Assist',
-        commandNames: [ballHandlingArray, assistArray],
         shorthand: 'AST',
         calculator: getStatCount(['AST']),
         result: StatResultTypes.nill,
@@ -353,11 +419,7 @@ const statDefinitions: StatCategoryType[] = [
       },
       {
         name: 'Error',
-        commandNames: [
-          ['ball', 'hall', 'fall', 'all'],
-          ['handling'],
-          errorArray,
-        ],
+        commandNames: [ballHandlingArray, errorArray],
         shorthand: 'BHE',
         calculator: getStatCount(['BHE']),
         result: StatResultTypes.error,

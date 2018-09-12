@@ -7,19 +7,14 @@ import {
   StatType,
   StatTypes,
 } from '../../../../redux/redux.definitions';
-import {Headline5} from '../../../components/Typography';
-import {AddHandlingContainer, AddStatContainer} from './components';
-import SelectPlayer, {PlayerGrid} from './components/SelectPlayer';
+import {AddStatContainer} from './components';
+import SelectPlayer from './components/SelectPlayer';
 import SelectStat from './components/SelectStat';
 import {getFormattedRotation} from './components/services';
-import {
-  getShorthandBallHandlingFromAttack,
-  statIsMissingBallHandling,
-} from './services';
 
 interface AddPlayerStatProps {
   game: GameRedux;
-  addPlayerStat: (game: string, stat: StatType, insertBefore?: boolean) => void;
+  addPlayerStat: (game: string, stat: StatType) => void;
 }
 
 interface AddPlayerStatState {
@@ -49,21 +44,6 @@ class AddPlayerStat extends React.Component<
     this.setState(initialState);
   };
 
-  public addBallHandlingStat = player => {
-    const {game} = this.props;
-    const {shorthand} = game.stats[0] as PlayerStat;
-    const shorthandSet = getShorthandBallHandlingFromAttack(shorthand);
-
-    const playerStat: PlayerStat = {
-      type: StatTypes.playerStat,
-      shorthand: shorthandSet,
-      player,
-    };
-
-    this.props.addPlayerStat(this.props.game.id, playerStat, true);
-    this.setState(initialState);
-  };
-
   public toggleCourtSides = () => {
     this.setState({courtSwapped: !this.state.courtSwapped});
   };
@@ -72,31 +52,10 @@ class AddPlayerStat extends React.Component<
     const {game} = this.props;
     const {courtSwapped} = this.state;
 
-    const needBallHandlingStat = statIsMissingBallHandling(game.stats);
     const rotation = getFormattedRotation(game, courtSwapped);
-
-    let selectBallHander = null;
-    if (needBallHandlingStat) {
-      const lastStat = game.stats[0] as PlayerStat;
-      const attackStat = getShorthandBallHandlingFromAttack(lastStat.shorthand);
-
-      selectBallHander = (
-        <AddHandlingContainer>
-          <Headline5 style={{margin: '10px 0'}}>Ball handling by...</Headline5>
-          <PlayerGrid
-            players={rotation}
-            selectPlayer={this.addBallHandlingStat}
-            selectedStat={attackStat}
-          >
-            selecthandler
-          </PlayerGrid>
-        </AddHandlingContainer>
-      );
-    }
 
     return (
       <AddStatContainer>
-        {selectBallHander}
         {this.state.selectedStat ? (
           <SelectPlayer
             swapCourtSides={this.toggleCourtSides}

@@ -7,7 +7,7 @@ import {getPlayerCommandFromSpeech} from './commands';
 import {Microphone} from './components';
 
 interface SpeechToTextProps {
-  addPlayerStat: (game: string, stat: StatType, insertBefore?: boolean) => void;
+  addPlayerStat: (game: string, stat: StatType) => void;
   game: GameRedux;
 }
 
@@ -41,7 +41,9 @@ class SpeechToText extends React.Component<
       this.recognition.onerror = e => {
         console.log('errored', e);
         this.setState({listening: false});
-        setTimeout(this.startSpeech);
+        setTimeout(() => {
+          this.startSpeech();
+        }, 20);
       };
 
       this.recognition.onend = e => {
@@ -71,7 +73,9 @@ class SpeechToText extends React.Component<
         }
 
         console.log('playerCommand', playerCommand);
-        setTimeout(this.startSpeech);
+        setTimeout(() => {
+          this.startSpeech();
+        }, 20);
       };
     }
   }

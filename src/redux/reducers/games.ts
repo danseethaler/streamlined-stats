@@ -18,13 +18,23 @@ export default (state = initialState, action): GamesRedux =>
 
       case ADD_STAT:
         const statGame = newState[action.game];
+        const lastStat = statGame.stats[0];
 
-        if (action.insertBefore) {
-          // Put the stat before the most recent stat
-          statGame.stats.splice(1, 0, action.stat);
-        } else {
-          statGame.stats.unshift(action.stat);
+        if (lastStat) {
+          // Change BHA to AST on kill
+          if (lastStat.shorthand === 'BHA' && action.stat.shorthand === 'K') {
+            statGame.stats[0].shorthand = 'AST';
+          }
+
+          // Change BS to BA on double block
+          const lastStatIsBlock = ['BS', 'BA'].indexOf(lastStat.shorthand) >= 0;
+          if (lastStatIsBlock && action.stat.shorthand === 'BS') {
+            statGame.stats[0].shorthand = 'BA';
+            action.stat.shorthand = 'BA';
+          }
         }
+
+        statGame.stats.unshift(action.stat);
         break;
 
       case UNDO_LAST_STAT:

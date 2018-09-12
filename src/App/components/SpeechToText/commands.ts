@@ -8,17 +8,19 @@ export const getCommands = () => {
     regex: '(' + alternateNames.join('|') + ')',
   }));
 
-  const commandGroupings = getFlatStatDefinitions(true).map(stat => ({
-    key: stat.shorthand,
-    regex:
-      '(' + stat.commandNames.map(group => group.join('|')).join(') (') + ')',
-  }));
+  const commandGroupings = getFlatStatDefinitions(true)
+    .filter(({commandNames}) => commandNames)
+    .map(stat => ({
+      key: stat.shorthand,
+      regex:
+        '(' + stat.commandNames.map(group => group.join('|')).join(') (') + ')',
+    }));
 
   return commandGroupings.reduce((combinedCommands, commandGrouping) => {
     playerGroupings.forEach(playerGroup => {
       combinedCommands[commandGrouping.key + '_' + playerGroup.key] = `^${
-        commandGrouping.regex
-      } ${playerGroup.regex}`;
+        playerGroup.regex
+      } ${commandGrouping.regex}$`;
     });
     return combinedCommands;
   }, {});
