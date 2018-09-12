@@ -9,6 +9,7 @@ import {HeaderContainer, PointsContainer} from './components';
 import GameActions from './GameActions';
 import {getScores} from './services';
 import StatList from './StatsList';
+import SpeechToText from '../../components/SpeechToText';
 
 interface GameProps {
   game: GameRedux;
@@ -58,6 +59,7 @@ class Game extends React.Component<GameProps, GameState> {
             <StatList game={game} />
           </Column>
         </ColumnContainer>
+        <SpeechToText game={game} />
       </div>
     );
   }

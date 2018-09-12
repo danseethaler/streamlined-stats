@@ -1,10 +1,18 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {IoIosMic} from 'react-icons/io';
+import {addStatAction} from '../../../redux/actions/games';
+import {GameRedux, StatType, StatTypes} from '../../../redux/redux.definitions';
+import {getPlayerCommandFromSpeech} from './commands';
 import {Microphone} from './components';
 
+interface SpeechToTextProps {
+  addPlayerStat: (game: string, stat: StatType, insertBefore?: boolean) => void;
+  game: GameRedux;
+}
+
 class SpeechToText extends React.Component<
-  {
-    handleCommand: (speech: string) => void;
-  },
+  SpeechToTextProps,
   {
     listening: boolean;
   }
@@ -23,31 +31,47 @@ class SpeechToText extends React.Component<
       this.recognition.continuous = true;
       this.recognition.lang = 'en-US';
       this.recognition.interimResults = false;
+      this.recognition.maxAlternatives = 10;
 
       this.recognition.onstart = () => {
-        console.log('onstart');
+        console.log('started');
+        this.setState({listening: true});
       };
 
-      this.recognition.onerror = () => {
-        console.log('onerror');
+      this.recognition.onerror = e => {
+        console.log('errored', e);
+        this.setState({listening: false});
+        setTimeout(this.startSpeech);
       };
 
-      this.recognition.onend = () => {
-        console.log('onend');
+      this.recognition.onend = e => {
+        console.log('ended');
+        this.setState({listening: false});
       };
 
       this.recognition.onresult = event => {
-        let finalTranscript = '';
+        this.stopSpeech();
 
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-          if (event.results[i].isFinal) {
-            finalTranscript += event.results[i][0].transcript;
-            this.props.handleCommand(finalTranscript);
-          } else {
-            console.log('interum', event.results[i][0].transcript);
-          }
+        const SpeechRecognitionResult = event.results[event.resultIndex];
+        const results = [];
+        for (let k = 0; k < SpeechRecognitionResult.length; k++) {
+          results[k] = SpeechRecognitionResult[k].transcript
+            .trim()
+            .toLowerCase();
         }
-        // final_span.innerHTML = linebreak(finalTranscript);
+
+        const playerCommand = getPlayerCommandFromSpeech(results);
+
+        if (playerCommand) {
+          this.props.addPlayerStat(this.props.game.id, {
+            type: StatTypes.playerStat,
+            player: playerCommand.player,
+            shorthand: playerCommand.command,
+          });
+        }
+
+        console.log('playerCommand', playerCommand);
+        setTimeout(this.startSpeech);
       };
     }
   }
@@ -59,18 +83,17 @@ class SpeechToText extends React.Component<
   }
 
   public startSpeech = () => {
-    this.setState({listening: true});
     this.recognition.start();
   };
 
   public stopSpeech = () => {
-    this.setState({listening: false});
     this.recognition.stop();
   };
 
   public render() {
     return (
       <Microphone
+        active={this.state.listening}
         onClick={() => {
           if (this.state.listening) {
             this.stopSpeech();
@@ -79,10 +102,13 @@ class SpeechToText extends React.Component<
           }
         }}
       >
-        {this.state.listening ? 'Stop' : 'Start'}
+        <IoIosMic size={32} color="#FFFFFF" />
       </Microphone>
     );
   }
 }
 
-export default SpeechToText;
+export default connect(
+  null,
+  {addPlayerStat: addStatAction}
+)(SpeechToText);

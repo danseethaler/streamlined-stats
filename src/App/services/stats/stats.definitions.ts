@@ -14,6 +14,7 @@ export const enum StatResultTypes {
 export interface StatDefinitionType {
   name: string;
   shorthand: string;
+  commandNames?: string[][];
   calculator: (name: string, games: GameRedux[]) => any;
   description: string;
   recordingType: StatRecordingType;
