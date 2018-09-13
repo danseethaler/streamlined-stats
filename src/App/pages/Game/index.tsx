@@ -52,13 +52,13 @@ class Game extends React.Component<GameProps, GameState> {
           </PointsContainer>
         </HeaderContainer>
 
-        <ColumnContainer>
+        {/* <ColumnContainer>
           <Column>
             <AddPlayerStat game={game} />
             <GameActions game={game} />
-            <StatList game={game} />
           </Column>
-        </ColumnContainer>
+        </ColumnContainer> */}
+        <StatList game={game} />
         <SpeechToText game={game} />
       </div>
     );

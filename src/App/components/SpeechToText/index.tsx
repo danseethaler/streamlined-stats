@@ -28,13 +28,13 @@ class SpeechToText extends React.Component<
       console.log('Web Speech API is not supported on this browser.');
     } else {
       this.recognition = new window.webkitSpeechRecognition();
-      this.recognition.continuous = true;
+      this.recognition.continuous = false;
       this.recognition.lang = 'en-US';
       this.recognition.interimResults = false;
       this.recognition.maxAlternatives = 10;
+      this.startSpeech();
 
       this.recognition.onstart = () => {
-        console.log('started');
         this.setState({listening: true});
       };
 
@@ -43,17 +43,17 @@ class SpeechToText extends React.Component<
         this.setState({listening: false});
         setTimeout(() => {
           this.startSpeech();
-        }, 20);
+        }, 150);
       };
 
       this.recognition.onend = e => {
-        console.log('ended');
         this.setState({listening: false});
+        setTimeout(() => {
+          this.startSpeech();
+        }, 150);
       };
 
       this.recognition.onresult = event => {
-        this.stopSpeech();
-
         const SpeechRecognitionResult = event.results[event.resultIndex];
         const results = [];
         for (let k = 0; k < SpeechRecognitionResult.length; k++) {
@@ -73,9 +73,6 @@ class SpeechToText extends React.Component<
         }
 
         console.log('playerCommand', playerCommand);
-        setTimeout(() => {
-          this.startSpeech();
-        }, 20);
       };
     }
   }

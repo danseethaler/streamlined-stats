@@ -23,17 +23,6 @@ const serviceArray = [
   'serbis',
 ];
 
-const attackArray = [
-  'attak',
-  'atack',
-  'attac',
-  'attack',
-  'kotak',
-  'ataque',
-  'attaque',
-  'tac',
-];
-
 const receivingArray = [
   'reception',
   'reception',
@@ -44,6 +33,7 @@ const receivingArray = [
   'reception',
   'perception',
   'receiving',
+  'receive',
 ];
 
 const errorArray = [
@@ -78,10 +68,17 @@ const attemptArray = [
   'attempts',
   'attempted',
   'a temps',
+  '10th',
+  'tent',
+  'tent',
+  'tant',
+  'tenth',
 ];
 
 const digArray = [
   'dig',
+  'digging',
+  'didinger',
   'jake',
   'pig',
   'did',
@@ -98,6 +95,9 @@ const digArray = [
   'dear',
   '30',
   '3d',
+  'greg',
+  'bag',
+  'dick',
 ];
 
 const ballHandlingArray = [
@@ -257,6 +257,9 @@ const statDefinitions: StatCategoryType[] = [
             'caro',
             'cairo',
             'general',
+            'churchill',
+            'kiehl',
+            'cahill',
           ],
         ],
         shorthand: 'K',
@@ -455,6 +458,7 @@ const statDefinitions: StatCategoryType[] = [
             'daycare',
             'duke energy',
             'duke are',
+            'digging are',
             'digging are',
             'digger',
             'bigger',
