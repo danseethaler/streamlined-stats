@@ -406,7 +406,7 @@ const statDefinitions: StatCategoryType[] = [
         name: 'Attempt',
         commandNames: [ballHandlingArray],
         shorthand: 'BHA',
-        calculator: getStatCount(['BHA']),
+        calculator: getStatCount(['BHA', 'AST']),
         result: StatResultTypes.nill,
         description: 'The total number of ball handling attempts.',
         recordingType: StatRecordingType.manual,
