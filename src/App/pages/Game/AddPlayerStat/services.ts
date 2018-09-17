@@ -2,12 +2,12 @@ import {
   StatType,
   StatTypes,
   UsOrOpponent,
-  PlayerStat,
+  GameRedux,
+  StatsAssignment,
 } from '../../../../redux/redux.definitions';
 import {
   getCategoriesByName,
   getManualRecordedStats,
-  getStatDefinition,
 } from '../../../services/stats/categories';
 import {
   StatCategories,
@@ -92,18 +92,32 @@ const getCategoryOptions = (playStatus: CurrentPlayStatus) => {
 };
 
 export const getCurrentStatCategoryOptions = (
-  stats: StatType[],
-  serveFirst: boolean
+  game: GameRedux
 ): StatCategoryType[] => {
-  const firstReferenceStat = getFirstRelevantStat(stats);
+  switch (game.statsAssignment) {
+    case StatsAssignment.serving:
+      return getManualRecordedStats().filter(
+        ({name}) => ['Serving', 'Ball Handling', 'Attack'].indexOf(name) >= 0
+      );
 
-  if (!firstReferenceStat) {
-    return serveFirst
-      ? getCategoriesByName([StatCategories.Serving])
-      : getCategoriesByName([StatCategories.Receiving]);
+    case StatsAssignment.receiving:
+      return getManualRecordedStats().filter(
+        ({name}) => ['Receiving', 'Digs', 'Blocking'].indexOf(name) >= 0
+      );
+
+    case StatsAssignment.all:
+      const firstReferenceStat = getFirstRelevantStat(game.stats);
+
+      if (!firstReferenceStat) {
+        return game.serveFirst
+          ? getCategoriesByName([StatCategories.Serving])
+          : getCategoriesByName([StatCategories.Receiving]);
+      }
+
+      const currentPlayStatus = getCurrentPlayStatusFromStat(
+        firstReferenceStat
+      );
+
+      return getCategoryOptions(currentPlayStatus);
   }
-
-  const currentPlayStatus = getCurrentPlayStatusFromStat(firstReferenceStat);
-
-  return getCategoryOptions(currentPlayStatus);
 };

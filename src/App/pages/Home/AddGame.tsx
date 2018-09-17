@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {arrayMove, SortableContainer} from 'react-sortable-hoc';
 import {addGameAction} from '../../../redux/actions/games';
-import {GameRedux} from '../../../redux/redux.definitions';
+import {GameRedux, StatsAssignment} from '../../../redux/redux.definitions';
 import {TextInput} from '../../components/Bits';
 import Button, {ButtonTypes} from '../../components/Button';
 import {Headline5, Paragraph3} from '../../components/Typography';
@@ -32,6 +32,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
   private opponentRef: React.RefObject<HTMLInputElement>;
   private setRef: React.RefObject<HTMLInputElement>;
   private serveFirstRef: React.RefObject<HTMLInputElement>;
+  private statsAssignmentRef: React.RefObject<HTMLSelectElement>;
 
   constructor(props) {
     super(props);
@@ -39,6 +40,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
     this.opponentRef = React.createRef();
     this.setRef = React.createRef();
     this.serveFirstRef = React.createRef();
+    this.statsAssignmentRef = React.createRef();
   }
 
   public componentDidMount() {
@@ -60,7 +62,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
       this.setState({formError: 'Select a game number between 1 and 5'});
       return false;
     }
-    if (gameData.lineup.length !== 6) {
+    if (gameData.usingRotation && gameData.lineup.length !== 6) {
       this.setState({formError: 'Lineup should have 6 players'});
       return false;
     }
@@ -70,6 +72,8 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
   public getGameData = (): GameRedux => {
     const opponent = this.opponentRef.current.value;
     const serveFirst = this.serveFirstRef.current.checked;
+    const statsAssignment = this.statsAssignmentRef.current
+      .value as StatsAssignment;
     const {usingRotation} = this.state;
     const set = parseInt(this.setRef.current.value, 10);
     const lineup = usingRotation
@@ -83,6 +87,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
       lineup,
       serveFirst,
       usingRotation,
+      statsAssignment,
       stats: [],
     };
 
@@ -111,6 +116,20 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
 
         <Paragraph3>Set Number</Paragraph3>
         <TextInput innerRef={this.setRef} type="number" />
+
+        <div
+          style={{
+            paddingBottom: '1em',
+            fontWeight: 500,
+          }}
+        >
+          <Paragraph3>Stats Assignment</Paragraph3>
+          <select ref={this.statsAssignmentRef}>
+            <option value={StatsAssignment.serving}>Serving</option>
+            <option value={StatsAssignment.receiving}>Receiving</option>
+            <option value={StatsAssignment.all}>All Stats</option>
+          </select>
+        </div>
 
         <label>
           <input ref={this.serveFirstRef} type="checkbox" /> Serve First

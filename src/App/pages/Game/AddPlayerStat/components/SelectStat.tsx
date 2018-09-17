@@ -18,10 +18,7 @@ interface Props {
 }
 
 const SelectPlayer: React.SFC<Props> = ({game, selectedStat, selectStat}) => {
-  const statCategories = getCurrentStatCategoryOptions(
-    game.stats,
-    game.serveFirst
-  );
+  const statCategories = getCurrentStatCategoryOptions(game);
 
   return (
     <StatsContainer>
