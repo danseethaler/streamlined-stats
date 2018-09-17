@@ -1,4 +1,4 @@
-import {cloneDeep, sortBy} from 'lodash';
+import {sortBy} from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps, withRouter} from 'react-router';
@@ -10,8 +10,7 @@ import Button, {ButtonTypes} from '../../components/Button';
 import {Headline5, Paragraph3} from '../../components/Typography';
 import players, {PlayerType} from '../../services/players';
 import {getUniqueId} from '../../services/unique_id';
-import {PlayerSortHandler, SortPlayer} from './components';
-import {PlayersContainer} from './components';
+import {PlayersContainer, PlayerSortHandler, SortPlayer} from './components';
 
 interface AddGameProps extends RouteComponentProps<any> {
   addGame: (game: GameRedux) => void;
@@ -20,12 +19,14 @@ interface AddGameProps extends RouteComponentProps<any> {
 interface AddGameState {
   formError: null | string;
   players: PlayerType[];
+  usingRotation: boolean;
 }
 
 class AddGame extends React.Component<AddGameProps, AddGameState> {
   public state = {
     formError: null,
     players: sortBy(players, 'name'),
+    usingRotation: false,
   };
 
   private opponentRef: React.RefObject<HTMLInputElement>;
@@ -69,17 +70,23 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
   public getGameData = (): GameRedux => {
     const opponent = this.opponentRef.current.value;
     const serveFirst = this.serveFirstRef.current.checked;
+    const {usingRotation} = this.state;
     const set = parseInt(this.setRef.current.value, 10);
-    const lineup = this.state.players.slice(0, 6).map(({name}) => name);
+    const lineup = usingRotation
+      ? this.state.players.slice(0, 6).map(({name}) => name)
+      : [];
 
-    return {
+    const gameData = {
       id: getUniqueId(),
       opponent,
       set,
       lineup,
-      stats: [],
       serveFirst,
+      usingRotation,
+      stats: [],
     };
+
+    return gameData;
   };
 
   public render() {
@@ -105,17 +112,40 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
         <Paragraph3>Set Number</Paragraph3>
         <TextInput innerRef={this.setRef} type="number" />
 
-        <Paragraph3>Serve First</Paragraph3>
-        <input ref={this.serveFirstRef} type="checkbox" />
+        <label>
+          <input ref={this.serveFirstRef} type="checkbox" /> Serve First
+        </label>
 
-        <Headline5>Lineup</Headline5>
+        <label>
+          <Paragraph3>
+            <input
+              ref={this.serveFirstRef}
+              checked={this.state.usingRotation}
+              onChange={e => {
+                console.log('e.target.checked', e.target.checked);
+                this.setState({usingRotation: e.target.checked});
+              }}
+              type="checkbox"
+            />{' '}
+            Track Rotation
+          </Paragraph3>
+        </label>
 
-        <SortablePlayers
-          onSortEnd={this.reorderPlayers}
-          lockAxis="y"
-          useDragHandle
-          items={this.state.players}
-        />
+        {this.state.usingRotation && (
+          <React.Fragment>
+            <Headline5>Lineup</Headline5>
+
+            <SortablePlayers
+              onSortEnd={this.reorderPlayers}
+              lockAxis="y"
+              useDragHandle
+              items={this.state.players}
+            />
+          </React.Fragment>
+        )}
+
+        <hr />
+
         <Button
           type={ButtonTypes.primary}
           onClick={() => {

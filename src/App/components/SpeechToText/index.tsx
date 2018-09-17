@@ -1,10 +1,12 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {IoIosMic} from 'react-icons/io';
+import {connect} from 'react-redux';
 import {addStatAction} from '../../../redux/actions/games';
 import {GameRedux, StatType, StatTypes} from '../../../redux/redux.definitions';
 import {getPlayerCommandFromSpeech} from './commands';
 import {Microphone} from './components';
+
+const speechApiAvailabled = () => 'webkitSpeechRecognition' in window;
 
 interface SpeechToTextProps {
   addPlayerStat: (game: string, stat: StatType) => void;
@@ -24,7 +26,7 @@ class SpeechToText extends React.Component<
   private recognition: any;
 
   public componentDidMount() {
-    if (!('webkitSpeechRecognition' in window)) {
+    if (!speechApiAvailabled()) {
       console.log('Web Speech API is not supported on this browser.');
     } else {
       this.recognition = new window.webkitSpeechRecognition();
@@ -92,6 +94,10 @@ class SpeechToText extends React.Component<
   };
 
   public render() {
+    if (!speechApiAvailabled()) {
+      return null;
+    }
+
     return (
       <Microphone
         active={this.state.listening}

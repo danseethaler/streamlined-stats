@@ -50,7 +50,7 @@ export const SelectStatButton = styled.button<{selected: boolean}>(
     margin: '0.5em',
     cursor: 'pointer',
     fontWeight: 300,
-    flex: '1 0 20%',
+    flex: '1',
     '@media (hover)': {
       ':hover': {
         backgroundColor: selected ? colors.darkCoolGray : colors.lightCoolGray,

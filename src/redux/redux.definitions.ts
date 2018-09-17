@@ -43,6 +43,7 @@ export interface GameRedux {
   opponent: string;
   set: number;
   serveFirst: boolean;
+  usingRotation: boolean;
   lineup: string[];
   stats: StatType[];
 }
