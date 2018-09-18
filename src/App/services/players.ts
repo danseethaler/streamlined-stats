@@ -347,7 +347,7 @@ const players = [
     photoPath: require('../../assets/photos/hannah.png'),
     nameFull: 'Hannah Weaks',
     year: 'Sr.',
-    positions: ['RS', 'OH', 'S'],
+    positions: ['RS', 'OH'],
     height: '5-8',
   },
 ] as PlayerType[];

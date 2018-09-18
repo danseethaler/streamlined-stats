@@ -74,35 +74,39 @@ export const getRotation = ({lineup, stats, serveFirst}: GameRedux): string[] =>
       });
   });
 
+const getPlayerIndexesByPosition = (players, positions) =>
+  players.reduce((matchedIndexes, player, index) => {
+    if (positions.some(position => player.positions.indexOf(position) >= 0)) {
+      matchedIndexes.push(index);
+    }
+    return matchedIndexes;
+  }, []);
+
 export const getMostLikelyStatPlayers = (stat, players: PlayerType[]) => {
   const statDefinition = getStatDefinition(stat);
   switch (statDefinition.category) {
     case StatCategories.Serving:
-      return [1];
+      return [];
 
     case StatCategories.Receiving:
-      return [1, 3, 5]; // Backrow
+      return getPlayerIndexesByPosition(players, ['LB', 'DS']);
 
     case StatCategories.Attack:
-      return players.reduce((matchedIndexes, player, index) => {
-        if (['RS', 'OH', 'MB', 'OPP', 'MH'].indexOf(player.positions[0]) >= 0) {
-          matchedIndexes.push(index);
-        }
-        return matchedIndexes;
-      }, []);
+      return getPlayerIndexesByPosition(players, [
+        'RS',
+        'OH',
+        'MB',
+        'OPP',
+        'MH',
+      ]);
 
     case StatCategories.Blocking:
-      return [0, 2, 4]; // Frontrow
+      return getPlayerIndexesByPosition(players, ['MB', 'RS', 'MH', 'OPP']);
 
     case StatCategories.BallHandling:
-      return players.reduce((matchedIndexes, player, index) => {
-        if (['S', 'LB'].indexOf(player.positions[0]) >= 0) {
-          matchedIndexes.push(index);
-        }
-        return matchedIndexes;
-      }, []);
+      return getPlayerIndexesByPosition(players, ['S', 'LB']);
 
     case StatCategories.Digs:
-      return [1, 3, 5]; // Backrow
+      return getPlayerIndexesByPosition(players, ['LB', 'DS']);
   }
 };

@@ -63,14 +63,16 @@ class StatList extends React.Component<StatListProps, StatListState> {
           >
             Undo stat
           </Button>
-          <Button
-            type={ButtonTypes.primary}
-            onClick={() => {
-              this.setState({subModalOpen: true});
-            }}
-          >
-            Substitute
-          </Button>
+          {game.usingRotation && (
+            <Button
+              type={ButtonTypes.primary}
+              onClick={() => {
+                this.setState({subModalOpen: true});
+              }}
+            >
+              Substitute
+            </Button>
+          )}
         </div>
         <SortableStatListItems
           onSortEnd={this.onReorderStats}

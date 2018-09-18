@@ -23,31 +23,31 @@ const PlayersList: React.SFC<PlayersListProps> = ({
 }) => {
   const playersData = players.map(player => getPlayerData(player));
 
+  const orderedPlayers = orderBy(playersData, ['jersey'], ['asc']);
+
   const highlightedPlayerIndexes = getMostLikelyStatPlayers(
     selectedStat,
-    playersData
+    orderedPlayers
   );
 
   return (
     <PlayersContainer>
-      {orderBy(playersData, ['jersey'], ['asc']).map(
-        ({jersey, photoPath, name}, index) => (
-          <PlayerRow
-            key={name}
-            onClick={() => {
-              selectPlayer(name);
-            }}
-          >
-            <LeftDiv>
-              <RecommendedPlayer
-                recommended={highlightedPlayerIndexes.indexOf(index) >= 0}
-              />
-              {jersey} - {name}
-            </LeftDiv>
-            <PlayerImage src={photoPath} />
-          </PlayerRow>
-        )
-      )}
+      {orderedPlayers.map(({jersey, photoPath, name}, index) => (
+        <PlayerRow
+          key={name}
+          onClick={() => {
+            selectPlayer(name);
+          }}
+        >
+          <LeftDiv>
+            <RecommendedPlayer
+              recommended={highlightedPlayerIndexes.indexOf(index) >= 0}
+            />
+            {jersey} - {name}
+          </LeftDiv>
+          <PlayerImage src={photoPath} />
+        </PlayerRow>
+      ))}
     </PlayersContainer>
   );
 };
