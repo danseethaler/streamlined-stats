@@ -1,5 +1,5 @@
 export interface PlayerType {
-  jersey: string;
+  jersey: number;
   name: string;
   alternateNames: string[];
   nameFull: string;
@@ -15,7 +15,7 @@ export const getPlayerData = (playerName): PlayerType =>
 
 const players = [
   {
-    jersey: '2',
+    jersey: 2,
     name: 'Juliann',
     alternateNames: [
       'julie ann',
@@ -36,7 +36,7 @@ const players = [
     height: '5-5',
   },
   {
-    jersey: '4',
+    jersey: 4,
     name: 'Emma',
     alternateNames: [
       'emma',
@@ -55,7 +55,7 @@ const players = [
     height: '5-11',
   },
   {
-    jersey: '5',
+    jersey: 5,
     name: 'Macy',
     alternateNames: [
       'macy',
@@ -88,7 +88,7 @@ const players = [
     height: '5-8',
   },
   {
-    jersey: '6',
+    jersey: 6,
     name: 'Kennedy',
     alternateNames: [
       'kennedy',
@@ -105,7 +105,7 @@ const players = [
     height: '5-7',
   },
   {
-    jersey: '7',
+    jersey: 7,
     name: 'Kat',
     alternateNames: ['cat', 'kat', 'katt', 'chat', 'khat', 'catt', 'kath'],
     photoPath: require('../../assets/photos/kat.png'),
@@ -115,7 +115,7 @@ const players = [
     height: '4-11',
   },
   {
-    jersey: '8',
+    jersey: 8,
     name: 'Celeste',
     alternateNames: [
       'celeste',
@@ -139,7 +139,7 @@ const players = [
     height: '5-9',
   },
   {
-    jersey: '9',
+    jersey: 9,
     name: 'Cailyn',
     alternateNames: [
       'kon',
@@ -166,7 +166,7 @@ const players = [
     height: '5-4',
   },
   {
-    jersey: '10',
+    jersey: 10,
     name: 'Victoria',
     alternateNames: [
       'tori',
@@ -196,7 +196,7 @@ const players = [
     height: '5-7',
   },
   {
-    jersey: '11',
+    jersey: 11,
     name: 'Lydia',
     alternateNames: [
       'lydia',
@@ -218,7 +218,7 @@ const players = [
     height: '5-11',
   },
   {
-    jersey: '18',
+    jersey: 18,
     name: 'Colby',
     alternateNames: [
       'colby',
@@ -239,7 +239,7 @@ const players = [
     height: '5-7',
   },
   {
-    jersey: '19',
+    jersey: 19,
     name: 'Sarah',
     alternateNames: [
       'sarah',
@@ -260,7 +260,7 @@ const players = [
     height: '5-11',
   },
   {
-    jersey: '20',
+    jersey: 20,
     name: 'Rachel',
     alternateNames: [
       'rachel',
@@ -281,7 +281,7 @@ const players = [
     height: '5-6',
   },
   {
-    jersey: '1/17',
+    jersey: 17,
     name: 'Marlee',
     alternateNames: [
       'marley',
@@ -302,7 +302,7 @@ const players = [
     height: '5-5',
   },
   {
-    jersey: '12/14',
+    jersey: 14,
     name: 'Haylee',
     alternateNames: [
       'haley',
@@ -330,7 +330,7 @@ const players = [
     height: '5-7',
   },
   {
-    jersey: '15/16',
+    jersey: 16,
     name: 'Hannah',
     alternateNames: [
       'chana',

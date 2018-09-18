@@ -34,7 +34,6 @@ class SpeechToText extends React.Component<
       this.recognition.lang = 'en-US';
       this.recognition.interimResults = false;
       this.recognition.maxAlternatives = 10;
-      this.startSpeech();
 
       this.recognition.onstart = () => {
         this.setState({listening: true});

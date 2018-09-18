@@ -7,16 +7,11 @@ export const AddHandlingContainer = styled.div({
   margin: '10px 0',
 });
 
-export const SelectPlayerContainer = styled.div<{swapped: boolean}>(
-  ({swapped}) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    paddingLeft: '0.5em',
-    ...(swapped
-      ? {borderRight: '5px solid gray'}
-      : {borderLeft: '5px solid gray'}),
-  })
-);
+export const SelectPlayerContainer = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '0.5em',
+});
 
 export const AddStatContainer = styled.div({
   display: 'flex',
@@ -58,53 +53,6 @@ export const SelectStatButton = styled.button<{selected: boolean}>(
     },
   })
 );
-
-export const PlayersContainer = styled.div({
-  display: 'flex',
-  flexWrap: 'wrap',
-  border: '1px solid #f5f5f5',
-  borderRadius: 10,
-});
-
-export const PlayerRow = styled.div<{recommended: boolean}>(
-  ({recommended}) => ({
-    display: 'flex',
-    flex: '1 1 45%',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    color: colors.darkCoolGray,
-    padding: '0.8em',
-    cursor: 'pointer',
-    fontWeight: 500,
-    opacity: recommended ? 1 : 0.5,
-    borderBottom: '1px solid #f5f5f5',
-    ':first-child': {
-      borderRadius: '10px 0 0 0',
-    },
-    ':nth-child(2)': {
-      borderRadius: '0 10px 0 0',
-    },
-    ':nth-child(5)': {
-      borderRadius: '0 0 0 10px',
-    },
-    ':last-child': {
-      borderRadius: '0 0 10px 0',
-    },
-    '@media (hover)': {
-      ':hover': {
-        backgroundColor: '#f5f5f5',
-      },
-    },
-  })
-);
-
-export const PlayerImage = styled.img({
-  height: '2em',
-  width: '2em',
-  borderRadius: '2em',
-  marginLeft: 48,
-  filter: 'brightness(120%)',
-});
 
 export const SelectedCircleContainer = styled.div<{active?: boolean}>(
   ({active}) => ({

@@ -11,6 +11,7 @@ import {AddStatContainer} from './components';
 import SelectPlayer from './components/SelectPlayer';
 import SelectStat from './components/SelectStat';
 import {getFormattedRotation} from './components/services';
+import players from '../../../services/players';
 
 interface AddPlayerStatProps {
   game: GameRedux;
@@ -52,7 +53,9 @@ class AddPlayerStat extends React.Component<
     const {game} = this.props;
     const {courtSwapped} = this.state;
 
-    const rotation = getFormattedRotation(game, courtSwapped);
+    const rotation = game.usingRotation
+      ? getFormattedRotation(game, courtSwapped)
+      : players.map(({name}) => name).sort();
 
     return (
       <AddStatContainer>
@@ -60,6 +63,7 @@ class AddPlayerStat extends React.Component<
           <SelectPlayer
             swapCourtSides={this.toggleCourtSides}
             courtSwapped={courtSwapped}
+            usingRotation={game.usingRotation}
             rotation={rotation}
             cancel={() => {
               this.setState(initialState);

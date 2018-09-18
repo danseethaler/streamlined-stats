@@ -2,14 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import {GameRedux} from '../../../redux/redux.definitions';
-import {Column, ColumnContainer} from '../../components/Bits';
+import SpeechToText from '../../components/SpeechToText';
 import {Headline4, Paragraph3} from '../../components/Typography';
 import AddPlayerStat from './AddPlayerStat';
 import {HeaderContainer, PointsContainer} from './components';
-import GameActions from './GameActions';
 import {getScores} from './services';
 import StatList from './StatsList';
-import SpeechToText from '../../components/SpeechToText';
 
 interface GameProps {
   game: GameRedux;
@@ -44,12 +42,12 @@ class Game extends React.Component<GameProps, GameState> {
             {game.opponent} - Set {game.set}
           </Headline4>
 
-          <PointsContainer>
+          {/* <PointsContainer>
             <Paragraph3>
               {game.opponent} {scores.opponent}
             </Paragraph3>
             <Paragraph3>Us {scores.us}</Paragraph3>
-          </PointsContainer>
+          </PointsContainer> */}
         </HeaderContainer>
 
         <AddPlayerStat game={game} />

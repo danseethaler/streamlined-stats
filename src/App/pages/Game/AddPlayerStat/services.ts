@@ -105,7 +105,7 @@ export const getCurrentStatCategoryOptions = (
         ({name}) => ['Receiving', 'Digs', 'Blocking'].indexOf(name) >= 0
       );
 
-    case StatsAssignment.all:
+    default:
       const firstReferenceStat = getFirstRelevantStat(game.stats);
 
       if (!firstReferenceStat) {
