@@ -81,7 +81,11 @@
       "prettier-package-json --write",
       "git add"
     ],
-    "{src,__{tests,mocks}__}/**/*.{js,ts,tsx,json,css,md}": [
+    "{src,__{tests,mocks}__}/**/*.{json,css,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "{src,__{tests,mocks}__}/**/*.{js,ts,tsx}": [
       "prettier --write",
       "tslint",
       "git add"

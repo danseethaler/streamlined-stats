@@ -5,7 +5,7 @@ import {RouteComponentProps, withRouter} from 'react-router';
 import {arrayMove, SortableContainer} from 'react-sortable-hoc';
 import {addGameAction} from '../../../redux/actions/games';
 import {GameRedux, StatsAssignment} from '../../../redux/redux.definitions';
-import {TextInput} from '../../components/Bits';
+import {Hr, TextInput} from '../../components/Bits';
 import Button, {ButtonTypes} from '../../components/Button';
 import {Headline5, Paragraph3} from '../../components/Typography';
 import players, {PlayerType} from '../../services/players';
@@ -163,7 +163,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
           </React.Fragment>
         )}
 
-        <hr />
+        <Hr />
 
         <Button
           type={ButtonTypes.primary}
@@ -180,7 +180,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
 
         {this.state.formError && (
           <React.Fragment>
-            <hr />
+            <Hr />
             <h5>{this.state.formError}</h5>
           </React.Fragment>
         )}

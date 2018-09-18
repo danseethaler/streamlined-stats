@@ -11,6 +11,12 @@ export const Column = styled.div<{flex?: number}>(({flex = 1}) => ({
   marginRight: '0.5em',
 }));
 
+export const Hr = styled.div({
+  display: 'block',
+  borderBottom: '1px solid #e2e2e2',
+  margin: '0.5em 2em',
+});
+
 export const TextInput = styled.input<{styleOverrides?: StyleType}>(
   {
     padding: '0.5em',
@@ -22,3 +28,13 @@ export const TextInput = styled.input<{styleOverrides?: StyleType}>(
   },
   ({styleOverrides}) => styleOverrides
 );
+
+export const ShadowDiv = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  backgroundColor: colors.white,
+  borderRadius: 3,
+  margin: '0.5em 1em',
+  padding: '0.5em',
+  boxShadow: `2px 1px 8px 1px ${colors.boxShadow}`,
+});

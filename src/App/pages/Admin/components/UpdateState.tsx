@@ -1,10 +1,11 @@
 import React from 'react';
 import {LOCAL_STORAGE_KEY} from '../../../../redux/constants';
+import {ShadowDiv} from '../../../components/Bits';
 import Button, {ButtonTypes} from '../../../components/Button';
 
 const UpdateState = () => (
-  <div>
-    <textarea id="new-state" />
+  <ShadowDiv>
+    <textarea id="new-state" rows={8} />
     <Button
       type={ButtonTypes.gray}
       onClick={() => {
@@ -18,7 +19,7 @@ const UpdateState = () => (
     >
       Update State Data
     </Button>
-  </div>
+  </ShadowDiv>
 );
 
 export default UpdateState;

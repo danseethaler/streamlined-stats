@@ -1,10 +1,9 @@
 import React from 'react';
-import {clearState, loadState} from '../../../redux/localStorage';
+import {Link} from 'react-router-dom';
+import {Hr} from '../../components/Bits';
 import Button, {ButtonTypes} from '../../components/Button';
 import Modal from '../../components/Modal';
-import download from '../../services/download';
 import AddGame from './AddGame';
-import UpdateState from './components/UpdateState';
 import Games from './Games';
 
 interface HomeState {
@@ -23,7 +22,6 @@ class Home extends React.Component<{}, HomeState> {
 
     return (
       <div>
-        <Games />
         <Button
           type={ButtonTypes.primary}
           onClick={() => {
@@ -32,43 +30,17 @@ class Home extends React.Component<{}, HomeState> {
         >
           New Set
         </Button>
-        <Button
-          type={ButtonTypes.gray}
-          onClick={() => {
-            const stateString = loadState();
-            this.setState({stateString: JSON.stringify(stateString, null, 4)});
-          }}
-        >
-          Show stored state
-        </Button>
-        <Button
-          type={ButtonTypes.danger}
-          onClick={() => {
-            clearState();
-            window.location = window.location;
-          }}
-        >
-          Clear stored state
-        </Button>
-        <Button
-          type={ButtonTypes.gray}
-          onClick={() => {
-            download();
-          }}
-        >
-          Download Data
-        </Button>
+        <Link to="/admin">Admin</Link>
         <Modal
           open={addGameModalOpen}
           title="Add Set"
           overlayClickCallback={() => {
-            this.setState({addGameModalOpen: !this.state.addGameModalOpen});
+            this.setState({addGameModalOpen: false});
           }}
           content={<AddGame />}
         />
-        <textarea value={this.state.stateString} />
-        <hr />
-        <UpdateState />
+        <Hr />
+        <Games />
       </div>
     );
   }

@@ -30,7 +30,7 @@ export const colors = {
   extraLightCoolGray: '#DDE0E7',
   xxLightCoolGray: '#F0F2F6',
   // Dynamic style
-  boxShadow: hexToRgb('#425464', 0.2),
+  boxShadow: hexToRgb('#425464', 0.1),
   green: '#58E797',
   purple: '#4633ed',
 };
