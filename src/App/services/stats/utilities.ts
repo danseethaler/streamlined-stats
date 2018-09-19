@@ -21,6 +21,17 @@ export const getPlayerGamesCount = (name: string, games: GameRedux[]): number =>
   games.filter(game => didPlayerPlayInGame(name, game)).length;
 
 export const didPlayerPlayInGame = (name: string, game: GameRedux) => {
+  const gameHasSubstitutions = game.stats.find(
+    ({type}) => type === StatTypes.substitute
+  );
+
+  if (!gameHasSubstitutions) {
+    // If not using rotation fall back to player stat
+    return game.stats.find(
+      stat => stat.type === StatTypes.playerStat && stat.player === name
+    );
+  }
+
   // Using using rotation then just see if player ever came in the game
   if (game.lineup.indexOf(name) >= 0) {
     return true;
@@ -29,11 +40,4 @@ export const didPlayerPlayInGame = (name: string, game: GameRedux) => {
   return game.stats.find(
     stat => stat.type === StatTypes.substitute && stat.subIn === name
   );
-
-  // TODO: we may want this as an alternate stat option
-  // after the game has been recorded
-  // If not using rotation fall back to player stat
-  // return game.stats.find(
-  //   stat => stat.type === StatTypes.playerStat && stat.player === name
-  // );
 };

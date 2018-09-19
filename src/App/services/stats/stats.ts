@@ -253,14 +253,14 @@ const statDefinitions: StatCategoryType[] = [
         commandNames: [
           [
             'chill',
+            'killed',
+            'kilo',
             'jill',
             'chill',
             'kill',
             'carol',
             'channel',
-            'caro',
             'cairo',
-            'general',
             'churchill',
             'kiehl',
             'cahill',
