@@ -13,7 +13,7 @@ const StyledBackButton = styled.button({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'flex-start',
-  padding: '5px 20px',
+  padding: '6px 10px',
   color: 'white',
   letterSpacing: '2px',
   marginTop: '0.5em',
@@ -44,7 +44,7 @@ const ButtonNew: React.SFC<{
   onClick: () => void;
 }> = ({icon: Icon, text, onClick}) => (
   <StyledBackButton onClick={onClick}>
-    {Icon && <Icon color={colors.white} size={34} />}
+    {Icon && <Icon color={colors.white} size={24} />}
     {text && <SpanSpacer left={12}>{text}</SpanSpacer>}
   </StyledBackButton>
 );
