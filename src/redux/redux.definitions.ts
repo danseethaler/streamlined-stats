@@ -38,20 +38,10 @@ export type StatType =
   | SubsitutionStat
   | PointAdjustmentStat;
 
-export const enum StatsAssignment {
-  receiving = 'receiving',
-  serving = 'serving',
-  all = 'all',
-  voice = 'voice',
-}
-
 export interface GameRedux {
   id: string;
   opponent: string;
   set: number;
-  serveFirst: boolean;
-  usingRotation: boolean;
-  statsAssignment: StatsAssignment;
   lineup: string[];
   stats: StatType[];
 }
