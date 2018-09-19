@@ -3,13 +3,13 @@ import {IoIosMic} from 'react-icons/io';
 import {connect} from 'react-redux';
 import {addStatAction} from '../../../redux/actions/games';
 import {GameRedux, StatType, StatTypes} from '../../../redux/redux.definitions';
-import {getPlayerCommandFromSpeech} from './commands';
+import {getSpeechMatchCommands} from './commands';
 import {Microphone} from './components';
 
 const speechApiAvailabled = () => 'webkitSpeechRecognition' in window;
 
 interface SpeechToTextProps {
-  addPlayerStat: (game: string, stat: StatType) => void;
+  addStat: (game: string, stat: StatType) => void;
   game: GameRedux;
 }
 
@@ -61,17 +61,40 @@ class SpeechToText extends React.Component<
             .toLowerCase();
         }
 
-        const playerCommand = getPlayerCommandFromSpeech(results);
+        const voiceCommand = getSpeechMatchCommands(results);
 
-        if (playerCommand) {
-          this.props.addPlayerStat(this.props.game.id, {
-            type: StatTypes.playerStat,
-            player: playerCommand.player,
-            shorthand: playerCommand.command,
-          });
+        if (!voiceCommand) {
+          return;
         }
 
-        console.log('playerCommand', playerCommand);
+        console.log('voiceCommand', voiceCommand);
+
+        switch (voiceCommand.type) {
+          case StatTypes.playerStat:
+            this.props.addStat(this.props.game.id, {
+              type: StatTypes.playerStat,
+              player: voiceCommand.player,
+              shorthand: voiceCommand.shorthand,
+            });
+            break;
+
+          case StatTypes.pointAdjustment:
+            this.props.addStat(this.props.game.id, {
+              type: StatTypes.pointAdjustment,
+              team: voiceCommand.team,
+            });
+            break;
+
+          case StatTypes.timeout:
+            this.props.addStat(this.props.game.id, {
+              type: StatTypes.timeout,
+              team: voiceCommand.team,
+            });
+            break;
+
+          default:
+            break;
+        }
       };
 
       window.addEventListener('keydown', e => {
@@ -133,5 +156,5 @@ class SpeechToText extends React.Component<
 
 export default connect(
   null,
-  {addPlayerStat: addStatAction}
+  {addStat: addStatAction}
 )(SpeechToText);
