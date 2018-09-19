@@ -102,15 +102,18 @@ const digArray = [
 
 const ballHandlingArray = [
   'handling',
+  'handel',
+  'handle',
+  'handler',
+  'mandolin',
+  'hand ling',
+  'hand sing',
   'ball handling',
   'ball handeling',
-  'orlando',
   'all handling',
   'fall handling',
   'hall handling',
   'play annoying',
-  'hand ling',
-  'hand sing',
   'call handling',
   'call handeling',
 ];

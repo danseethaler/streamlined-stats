@@ -42,6 +42,7 @@ export const enum StatsAssignment {
   receiving = 'receiving',
   serving = 'serving',
   all = 'all',
+  voice = 'voice',
 }
 
 export interface GameRedux {

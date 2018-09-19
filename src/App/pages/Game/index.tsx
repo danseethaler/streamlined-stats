@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
-import {GameRedux} from '../../../redux/redux.definitions';
+import {GameRedux, StatsAssignment} from '../../../redux/redux.definitions';
 import SpeechToText from '../../components/SpeechToText';
 import {Headline4, Paragraph3} from '../../components/Typography';
 import AddPlayerStat from './AddPlayerStat';
@@ -49,10 +49,15 @@ class Game extends React.Component<GameProps, GameState> {
             <Paragraph3>Us {scores.us}</Paragraph3>
           </PointsContainer> */}
         </HeaderContainer>
+        {game.statsAssignment !== StatsAssignment.voice && (
+          <AddPlayerStat game={game} />
+        )}
 
-        <AddPlayerStat game={game} />
         <StatList game={game} />
-        <SpeechToText game={game} />
+
+        {game.statsAssignment === StatsAssignment.voice && (
+          <SpeechToText game={game} />
+        )}
       </div>
     );
   }

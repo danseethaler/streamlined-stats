@@ -128,6 +128,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
             <option value={StatsAssignment.serving}>Serving</option>
             <option value={StatsAssignment.receiving}>Receiving</option>
             <option value={StatsAssignment.all}>All Stats</option>
+            <option value={StatsAssignment.voice}>Voice</option>
           </select>
         </div>
 

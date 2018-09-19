@@ -2,9 +2,10 @@ import React from 'react';
 import Button, {ButtonTypes} from '../Button';
 import {colors} from '../theme';
 
-export const Microphone = ({active, onClick, children}) => (
+export const Microphone = ({active, onMouseUp, onMouseDown, children}) => (
   <Button
-    onClick={onClick}
+    onMouseUp={onMouseUp}
+    onMouseDown={onMouseDown}
     type={ButtonTypes.success}
     style={{
       position: 'fixed',

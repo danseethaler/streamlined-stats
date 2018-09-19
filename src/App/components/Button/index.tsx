@@ -31,7 +31,7 @@ export default styled.button<{type: ButtonTypes}>(props => {
     display: 'inline-block',
     padding: '10px 20px',
     textAlign: 'center',
-    transition: 'all 300ms ease',
+    transition: 'all 200ms ease',
     borderRadius: 4,
     color: '#fff',
     boxShadow: '0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08)',

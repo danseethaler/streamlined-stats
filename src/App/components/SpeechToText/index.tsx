@@ -42,17 +42,15 @@ class SpeechToText extends React.Component<
       this.recognition.onerror = e => {
         console.log('errored', e);
         this.setState({listening: false});
-        setTimeout(() => {
-          this.startSpeech();
-        }, 150);
       };
 
-      this.recognition.onend = e => {
+      this.recognition.onaudioend = e => {
         this.setState({listening: false});
-        setTimeout(() => {
-          this.startSpeech();
-        }, 150);
       };
+
+      // this.recognition.onend = e => {
+      //   this.setState({listening: false});
+      // };
 
       this.recognition.onresult = event => {
         const SpeechRecognitionResult = event.results[event.resultIndex];
@@ -75,6 +73,26 @@ class SpeechToText extends React.Component<
 
         console.log('playerCommand', playerCommand);
       };
+
+      window.addEventListener('keydown', e => {
+        if ([13, 32].indexOf(e.keyCode) >= 0) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (!this.state.listening) {
+            this.startSpeech();
+          }
+        }
+      });
+
+      window.addEventListener('keyup', e => {
+        if ([13, 32].indexOf(e.keyCode) >= 0) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (this.state.listening) {
+            this.stopSpeech();
+          }
+        }
+      });
     }
   }
 
@@ -100,12 +118,11 @@ class SpeechToText extends React.Component<
     return (
       <Microphone
         active={this.state.listening}
-        onClick={() => {
-          if (this.state.listening) {
-            this.stopSpeech();
-          } else {
-            this.startSpeech();
-          }
+        onMouseDown={() => {
+          this.startSpeech();
+        }}
+        onMouseUp={() => {
+          this.stopSpeech();
         }}
       >
         <IoIosMic size={32} color="#FFFFFF" />
