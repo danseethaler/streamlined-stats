@@ -11,9 +11,19 @@ import {Paragraph3} from '../../components/Typography';
 import {getStatDefinition} from '../../services/stats/categories';
 import {StatResultTypes} from '../../services/stats/stats.definitions';
 
+export const GameContainer = styled.div({
+  marginTop: 64,
+});
+
 export const HeaderContainer = styled.div({
   display: 'flex',
   justifyContent: 'space-between',
+  backgroundColor: '#fff',
+  boxShadow: '0 4px 12px -2px rgba(0, 0, 0, 0.1)',
+  position: 'fixed',
+  top: '0',
+  left: '0',
+  right: '0',
 });
 
 export const PointsContainer = styled.div({

@@ -4,7 +4,7 @@ import {Redirect} from 'react-router';
 import {GameRedux} from '../../../redux/redux.definitions';
 import SpeechToText from '../../components/SpeechToText';
 import {Headline4, Paragraph3} from '../../components/Typography';
-import {HeaderContainer, PointsContainer} from './components';
+import {GameContainer, HeaderContainer, PointsContainer} from './components';
 import {getScores} from './services';
 import StatList from './StatsList';
 
@@ -30,7 +30,7 @@ class Game extends React.Component<GameProps, GameState> {
     }
 
     return (
-      <div>
+      <GameContainer>
         <HeaderContainer>
           <Headline4
             style={{
@@ -52,7 +52,7 @@ class Game extends React.Component<GameProps, GameState> {
         <StatList game={game} />
 
         <SpeechToText game={game} />
-      </div>
+      </GameContainer>
     );
   }
 }
