@@ -50,8 +50,8 @@ const HeaderRowCategoryStat = () => (
 
 const playerRows = playerStats =>
   map(playerStats, playerStatData => (
-    <tr key={playerStatData.jersey}>
-      <td>{playerStatData.jersey}</td>
+    <tr key={playerStatData.jersey.toString()}>
+      <td>{playerStatData.jersey.toString()}</td>
       <td>{playerStatData.name}</td>
       {playerStatData.stats.map(({shorthand, value}) => (
         <td key={shorthand}>{value}</td>

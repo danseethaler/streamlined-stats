@@ -80,7 +80,11 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
     const SP = ({items}) => (
       <PlayersContainer>
         {items.map((player, index) => (
-          <SortPlayer key={player.jersey} sortIndex={index} index={index}>
+          <SortPlayer
+            key={player.jersey.toString()}
+            sortIndex={index}
+            index={index}
+          >
             {player.name}
             <PlayerSortHandler>:::</PlayerSortHandler>
           </SortPlayer>

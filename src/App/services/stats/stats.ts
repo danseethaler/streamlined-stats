@@ -108,6 +108,7 @@ const ballHandlingArray = [
   'mandolin',
   'hand ling',
   'hand sing',
+  'handles',
   'ball handling',
   'ball handeling',
   'all handling',
