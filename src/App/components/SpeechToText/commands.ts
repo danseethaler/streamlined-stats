@@ -1,10 +1,18 @@
 import {flatten} from 'lodash';
+import {UsOrOpponent} from '../../../redux/redux.definitions';
 import players from '../../services/players';
 import {getFlatStatDefinitions} from '../../services/stats/categories';
-import {StatTypes, UsOrOpponent} from '../../../redux/redux.definitions';
+
+export const enum VoiceCommandType {
+  substitute = 'substitute',
+  timeout = 'timeout',
+  playerStat = 'playerStat',
+  pointAdjustment = 'pointAdjustment',
+  undo = 'undo',
+}
 
 interface VoiceCommands {
-  type: StatTypes;
+  type: VoiceCommandType;
   regex: string;
   shorthand?: string;
   player?: string;
@@ -28,7 +36,7 @@ export const getCommands = (): VoiceCommands[] => {
 
   const playerCommands = commandGroupings.map(commandGrouping =>
     playerGroupings.map(playerGroup => ({
-      type: StatTypes.playerStat,
+      type: VoiceCommandType.playerStat,
       regex: `^${playerGroup.regex} ${commandGrouping.regex}$`,
       shorthand: commandGrouping.shorthand,
       player: playerGroup.player,
@@ -37,23 +45,28 @@ export const getCommands = (): VoiceCommands[] => {
 
   const otherCommands = [
     {
-      type: StatTypes.pointAdjustment,
+      type: VoiceCommandType.pointAdjustment,
       regex: `^add point$`,
       team: UsOrOpponent.us,
     },
     {
-      type: StatTypes.pointAdjustment,
+      type: VoiceCommandType.pointAdjustment,
       regex: `^add point opponent$`,
       team: UsOrOpponent.opponent,
     },
     {
-      type: StatTypes.timeout,
+      type: VoiceCommandType.timeout,
       regex: `^timeout$`,
       team: UsOrOpponent.us,
     },
     {
-      type: StatTypes.timeout,
+      type: VoiceCommandType.timeout,
       regex: `^timeout opponent$`,
+      team: UsOrOpponent.opponent,
+    },
+    {
+      type: VoiceCommandType.undo,
+      regex: `^(undo|cancel|remove|delete)$`,
       team: UsOrOpponent.opponent,
     },
   ];

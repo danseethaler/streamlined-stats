@@ -51,7 +51,7 @@ const StatContainerStyle = styled.div({
   padding: '0.3em 0.6em',
   marginTop: '0.3em',
   backgroundColor: colors.xxLightCoolGray,
-  borderRadius: '24px 0 0 24px',
+  borderRadius: 24,
 });
 
 const dotColors = {

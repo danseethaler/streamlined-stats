@@ -1,15 +1,16 @@
 import React from 'react';
 import {IoIosMic} from 'react-icons/io';
 import {connect} from 'react-redux';
-import {addStatAction} from '../../../redux/actions/games';
+import {addStatAction, undoLastStatAction} from '../../../redux/actions/games';
 import {GameRedux, StatType, StatTypes} from '../../../redux/redux.definitions';
-import {getSpeechMatchCommands} from './commands';
+import {getSpeechMatchCommands, VoiceCommandType} from './commands';
 import {Microphone} from './components';
 
 const speechApiAvailabled = () => 'webkitSpeechRecognition' in window;
 
 interface SpeechToTextProps {
   addStat: (game: string, stat: StatType) => void;
+  undoLastStat: (game: string) => void;
   game: GameRedux;
 }
 
@@ -67,29 +68,35 @@ class SpeechToText extends React.Component<
           return;
         }
 
+        const {game} = this.props;
+
         console.log('voiceCommand', voiceCommand);
 
         switch (voiceCommand.type) {
-          case StatTypes.playerStat:
-            this.props.addStat(this.props.game.id, {
+          case VoiceCommandType.playerStat:
+            this.props.addStat(game.id, {
               type: StatTypes.playerStat,
               player: voiceCommand.player,
               shorthand: voiceCommand.shorthand,
             });
             break;
 
-          case StatTypes.pointAdjustment:
-            this.props.addStat(this.props.game.id, {
+          case VoiceCommandType.pointAdjustment:
+            this.props.addStat(game.id, {
               type: StatTypes.pointAdjustment,
               team: voiceCommand.team,
             });
             break;
 
-          case StatTypes.timeout:
-            this.props.addStat(this.props.game.id, {
+          case VoiceCommandType.timeout:
+            this.props.addStat(game.id, {
               type: StatTypes.timeout,
               team: voiceCommand.team,
             });
+            break;
+
+          case VoiceCommandType.undo:
+            this.props.undoLastStat(game.id);
             break;
 
           default:
@@ -156,5 +163,8 @@ class SpeechToText extends React.Component<
 
 export default connect(
   null,
-  {addStat: addStatAction}
+  {
+    addStat: addStatAction,
+    undoLastStat: undoLastStatAction,
+  }
 )(SpeechToText);
