@@ -4,6 +4,7 @@ import {GameRedux} from '../../../redux/redux.definitions';
 import players, {PlayerType} from '../../services/players';
 import {getStatCategoryDefinitions} from '../../services/stats/categories';
 import calculatePlayerStats from './calculatePlayerStats';
+import {ThSticky} from './components';
 
 interface PlayerStat {
   shorthand: string;
@@ -26,42 +27,41 @@ const getStatsByPlayer = (
 const statDefinitions = getStatCategoryDefinitions();
 
 const HeaderRowCategoryName = ({useMaxpreps}) => (
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      {statDefinitions.map(category => (
-        <th
-          key={category.name}
-          colSpan={
-            category.stats.filter(
-              ({maxPrepsCalculator}) =>
-                !useMaxpreps || maxPrepsCalculator !== null
-            ).length
-          }
-        >
-          {category.name}
-        </th>
-      ))}
-    </tr>
-  </thead>
+  <tr>
+    <ThSticky>#</ThSticky>
+    <ThSticky>Name</ThSticky>
+    {statDefinitions.map(category => (
+      <ThSticky
+        key={category.name}
+        colSpan={
+          category.stats.filter(
+            ({maxPrepsCalculator}) =>
+              !useMaxpreps || maxPrepsCalculator !== null
+          ).length
+        }
+      >
+        {category.name}
+      </ThSticky>
+    ))}
+  </tr>
 );
 
 const HeaderRowCategoryStat = ({useMaxpreps}) => (
-  <thead>
-    <tr>
-      <th />
-      <th />
-      {statDefinitions.map(({stats}) =>
-        stats
-          .filter(
-            ({maxPrepsCalculator}) =>
-              !useMaxpreps || maxPrepsCalculator !== null
-          )
-          .map(stat => <th key={stat.shorthand}>{stat.shorthand}</th>)
-      )}
-    </tr>
-  </thead>
+  <tr>
+    <ThSticky offset={39} />
+    <ThSticky offset={39} />
+    {statDefinitions.map(({stats}) =>
+      stats
+        .filter(
+          ({maxPrepsCalculator}) => !useMaxpreps || maxPrepsCalculator !== null
+        )
+        .map(stat => (
+          <ThSticky offset={39} key={stat.shorthand}>
+            {stat.shorthand}
+          </ThSticky>
+        ))
+    )}
+  </tr>
 );
 
 const playerRows = playerStats =>
@@ -100,9 +100,16 @@ export const buildStatsTable = (games: GameRedux[], useMaxpreps: boolean) => {
   const playerStats = getStatsByPlayer(games, useMaxpreps);
 
   return (
-    <table className="pure-table pure-table-striped">
-      <HeaderRowCategoryName useMaxpreps={useMaxpreps} />
-      <HeaderRowCategoryStat useMaxpreps={useMaxpreps} />
+    <table
+      className="pure-table pure-table-striped"
+      style={{
+        marginBottom: 'calc(100vh - 7.3em)',
+      }}
+    >
+      <thead>
+        <HeaderRowCategoryName useMaxpreps={useMaxpreps} />
+        <HeaderRowCategoryStat useMaxpreps={useMaxpreps} />
+      </thead>
       <tbody>
         {playerRows(playerStats)}
         {totalsRow(playerStats)}

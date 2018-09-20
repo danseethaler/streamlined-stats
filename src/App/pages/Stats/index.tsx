@@ -66,7 +66,6 @@ class MatchStats extends React.Component<MatchStatsProps, MatchStatsState> {
             ))}
           </ul>
         </div>
-        {buildStatsTable(selectedGames, this.state.useMaxPreps)}
         <ButtonNew
           icon={IoIosArrowBack}
           text="Toggle MaxPreps"
@@ -74,6 +73,7 @@ class MatchStats extends React.Component<MatchStatsProps, MatchStatsState> {
             this.setState({useMaxPreps: !this.state.useMaxPreps});
           }}
         />
+        {buildStatsTable(selectedGames, this.state.useMaxPreps)}
       </div>
     );
   }
