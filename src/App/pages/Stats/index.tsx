@@ -43,13 +43,7 @@ class MatchStats extends React.Component<MatchStatsProps, MatchStatsState> {
     );
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
+      <div>
         <div>
           <ul>
             {map(this.props.games, (game, gameId) => (
