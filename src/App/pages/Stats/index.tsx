@@ -1,6 +1,8 @@
 import {filter, map, remove} from 'lodash';
 import React from 'react';
+import {IoIosArrowBack} from 'react-icons/io';
 import {GamesRedux} from '../../../redux/redux.definitions';
+import ButtonNew from '../../components/ButtonNew';
 import {buildStatsTable} from './services';
 
 interface MatchStatsProps {
@@ -9,11 +11,13 @@ interface MatchStatsProps {
 
 interface MatchStatsState {
   selectedGames: string[];
+  useMaxPreps: boolean;
 }
 
 class MatchStats extends React.Component<MatchStatsProps, MatchStatsState> {
   public state = {
     selectedGames: [],
+    useMaxPreps: true,
   };
 
   public handleInputChange = ({target}) => {
@@ -53,7 +57,6 @@ class MatchStats extends React.Component<MatchStatsProps, MatchStatsState> {
                 <label>
                   <input
                     name={gameId}
-                    // value={true}
                     onChange={this.handleInputChange}
                     type="checkbox"
                   />
@@ -63,7 +66,14 @@ class MatchStats extends React.Component<MatchStatsProps, MatchStatsState> {
             ))}
           </ul>
         </div>
-        {buildStatsTable(selectedGames)}
+        {buildStatsTable(selectedGames, this.state.useMaxPreps)}
+        <ButtonNew
+          icon={IoIosArrowBack}
+          text="Toggle MaxPreps"
+          onClick={() => {
+            this.setState({useMaxPreps: !this.state.useMaxPreps});
+          }}
+        />
       </div>
     );
   }

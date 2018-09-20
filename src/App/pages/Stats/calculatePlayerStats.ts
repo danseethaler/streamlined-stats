@@ -6,13 +6,29 @@ interface PlayerStat {
   value: number;
 }
 
-export default (name, games: GameRedux[]): PlayerStat[] => {
+export default (
+  name,
+  games: GameRedux[],
+  useMaxpreps: boolean
+): PlayerStat[] => {
   const playerStats = [];
 
-  getStatDefinitions().map(({shorthand, calculator}) => {
-    const value = calculator(name, games);
-    playerStats.push({shorthand, value});
-  });
+  getStatDefinitions().forEach(
+    ({shorthand, calculator, maxPrepsCalculator}) => {
+      if (useMaxpreps && maxPrepsCalculator === null) {
+        return;
+      }
+
+      let value;
+      if (useMaxpreps && maxPrepsCalculator) {
+        value = maxPrepsCalculator(name, games);
+      } else {
+        value = calculator(name, games);
+      }
+
+      playerStats.push({shorthand, value});
+    }
+  );
 
   return playerStats;
 };

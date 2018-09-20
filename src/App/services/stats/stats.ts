@@ -303,6 +303,7 @@ const statDefinitions: StatCategoryType[] = [
         ],
         shorthand: 'FB',
         calculator: getStatCount(['FB']),
+        maxPrepsCalculator: null,
         result: StatResultTypes.nill,
         description: 'Number of free balls sent over to the opponent.',
         recordingType: StatRecordingType.manual,
@@ -320,6 +321,7 @@ const statDefinitions: StatCategoryType[] = [
         ],
         shorthand: 'R1',
         calculator: getStatCount(['R1']),
+        maxPrepsCalculator: getStatCount(['R1', 'R2', 'R3']),
         result: StatResultTypes.nill,
         description:
           'A service reception is awarded when a player continues play by successfully passing a served ball and the pass does not result in a kill (an overpass) or lead directly to a kill by a teammate (this would be an assist).',
@@ -330,6 +332,7 @@ const statDefinitions: StatCategoryType[] = [
         commandNames: [receivingArray, ['two', '2', 'to']],
         shorthand: 'R2',
         calculator: getStatCount(['R2']),
+        maxPrepsCalculator: null,
         result: StatResultTypes.nill,
         description:
           'A service reception is awarded when a player continues play by successfully passing a served ball and the pass does not result in a kill (an overpass) or lead directly to a kill by a teammate (this would be an assist).',
@@ -352,6 +355,7 @@ const statDefinitions: StatCategoryType[] = [
         ],
         shorthand: 'R3',
         calculator: getStatCount(['R3']),
+        maxPrepsCalculator: null,
         result: StatResultTypes.nill,
         description:
           'A service reception is awarded when a player continues play by successfully passing a served ball and the pass does not result in a kill (an overpass) or lead directly to a kill by a teammate (this would be an assist).',

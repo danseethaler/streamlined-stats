@@ -17,6 +17,7 @@ export interface StatDefinitionType {
   commandNames?: string[][];
   calculator: (name: string, games: GameRedux[]) => any;
   description: string;
+  maxPrepsCalculator?: (name: string, games: GameRedux[]) => any | null;
   recordingType: StatRecordingType;
   result: StatResultTypes;
   raking?: boolean;

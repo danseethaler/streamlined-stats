@@ -14,21 +14,32 @@ interface CalculatedPlayerStats extends PlayerType {
   stats: PlayerStat[];
 }
 
-const getStatsByPlayer = (games: GameRedux[]): CalculatedPlayerStats[] =>
+const getStatsByPlayer = (
+  games: GameRedux[],
+  useMaxpreps
+): CalculatedPlayerStats[] =>
   players.map(player => ({
     ...player,
-    stats: calculatePlayerStats(player.name, games),
+    stats: calculatePlayerStats(player.name, games, useMaxpreps),
   }));
 
 const statDefinitions = getStatCategoryDefinitions();
 
-const HeaderRowCategoryName = () => (
+const HeaderRowCategoryName = ({useMaxpreps}) => (
   <thead>
     <tr>
       <th>#</th>
       <th>Name</th>
       {statDefinitions.map(category => (
-        <th key={category.name} colSpan={category.stats.length}>
+        <th
+          key={category.name}
+          colSpan={
+            category.stats.filter(
+              ({maxPrepsCalculator}) =>
+                !useMaxpreps || maxPrepsCalculator !== null
+            ).length
+          }
+        >
           {category.name}
         </th>
       ))}
@@ -36,13 +47,18 @@ const HeaderRowCategoryName = () => (
   </thead>
 );
 
-const HeaderRowCategoryStat = () => (
+const HeaderRowCategoryStat = ({useMaxpreps}) => (
   <thead>
     <tr>
       <th />
       <th />
       {statDefinitions.map(({stats}) =>
-        stats.map(stat => <th key={stat.shorthand}>{stat.shorthand}</th>)
+        stats
+          .filter(
+            ({maxPrepsCalculator}) =>
+              !useMaxpreps || maxPrepsCalculator !== null
+          )
+          .map(stat => <th key={stat.shorthand}>{stat.shorthand}</th>)
       )}
     </tr>
   </thead>
@@ -80,13 +96,13 @@ const totalsRow = playerStats => {
   );
 };
 
-export const buildStatsTable = (games: GameRedux[]) => {
-  const playerStats = getStatsByPlayer(games);
+export const buildStatsTable = (games: GameRedux[], useMaxpreps: boolean) => {
+  const playerStats = getStatsByPlayer(games, useMaxpreps);
 
   return (
     <table className="pure-table pure-table-striped">
-      <HeaderRowCategoryName />
-      <HeaderRowCategoryStat />
+      <HeaderRowCategoryName useMaxpreps={useMaxpreps} />
+      <HeaderRowCategoryStat useMaxpreps={useMaxpreps} />
       <tbody>
         {playerRows(playerStats)}
         {totalsRow(playerStats)}
