@@ -2,6 +2,7 @@ import {flatten} from 'lodash';
 import {UsOrOpponent} from '../../../redux/redux.definitions';
 import players from '../../services/players';
 import {getFlatStatDefinitions} from '../../services/stats/categories';
+import {getJerseyVoiceAlternatives} from './services';
 
 export const enum VoiceCommandType {
   substitute = 'substitute',
@@ -23,7 +24,10 @@ export const getCommands = (): VoiceCommands[] => {
   // TODO: Remove alternateNames once jersey numbers prove effective
   const playerGroupings = players.map(({name, jersey, alternateNames}) => ({
     player: name,
-    regex: '(' + [...jersey, ...alternateNames].join('|') + ')',
+    regex:
+      '(' +
+      [...getJerseyVoiceAlternatives(jersey), ...alternateNames].join('|') +
+      ')',
   }));
 
   const commandGroupings = getFlatStatDefinitions(true)
@@ -46,12 +50,12 @@ export const getCommands = (): VoiceCommands[] => {
   const otherCommands = [
     {
       type: VoiceCommandType.pointAdjustment,
-      regex: `^add point$`,
+      regex: `^(add point|add points|adding points)$`,
       team: UsOrOpponent.us,
     },
     {
       type: VoiceCommandType.pointAdjustment,
-      regex: `^add point opponent$`,
+      regex: `^(add point opponent|add points opponent|add point opponents)$`,
       team: UsOrOpponent.opponent,
     },
     {

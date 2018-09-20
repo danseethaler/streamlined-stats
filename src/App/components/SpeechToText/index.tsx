@@ -65,6 +65,7 @@ class SpeechToText extends React.Component<
         const voiceCommand = getSpeechMatchCommands(results);
 
         if (!voiceCommand) {
+          console.warn('No match!');
           return;
         }
 

@@ -21,6 +21,8 @@ const players = [
       'julie ann',
       'julianne',
       'julienne',
+      'julianna',
+      'juliana',
       'julie anne',
       'juliane',
       'juliann',

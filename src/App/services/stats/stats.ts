@@ -65,10 +65,15 @@ const attemptArray = [
   'attempt',
   'shaka',
   'tempt',
+  'temp',
+  'tempe',
+  'temple',
   'attempts',
   'attempted',
   'a temps',
   '10th',
+  'to 10',
+  'and 10',
   'tent',
   'tent',
   'tant',
@@ -79,6 +84,7 @@ const digArray = [
   'dig',
   'digging',
   'didinger',
+  'digit',
   'jake',
   'pig',
   'did',
@@ -149,7 +155,7 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.Serving,
     stats: [
       {
-        name: 'Attempt',
+        name: 'Service Attempt',
         commandNames: [serviceArray, attemptArray],
         shorthand: 'SA',
         calculator: getStatCount(['SA', 'A', 'SE']),
@@ -183,7 +189,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Error',
+        name: 'Service Error',
         commandNames: [serviceArray, errorArray],
         shorthand: 'SE',
         calculator: getStatCount(['SE']),
@@ -193,7 +199,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Rotation Points',
+        name: 'Service Rotation Points',
         shorthand: 'PTS',
         calculator: (name, games) => {
           const statsArray = getFlatStatsFromGames(games);
@@ -239,7 +245,7 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.Attack,
     stats: [
       {
-        name: 'Attempt',
+        name: 'Attack Attempt',
         commandNames: [attemptArray],
         shorthand: 'ATT',
         calculator: getStatCount(['ATT', 'K', 'E']),
@@ -274,7 +280,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Error',
+        name: 'Attack Error',
         commandNames: [errorArray],
         shorthand: 'E',
         calculator: getStatCount(['E']),
@@ -314,7 +320,7 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.Receiving,
     stats: [
       {
-        name: '1',
+        name: 'Receiving 1',
         commandNames: [
           receivingArray,
           ['one', '1', 'won', 'one', '1', '1:00', 'juan', 'won'],
@@ -328,7 +334,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: '2',
+        name: 'Receiving 2',
         commandNames: [receivingArray, ['two', '2', 'to']],
         shorthand: 'R2',
         calculator: getStatCount(['R2']),
@@ -339,7 +345,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: '3',
+        name: 'Receiving 3',
         commandNames: [
           receivingArray,
           [
@@ -362,7 +368,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Error',
+        name: 'Receiving Error',
         commandNames: [receivingArray, errorArray],
         shorthand: 'RE',
         calculator: getStatCount(['RE']),
@@ -377,7 +383,7 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.Blocking,
     stats: [
       {
-        name: 'Solo',
+        name: 'Solo Block',
         commandNames: [blockArray],
         shorthand: 'BS',
         calculator: getStatCount(['BS']),
@@ -387,7 +393,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Assisted',
+        name: 'Assisted Block',
         shorthand: 'BA',
         calculator: getStatCount(['BA']),
         result: StatResultTypes.point,
@@ -396,7 +402,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Error',
+        name: 'Blocking Error',
         commandNames: [blockArray, errorArray],
         shorthand: 'BE',
         calculator: getStatCount(['BE']),
@@ -411,7 +417,7 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.BallHandling,
     stats: [
       {
-        name: 'Attempt',
+        name: 'Handling Attempt',
         commandNames: [ballHandlingArray],
         shorthand: 'BHA',
         calculator: getStatCount(['BHA', 'AST']),
@@ -420,7 +426,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Assist',
+        name: 'Handling Assist',
         shorthand: 'AST',
         calculator: getStatCount(['AST']),
         result: StatResultTypes.nill,
@@ -429,7 +435,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Error',
+        name: 'Handling Error',
         commandNames: [ballHandlingArray, errorArray],
         shorthand: 'BHE',
         calculator: getStatCount(['BHE']),
@@ -454,7 +460,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Error',
+        name: 'Dig Error',
         commandNames: [
           [
             ...flatten(
