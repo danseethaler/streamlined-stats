@@ -10,6 +10,7 @@ export const enum VoiceCommandType {
   playerStat = 'playerStat',
   pointAdjustment = 'pointAdjustment',
   undo = 'undo',
+  adjustment = 'adjustment',
 }
 
 interface VoiceCommands {
@@ -72,6 +73,10 @@ export const getCommands = (): VoiceCommands[] => {
       type: VoiceCommandType.undo,
       regex: `^(undo|cancel|remove|delete)$`,
       team: UsOrOpponent.opponent,
+    },
+    {
+      type: VoiceCommandType.adjustment,
+      regex: `^(adjustment|adjustments|address book)$`,
     },
   ];
 

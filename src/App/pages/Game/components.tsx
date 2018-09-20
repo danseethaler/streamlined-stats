@@ -88,9 +88,30 @@ export const StatTextWithDot = ({text, status}) => (
   </div>
 );
 
-const StatContainer = ({text, status}) => (
+const AdjustmentBox = ({adjustment}) => {
+  if (!adjustment) {
+    return null;
+  }
+
+  return (
+    <span
+      style={{
+        color: colors.white,
+        padding: '0px 3px',
+        fontSize: '0.8em',
+        backgroundColor: colors.extraLightGray,
+        borderRadius: 3,
+      }}
+    >
+      adj
+    </span>
+  );
+};
+
+const StatContainer = ({text, status, adjustment = false}) => (
   <StatContainerStyle>
     <StatTextWithDot text={text} status={status} />
+    <AdjustmentBox adjustment={adjustment} />
     <SortHandler>:::</SortHandler>
   </StatContainerStyle>
 );
@@ -102,6 +123,7 @@ export const SortableStatItem = SortableElement((stat: StatType) => {
         <StatContainer
           status={getStatDefinition(stat.shorthand).result}
           text={`${stat.shorthand} - ${stat.player}`}
+          adjustment={stat.adjustment}
         />
       );
 

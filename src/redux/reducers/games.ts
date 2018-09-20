@@ -4,8 +4,9 @@ import {
   ADD_STAT,
   UNDO_LAST_STAT,
   UPDATE_STATS_ORDER,
+  TOGGLE_ADJUSTMENT_LAST_STAT,
 } from '../constants';
-import {GamesRedux} from '../redux.definitions';
+import {GamesRedux, StatTypes} from '../redux.definitions';
 
 const initialState = {};
 
@@ -40,6 +41,16 @@ export default (state = initialState, action): GamesRedux =>
       case UNDO_LAST_STAT:
         const undoGame = newState[action.game];
         undoGame.stats.shift();
+
+        break;
+
+      case TOGGLE_ADJUSTMENT_LAST_STAT:
+        const priorGame = newState[action.game];
+        const priorStat = priorGame.stats.shift();
+        if (priorStat.type === StatTypes.playerStat) {
+          priorStat.adjustment = !priorStat.adjustment;
+        }
+        priorGame.stats.unshift(priorStat);
 
         break;
 

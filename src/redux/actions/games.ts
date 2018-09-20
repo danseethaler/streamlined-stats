@@ -1,6 +1,7 @@
 import {
   ADD_GAME,
   ADD_STAT,
+  TOGGLE_ADJUSTMENT_LAST_STAT,
   UNDO_LAST_STAT,
   UPDATE_STATS_ORDER,
 } from '../constants';
@@ -26,6 +27,11 @@ export const addStatAction = (game, stat: StatType, insertBefore = false) => ({
 
 export const undoLastStatAction = game => ({
   type: UNDO_LAST_STAT,
+  game,
+});
+
+export const toggleAdjustmentLastStatAction = game => ({
+  type: TOGGLE_ADJUSTMENT_LAST_STAT,
   game,
 });
 

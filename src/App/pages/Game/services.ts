@@ -11,7 +11,7 @@ export const getScores = (stats: StatType[]) =>
     (pointObject, stat) => {
       if (stat.type === StatTypes.pointAdjustment) {
         pointObject[stat.team]++;
-      } else if (stat.type === StatTypes.playerStat) {
+      } else if (stat.type === StatTypes.playerStat && !stat.adjustment) {
         const {result} = getStatDefinition(stat.shorthand);
 
         if (result === StatResultTypes.point) {

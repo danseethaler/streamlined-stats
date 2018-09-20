@@ -1,7 +1,11 @@
 import React from 'react';
 import {IoIosMic} from 'react-icons/io';
 import {connect} from 'react-redux';
-import {addStatAction, undoLastStatAction} from '../../../redux/actions/games';
+import {
+  addStatAction,
+  toggleAdjustmentLastStatAction,
+  undoLastStatAction,
+} from '../../../redux/actions/games';
 import {GameRedux, StatType, StatTypes} from '../../../redux/redux.definitions';
 import {getSpeechMatchCommands, VoiceCommandType} from './commands';
 import {Microphone} from './components';
@@ -11,6 +15,7 @@ const speechApiAvailabled = () => 'webkitSpeechRecognition' in window;
 interface SpeechToTextProps {
   addStat: (game: string, stat: StatType) => void;
   undoLastStat: (game: string) => void;
+  toggleAdjustmentLastStat: (game: string) => void;
   game: GameRedux;
 }
 
@@ -100,6 +105,10 @@ class SpeechToText extends React.Component<
             this.props.undoLastStat(game.id);
             break;
 
+          case VoiceCommandType.adjustment:
+            this.props.toggleAdjustmentLastStat(game.id);
+            break;
+
           default:
             break;
         }
@@ -167,5 +176,6 @@ export default connect(
   {
     addStat: addStatAction,
     undoLastStat: undoLastStatAction,
+    toggleAdjustmentLastStat: toggleAdjustmentLastStatAction,
   }
 )(SpeechToText);

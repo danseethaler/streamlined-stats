@@ -9,6 +9,7 @@ export interface PlayerStat {
   type: StatTypes.playerStat;
   shorthand: string;
   player: string;
+  adjustment?: boolean;
 }
 
 export const enum UsOrOpponent {
