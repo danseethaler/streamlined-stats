@@ -1,5 +1,4 @@
 export const enum StatTypes {
-  substitute = 'substitute',
   timeout = 'timeout',
   playerStat = 'playerStat',
   pointAdjustment = 'pointAdjustment',
@@ -22,28 +21,17 @@ export interface TimeoutStat {
   team: UsOrOpponent;
 }
 
-export interface SubsitutionStat {
-  type: StatTypes.substitute;
-  subIn: string;
-  subOut: string;
-}
-
 export interface PointAdjustmentStat {
   type: StatTypes.pointAdjustment;
   team: UsOrOpponent;
 }
 
-export type StatType =
-  | PlayerStat
-  | TimeoutStat
-  | SubsitutionStat
-  | PointAdjustmentStat;
+export type StatType = PlayerStat | TimeoutStat | PointAdjustmentStat;
 
 export interface GameRedux {
   id: string;
   opponent: string;
   set: number;
-  lineup: string[];
   stats: StatType[];
 }
 

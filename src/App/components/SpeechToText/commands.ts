@@ -5,7 +5,6 @@ import {getFlatStatDefinitions} from '../../services/stats/categories';
 import {getJerseyVoiceAlternatives} from './services';
 
 export const enum VoiceCommandType {
-  substitute = 'substitute',
   timeout = 'timeout',
   playerStat = 'playerStat',
   pointAdjustment = 'pointAdjustment',

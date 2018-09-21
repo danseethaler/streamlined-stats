@@ -4,7 +4,6 @@ export default {
       id: '2646',
       opponent: 'Jordan',
       set: 1,
-      lineup: ['Emma', 'Macy', 'Juliann', 'Sarah', 'Hannah', 'Colby'],
       stats: [
         {
           type: 'playerStat',
@@ -17,16 +16,6 @@ export default {
           player: 'Kat',
         },
         {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Victoria',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -86,11 +75,6 @@ export default {
           player: 'Macy',
         },
         {
-          type: 'substitute',
-          subOut: 'Marlee',
-          subIn: 'Hannah',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Juliann',
@@ -131,16 +115,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Sarah',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Juliann',
@@ -164,11 +138,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R1',
           player: 'Colby',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Colby',
         },
         {
           type: 'playerStat',
@@ -230,11 +199,6 @@ export default {
           player: 'Victoria',
         },
         {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Juliann',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Emma',
@@ -284,11 +248,6 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Hannah',
-          subIn: 'Marlee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Rachel',
@@ -301,11 +260,6 @@ export default {
         {
           type: 'pointAdjustment',
           team: 'us',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
         },
         {
           type: 'playerStat',
@@ -325,11 +279,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Sarah',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
         },
         {
           type: 'playerStat',
@@ -385,11 +334,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R1',
           player: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Kat',
-          subIn: 'Haylee',
         },
         {
           type: 'playerStat',
@@ -401,16 +345,6 @@ export default {
           team: 'opponent',
         },
         {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Victoria',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kat',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Hannah',
@@ -436,11 +370,6 @@ export default {
           player: 'Macy',
         },
         {
-          type: 'substitute',
-          subOut: 'Marlee',
-          subIn: 'Hannah',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -453,16 +382,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Sarah',
         },
         {
           type: 'playerStat',
@@ -500,11 +419,6 @@ export default {
           player: 'Marlee',
         },
         {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Colby',
-        },
-        {
           type: 'playerStat',
           shorthand: 'E',
           player: 'Juliann',
@@ -523,11 +437,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Victoria',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Juliann',
         },
         {
           type: 'playerStat',
@@ -565,11 +474,6 @@ export default {
           player: 'Marlee',
         },
         {
-          type: 'substitute',
-          subOut: 'Hannah',
-          subIn: 'Marlee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Hannah',
@@ -694,11 +598,6 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
-        {
           type: 'playerStat',
           shorthand: 'E',
           player: 'Hannah',
@@ -732,11 +631,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Sarah',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
         },
         {
           type: 'playerStat',
@@ -829,11 +723,6 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Kat',
-          subIn: 'Haylee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Macy',
@@ -857,16 +746,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Victoria',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kat',
         },
         {
           type: 'playerStat',
@@ -977,11 +856,6 @@ export default {
           shorthand: 'R2',
           player: 'Hannah',
         },
-        {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Rachel',
-        },
       ],
       rotation: ['Rachel', 'Macy', 'Kat', 'Sarah', 'Hannah', 'Victoria'],
       serveFirst: false,
@@ -990,7 +864,6 @@ export default {
       id: '3913',
       opponent: 'East Chapel Hill',
       set: 1,
-      lineup: ['Colby', 'Emma', 'Juliann', 'Macy', 'Sarah', 'Victoria'],
       rotation: [
         'Celeste',
         'Emma',
@@ -1052,11 +925,6 @@ export default {
           player: 'Celeste',
         },
         {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Sarah',
@@ -1067,18 +935,8 @@ export default {
           player: 'Sarah',
         },
         {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Kat',
-          subIn: 'Haylee',
         },
         {
           type: 'playerStat',
@@ -1118,16 +976,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Celeste',
         },
         {
           type: 'playerStat',
@@ -1215,11 +1063,6 @@ export default {
           player: 'Macy',
         },
         {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Victoria',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -1254,11 +1097,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Sarah',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -1283,16 +1121,6 @@ export default {
           player: 'Colby',
         },
         {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Juliann',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Colby',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -1300,11 +1128,6 @@ export default {
           type: 'playerStat',
           shorthand: 'RE',
           player: 'Marlee',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Marlee',
         },
         {
           type: 'playerStat',
@@ -1486,11 +1309,6 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Sarah',
@@ -1508,11 +1326,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Sarah',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
         },
         {
           type: 'playerStat',
@@ -1595,11 +1408,6 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Kat',
-          subIn: 'Haylee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Kat',
@@ -1608,16 +1416,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Celeste',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kat',
         },
         {
           type: 'playerStat',
@@ -1689,18 +1487,12 @@ export default {
           shorthand: 'SA',
           player: 'Macy',
         },
-        {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Rachel',
-        },
       ],
     },
     '7391': {
       id: '7391',
       opponent: 'Jordan',
       set: 3,
-      lineup: ['Sarah', 'Macy', 'Colby', 'Emma', 'Juliann', 'Haylee'],
       stats: [
         {
           type: 'playerStat',
@@ -1718,11 +1510,6 @@ export default {
           shorthand: 'R3',
         },
         {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Haylee',
-        },
-        {
           type: 'playerStat',
           player: 'Macy',
           shorthand: 'ATT',
@@ -1781,11 +1568,6 @@ export default {
           type: 'playerStat',
           player: 'Kennedy',
           shorthand: 'SA',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kennedy',
         },
         {
           type: 'playerStat',
@@ -1882,16 +1664,6 @@ export default {
           team: 'opponent',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Sarah',
-        },
-        {
           type: 'playerStat',
           player: 'Juliann',
           shorthand: 'K',
@@ -2002,11 +1774,6 @@ export default {
           shorthand: 'A',
         },
         {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Victoria',
-        },
-        {
           type: 'playerStat',
           player: 'Emma',
           shorthand: 'K',
@@ -2092,11 +1859,6 @@ export default {
           shorthand: 'SA',
         },
         {
-          type: 'substitute',
-          subOut: 'Kennedy',
-          subIn: 'Juliann',
-        },
-        {
           type: 'playerStat',
           player: 'Rachel',
           shorthand: 'K',
@@ -2110,11 +1872,6 @@ export default {
           type: 'playerStat',
           player: 'Kennedy',
           shorthand: 'R1',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
         },
         {
           type: 'playerStat',
@@ -2196,11 +1953,6 @@ export default {
           team: 'opponent',
         },
         {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
-        },
-        {
           type: 'playerStat',
           player: 'Haylee',
           shorthand: 'K',
@@ -2224,11 +1976,6 @@ export default {
           type: 'playerStat',
           player: 'Kennedy',
           shorthand: 'R2',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Haylee',
         },
         {
           type: 'playerStat',
@@ -2291,11 +2038,6 @@ export default {
           shorthand: 'A',
         },
         {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kennedy',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -2313,16 +2055,6 @@ export default {
           type: 'playerStat',
           player: 'Rachel',
           shorthand: 'SA',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Sarah',
         },
         {
           type: 'playerStat',
@@ -2385,11 +2117,6 @@ export default {
           shorthand: 'SA',
         },
         {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Victoria',
-        },
-        {
           type: 'playerStat',
           player: 'Emma',
           shorthand: 'K',
@@ -2504,11 +2231,6 @@ export default {
           player: 'Haylee',
           shorthand: 'R3',
         },
-        {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
       ],
       rotation: ['Sarah', 'Macy', 'Colby', 'Emma', 'Kennedy', 'Haylee'],
       serveFirst: false,
@@ -2517,7 +2239,6 @@ export default {
       id: '2c14',
       opponent: 'Northern',
       set: 1,
-      lineup: ['Juliann', 'Emma', 'Macy', 'Kennedy', 'Victoria', 'Sarah'],
       rotation: ['Celeste', 'Colby', 'Haylee', 'Macy', 'Rachel', 'Sarah'],
       stats: [
         {
@@ -2590,11 +2311,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Haylee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Colby',
@@ -2713,11 +2429,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Sarah',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Emma',
@@ -2780,16 +2491,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Colby',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Kennedy',
-          subIn: 'Celeste',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Colby',
         },
         {
           type: 'playerStat',
@@ -2832,11 +2533,6 @@ export default {
           player: 'Macy',
         },
         {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Victoria',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Emma',
@@ -2892,11 +2588,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Haylee',
@@ -2930,11 +2621,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Sarah',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
         },
         {
           type: 'playerStat',
@@ -2987,11 +2673,6 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Kennedy',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Haylee',
@@ -3005,11 +2686,6 @@ export default {
           type: 'playerStat',
           shorthand: 'A',
           player: 'Celeste',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Juliann',
         },
         {
           type: 'playerStat',
@@ -3040,11 +2716,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R2',
           player: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Haylee',
         },
         {
           type: 'playerStat',
@@ -3107,11 +2778,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Sarah',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Celeste',
@@ -3132,19 +2798,9 @@ export default {
           player: 'Colby',
         },
         {
-          type: 'substitute',
-          subOut: 'Kennedy',
-          subIn: 'Celeste',
-        },
-        {
           type: 'playerStat',
           shorthand: 'SE',
           player: 'Colby',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Colby',
         },
         {
           type: 'pointAdjustment',
@@ -3297,11 +2953,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R1',
           player: 'Kennedy',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
         },
       ],
     },
@@ -3309,7 +2960,6 @@ export default {
       id: '15e5',
       opponent: 'Northern',
       set: 2,
-      lineup: ['Emma', 'Juliann', 'Kennedy', 'Macy', 'Sarah', 'Victoria'],
       rotation: ['Haylee', 'Juliann', 'Kennedy', 'Macy', 'Rachel', 'Sarah'],
       stats: [
         {
@@ -3353,11 +3003,6 @@ export default {
           player: 'Kennedy',
         },
         {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Kennedy',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Celeste',
@@ -3366,11 +3011,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Celeste',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Juliann',
         },
         {
           type: 'pointAdjustment',
@@ -3400,11 +3040,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R1',
           player: 'Colby',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Haylee',
         },
         {
           type: 'playerStat',
@@ -3482,11 +3117,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Sarah',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Celeste',
@@ -3547,16 +3177,6 @@ export default {
           player: 'Colby',
         },
         {
-          type: 'substitute',
-          subOut: 'Kennedy',
-          subIn: 'Celeste',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Colby',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Juliann',
@@ -3582,11 +3202,6 @@ export default {
           player: 'Macy',
         },
         {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Victoria',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Emma',
@@ -3602,11 +3217,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Sarah',
@@ -3620,11 +3230,6 @@ export default {
           type: 'playerStat',
           shorthand: 'A',
           player: 'Sarah',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
         },
         {
           type: 'playerStat',
@@ -3696,11 +3301,6 @@ export default {
           player: 'Kennedy',
         },
         {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Kennedy',
-        },
-        {
           type: 'playerStat',
           shorthand: 'SE',
           player: 'Celeste',
@@ -3709,11 +3309,6 @@ export default {
           type: 'playerStat',
           shorthand: 'A',
           player: 'Celeste',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Juliann',
         },
         {
           type: 'playerStat',
@@ -3729,11 +3324,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R3',
           player: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Haylee',
         },
         {
           type: 'playerStat',
@@ -3884,11 +3474,6 @@ export default {
           type: 'playerStat',
           shorthand: 'A',
           player: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Sarah',
         },
         {
           type: 'pointAdjustment',
@@ -3959,16 +3544,6 @@ export default {
           player: 'Colby',
         },
         {
-          type: 'substitute',
-          subOut: 'Kennedy',
-          subIn: 'Celeste',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Colby',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Juliann',
@@ -4028,18 +3603,12 @@ export default {
           shorthand: 'SA',
           player: 'Macy',
         },
-        {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
       ],
     },
     b976: {
       id: 'b976',
       opponent: 'Northern',
       set: 3,
-      lineup: ['Colby', 'Emma', 'Juliann', 'Macy', 'Sarah', 'Victoria'],
       rotation: ['Colby', 'Emma', 'Juliann', 'Macy', 'Rachel', 'Victoria'],
       stats: [
         {
@@ -4112,11 +3681,6 @@ export default {
           player: 'Macy',
         },
         {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Victoria',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -4136,11 +3700,6 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Sarah',
@@ -4149,11 +3708,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Sarah',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
         },
         {
           type: 'playerStat',
@@ -4224,16 +3778,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Colby',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Marlee',
-          subIn: 'Juliann',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Colby',
         },
         {
           type: 'playerStat',
@@ -4316,11 +3860,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Haylee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Victoria',
@@ -4391,18 +3930,8 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Sarah',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Marlee',
         },
         {
           type: 'playerStat',
@@ -4413,11 +3942,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Juliann',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Celeste',
         },
         {
           type: 'playerStat',
@@ -4545,11 +4069,6 @@ export default {
           player: 'Macy',
         },
         {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Victoria',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -4557,11 +4076,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R1',
           player: 'Colby',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
         },
         {
           type: 'playerStat',
@@ -4577,11 +4091,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Sarah',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
         },
         {
           type: 'playerStat',
@@ -4612,11 +4121,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R3',
           player: 'Haylee',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Colby',
         },
         {
           type: 'playerStat',
@@ -4624,11 +4128,6 @@ export default {
           player: 'Celeste',
         },
         {
-          type: 'substitute',
-          subOut: 'Marlee',
-          subIn: 'Juliann',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -4641,11 +4140,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R1',
           player: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Haylee',
         },
         {
           type: 'playerStat',
@@ -4682,18 +4176,8 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Sarah',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Marlee',
         },
         {
           type: 'playerStat',
@@ -4704,11 +4188,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Juliann',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Celeste',
         },
         {
           type: 'pointAdjustment',
@@ -4754,18 +4233,12 @@ export default {
           shorthand: 'R1',
           player: 'Victoria',
         },
-        {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
       ],
     },
     b0d6: {
       id: 'b0d6',
       opponent: 'Northern',
       set: 4,
-      lineup: ['Colby', 'Emma', 'Juliann', 'Macy', 'Sarah', 'Victoria'],
       rotation: ['Colby', 'Emma', 'Haylee', 'Juliann', 'Macy', 'Sarah'],
       stats: [
         {
@@ -4779,11 +4252,6 @@ export default {
           player: 'Sarah',
         },
         {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -4818,16 +4286,6 @@ export default {
           player: 'Colby',
         },
         {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Colby',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Marlee',
-          subIn: 'Juliann',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Rachel',
@@ -4841,11 +4299,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R2',
           player: 'Haylee',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Haylee',
         },
         {
           type: 'playerStat',
@@ -5023,11 +4476,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Sarah',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Emma',
@@ -5041,16 +4489,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R3',
           player: 'Celeste',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Marlee',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Celeste',
         },
         {
           type: 'playerStat',
@@ -5075,11 +4513,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Macy',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Victoria',
         },
         {
           type: 'playerStat',
@@ -5132,16 +4565,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Kat',
-          subIn: 'Haylee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Kat',
@@ -5152,11 +4575,6 @@ export default {
           player: 'Sarah',
         },
         {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -5164,11 +4582,6 @@ export default {
           type: 'playerStat',
           shorthand: 'RE',
           player: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Kat',
         },
         {
           type: 'playerStat',
@@ -5189,16 +4602,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Colby',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Marlee',
-          subIn: 'Juliann',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Colby',
         },
         {
           type: 'playerStat',
@@ -5214,11 +4617,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R2',
           player: 'Haylee',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Haylee',
         },
         {
           type: 'playerStat',
@@ -5335,11 +4733,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Sarah',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Emma',
@@ -5375,11 +4768,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Marlee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'E',
           player: 'Celeste',
@@ -5398,11 +4786,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Juliann',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Celeste',
         },
         {
           type: 'playerStat',
@@ -5493,18 +4876,12 @@ export default {
           shorthand: 'SA',
           player: 'Macy',
         },
-        {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
       ],
     },
     '9c87': {
       id: '9c87',
       opponent: 'East Chapel Hill',
       set: 2,
-      lineup: ['Colby', 'Juliann', 'Macy', 'Rachel', 'Sarah', 'Victoria'],
       rotation: ['Colby', 'Emma', 'Haylee', 'Macy', 'Rachel', 'Victoria'],
       stats: [
         {
@@ -5558,11 +4935,6 @@ export default {
           player: 'Colby',
         },
         {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Sarah',
@@ -5571,11 +4943,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Sarah',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
         },
         {
           type: 'playerStat',
@@ -5718,11 +5085,6 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Kennedy',
-          subIn: 'Haylee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'RE',
           player: 'Kennedy',
@@ -5735,11 +5097,6 @@ export default {
           type: 'playerStat',
           shorthand: 'RE',
           player: 'Kennedy',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Kennedy',
         },
         {
           type: 'playerStat',
@@ -5762,11 +5119,6 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Kat',
-          subIn: 'Haylee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'BE',
           player: 'Sarah',
@@ -5775,11 +5127,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kat',
         },
         {
           type: 'playerStat',
@@ -6056,7 +5403,6 @@ export default {
       id: 'bf8f',
       opponent: 'East Chapel Hill',
       set: 3,
-      lineup: ['Colby', 'Emma', 'Hannah', 'Juliann', 'Macy', 'Sarah'],
       rotation: ['Colby', 'Juliann', 'Macy', 'Marlee', 'Rachel', 'Sarah'],
       stats: [
         {
@@ -6075,11 +5421,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Sarah',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -6208,16 +5549,6 @@ export default {
           player: 'Colby',
         },
         {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Juliann',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Colby',
-        },
-        {
           type: 'playerStat',
           shorthand: 'BA',
           player: 'Macy',
@@ -6248,11 +5579,6 @@ export default {
           player: 'Marlee',
         },
         {
-          type: 'substitute',
-          subOut: 'Hannah',
-          subIn: 'Marlee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Emma',
@@ -6268,11 +5594,6 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Sarah',
@@ -6281,11 +5602,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Sarah',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
         },
         {
           type: 'playerStat',
@@ -6303,11 +5619,6 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Kat',
-          subIn: 'Haylee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Kat',
@@ -6316,16 +5627,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Celeste',
         },
         {
           type: 'playerStat',
@@ -6403,11 +5704,6 @@ export default {
           player: 'Macy',
         },
         {
-          type: 'substitute',
-          subOut: 'Marlee',
-          subIn: 'Hannah',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Juliann',
@@ -6463,11 +5759,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Sarah',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Juliann',
@@ -6508,16 +5799,6 @@ export default {
           player: 'Colby',
         },
         {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Juliann',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Colby',
-        },
-        {
           type: 'pointAdjustment',
           team: 'us',
         },
@@ -6545,11 +5826,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Marlee',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Hannah',
-          subIn: 'Marlee',
         },
         {
           type: 'playerStat',
@@ -6657,11 +5933,6 @@ export default {
           player: 'Celeste',
         },
         {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Sarah',
@@ -6675,11 +5946,6 @@ export default {
           type: 'playerStat',
           shorthand: 'A',
           player: 'Sarah',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
         },
         {
           type: 'playerStat',
@@ -6777,24 +6043,9 @@ export default {
           player: 'Haylee',
         },
         {
-          type: 'substitute',
-          subOut: 'Kat',
-          subIn: 'Haylee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'SE',
           player: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Celeste',
         },
         {
           type: 'playerStat',
@@ -6875,11 +6126,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Macy',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Rachel',
         },
       ],
     },
@@ -6887,7 +6133,6 @@ export default {
       id: '91ea',
       opponent: 'Jordan',
       set: 2,
-      lineup: ['Macy', 'Juliann', 'Sarah', 'Hannah', 'Colby', 'Rachel'],
       stats: [
         {
           type: 'playerStat',
@@ -6915,11 +6160,6 @@ export default {
           player: 'Kat',
         },
         {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kat',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Sarah',
@@ -6943,11 +6183,6 @@ export default {
           type: 'playerStat',
           shorthand: 'A',
           player: 'Macy',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Marlee',
-          subIn: 'Hannah',
         },
         {
           type: 'pointAdjustment',
@@ -7004,16 +6239,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Emma',
-          subIn: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Sarah',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Juliann',
@@ -7149,16 +6374,6 @@ export default {
           player: 'Colby',
         },
         {
-          type: 'substitute',
-          subOut: 'Haylee',
-          subIn: 'Juliann',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Victoria',
-          subIn: 'Colby',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Emma',
@@ -7172,11 +6387,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R3',
           player: 'Marlee',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Hannah',
-          subIn: 'Marlee',
         },
         {
           type: 'playerStat',
@@ -7197,11 +6407,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R3',
           player: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Victoria',
         },
         {
           type: 'playerStat',
@@ -7237,11 +6442,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R3',
           player: 'Haylee',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Sarah',
-          subIn: 'Rachel',
         },
         {
           type: 'playerStat',
@@ -7282,11 +6482,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Sarah',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Rachel',
-          subIn: 'Emma',
         },
         {
           type: 'pointAdjustment',
@@ -7476,11 +6671,6 @@ export default {
           player: 'Rachel',
         },
         {
-          type: 'substitute',
-          subOut: 'Kat',
-          subIn: 'Haylee',
-        },
-        {
           type: 'playerStat',
           shorthand: 'DE',
           player: 'Macy',
@@ -7489,16 +6679,6 @@ export default {
           type: 'playerStat',
           shorthand: 'SA',
           player: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Juliann',
-          subIn: 'Kat',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Celeste',
         },
         {
           type: 'playerStat',
@@ -7534,11 +6714,6 @@ export default {
           type: 'playerStat',
           shorthand: 'R1',
           player: 'Rachel',
-        },
-        {
-          type: 'substitute',
-          subOut: 'Celeste',
-          subIn: 'Colby',
         },
         {
           type: 'playerStat',
@@ -7626,11 +6801,6 @@ export default {
           player: 'Macy',
         },
         {
-          type: 'substitute',
-          subOut: 'Colby',
-          subIn: 'Celeste',
-        },
-        {
           type: 'playerStat',
           shorthand: 'K',
           player: 'Sarah',
@@ -7658,7 +6828,6 @@ export default {
       id: 'ee91',
       opponent: 'Jordan',
       set: 4,
-      lineup: ['Cailyn', 'Celeste', 'Colby', 'Emma', 'Hannah', 'Haylee'],
       stats: [
         {
           type: 'playerStat',
@@ -8401,7 +7570,6 @@ export default {
       id: 'e621',
       opponent: 'DSA - Away',
       set: 1,
-      lineup: ['Cailyn', 'Celeste', 'Colby', 'Emma', 'Hannah', 'Haylee'],
       stats: [
         {
           type: 'playerStat',
@@ -9195,7 +8363,6 @@ export default {
       id: '73be',
       opponent: 'DSA - away',
       set: 4,
-      lineup: ['Cailyn', 'Celeste', 'Colby', 'Emma', 'Hannah', 'Haylee'],
       stats: [
         {
           type: 'playerStat',
@@ -9999,7 +9166,6 @@ export default {
       id: 'f632',
       opponent: 'DSA - away',
       set: 2,
-      lineup: ['Cailyn', 'Celeste', 'Colby', 'Emma', 'Hannah', 'Haylee'],
       stats: [
         {
           type: 'playerStat',
@@ -10683,7 +9849,6 @@ export default {
       id: 'aed5',
       opponent: 'DSA - away',
       set: 3,
-      lineup: ['Cailyn', 'Celeste', 'Colby', 'Emma', 'Hannah', 'Haylee'],
       stats: [
         {
           type: 'playerStat',
@@ -11447,7 +10612,6 @@ export default {
       id: '0865',
       opponent: 'Chapel Hill',
       set: 1,
-      lineup: [],
       serveFirst: false,
       usingRotation: false,
       statsAssignment: 'voice',
@@ -11613,7 +10777,6 @@ export default {
       id: '7d4f',
       opponent: 'ChapelHill',
       set: 3,
-      lineup: [],
       serveFirst: false,
       usingRotation: false,
       statsAssignment: 'voice',
@@ -12164,7 +11327,6 @@ export default {
       id: '7ddb',
       opponent: 'Voice2.0',
       set: 1,
-      lineup: ['Hannah', 'Celeste', 'Cailyn', 'Colby', 'Emma', 'Haylee'],
       stats: [
         {
           type: 'playerStat',

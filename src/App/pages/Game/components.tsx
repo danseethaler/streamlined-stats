@@ -127,14 +127,6 @@ export const SortableStatItem = SortableElement((stat: StatType) => {
         />
       );
 
-    case StatTypes.substitute:
-      return (
-        <StatContainer
-          status="alternative"
-          text={`${stat.subIn} in for ${stat.subOut}`}
-        />
-      );
-
     case StatTypes.timeout:
       return (
         <StatContainer status="alternative" text={`Timeout - ${stat.team}`} />

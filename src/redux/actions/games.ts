@@ -7,12 +7,6 @@ import {
 } from '../constants';
 import {StatType} from '../redux.definitions';
 
-export interface SubstituteAction {
-  subOut: string;
-  subIn: string;
-  game: string;
-}
-
 export const addGameAction = game => ({
   type: ADD_GAME,
   game,

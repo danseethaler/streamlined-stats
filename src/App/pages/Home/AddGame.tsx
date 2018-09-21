@@ -1,16 +1,12 @@
-import {sortBy} from 'lodash';
 import React from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps, withRouter} from 'react-router';
-import {arrayMove, SortableContainer} from 'react-sortable-hoc';
 import {addGameAction} from '../../../redux/actions/games';
 import {GameRedux} from '../../../redux/redux.definitions';
 import {Hr, TextInput} from '../../components/Bits';
 import Button, {ButtonTypes} from '../../components/Button';
-import {Headline5, Paragraph3} from '../../components/Typography';
-import players, {PlayerType} from '../../services/players';
+import {Paragraph3} from '../../components/Typography';
 import {getUniqueId} from '../../services/unique_id';
-import {PlayersContainer, PlayerSortHandler, SortPlayer} from './components';
 
 interface AddGameProps extends RouteComponentProps<any> {
   addGame: (game: GameRedux) => void;
@@ -18,13 +14,11 @@ interface AddGameProps extends RouteComponentProps<any> {
 
 interface AddGameState {
   formError: null | string;
-  players: PlayerType[];
 }
 
 class AddGame extends React.Component<AddGameProps, AddGameState> {
   public state = {
     formError: null,
-    players: sortBy(players, 'name'),
   };
 
   private opponentRef: React.RefObject<HTMLInputElement>;
@@ -40,11 +34,6 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
   public componentDidMount() {
     this.opponentRef.current.select();
   }
-
-  public reorderPlayers = ({oldIndex, newIndex}) => {
-    const orderedPlayers = arrayMove(this.state.players, oldIndex, newIndex);
-    this.setState({players: orderedPlayers});
-  };
 
   public validateForm = () => {
     const gameData = this.getGameData();
@@ -62,13 +51,11 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
   public getGameData = (): GameRedux => {
     const opponent = this.opponentRef.current.value;
     const set = parseInt(this.setRef.current.value, 10);
-    const lineup = this.state.players.slice(0, 6).map(({name}) => name);
 
     const gameData = {
       id: getUniqueId(),
       opponent,
       set,
-      lineup,
       stats: [],
     };
 
@@ -77,22 +64,6 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
 
   public render() {
     const {history, addGame} = this.props;
-    const SP = ({items}) => (
-      <PlayersContainer>
-        {items.map((player, index) => (
-          <SortPlayer
-            key={player.jersey.toString()}
-            sortIndex={index}
-            index={index}
-          >
-            {player.name}
-            <PlayerSortHandler>:::</PlayerSortHandler>
-          </SortPlayer>
-        ))}
-      </PlayersContainer>
-    );
-
-    const SortablePlayers = SortableContainer(SP);
 
     return (
       <form onSubmit={e => e.preventDefault()}>
@@ -101,19 +72,6 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
 
         <Paragraph3>Set Number</Paragraph3>
         <TextInput innerRef={this.setRef} type="number" />
-
-        <React.Fragment>
-          <Headline5>Lineup</Headline5>
-
-          <SortablePlayers
-            onSortEnd={this.reorderPlayers}
-            lockAxis="y"
-            useDragHandle
-            items={this.state.players}
-          />
-        </React.Fragment>
-
-        <Hr />
 
         <Button
           type={ButtonTypes.primary}
@@ -125,7 +83,7 @@ class AddGame extends React.Component<AddGameProps, AddGameState> {
             }
           }}
         >
-          Add Set
+          Continue
         </Button>
 
         {this.state.formError && (

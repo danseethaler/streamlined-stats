@@ -1,19 +1,13 @@
 import React from 'react';
-import {IoIosArrowBack} from 'react-icons/io';
 import {connect} from 'react-redux';
 import {arrayMove, SortableContainer} from 'react-sortable-hoc';
-import {
-  undoLastStatAction,
-  updateStatsOrderAction,
-} from '../../../../redux/actions/games';
+import {updateStatsOrderAction} from '../../../../redux/actions/games';
 import {GameRedux, StatType} from '../../../../redux/redux.definitions';
-import ButtonNew from '../../../components/ButtonNew';
 import {SortableStatItem} from '../components';
 import {StatListContainer} from './components';
 
 interface StatListProps {
   game: GameRedux;
-  undoLastStat: (game: string) => void;
   updateStatsOrder: (game: string, stats: StatType[]) => void;
 }
 
@@ -45,15 +39,6 @@ class StatList extends React.Component<StatListProps> {
 
     return (
       <StatListContainer>
-        <div style={{display: 'flex'}}>
-          <ButtonNew
-            icon={IoIosArrowBack}
-            text="Undo stat"
-            onClick={() => {
-              this.props.undoLastStat(game.id);
-            }}
-          />
-        </div>
         <SortableStatListItems
           onSortEnd={this.onReorderStats}
           lockAxis="y"
@@ -68,7 +53,6 @@ class StatList extends React.Component<StatListProps> {
 export default connect(
   null,
   {
-    undoLastStat: undoLastStatAction,
     updateStatsOrder: updateStatsOrderAction,
   }
 )(StatList);
