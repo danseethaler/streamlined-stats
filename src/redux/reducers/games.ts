@@ -47,6 +47,11 @@ export default (state = initialState, action): GamesRedux =>
       case TOGGLE_ADJUSTMENT_LAST_STAT:
         const priorGame = newState[action.game];
         const priorStat = priorGame.stats.shift();
+
+        if (!priorStat) {
+          break;
+        }
+
         if (priorStat.type === StatTypes.playerStat) {
           priorStat.adjustment = !priorStat.adjustment;
         }

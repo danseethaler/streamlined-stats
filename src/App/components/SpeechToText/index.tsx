@@ -115,7 +115,7 @@ class SpeechToText extends React.Component<
       };
 
       window.addEventListener('keydown', e => {
-        if ([13, 32].indexOf(e.keyCode) >= 0) {
+        if ([13].indexOf(e.keyCode) >= 0) {
           e.preventDefault();
           e.stopPropagation();
           if (!this.state.listening) {
@@ -125,7 +125,7 @@ class SpeechToText extends React.Component<
       });
 
       window.addEventListener('keyup', e => {
-        if ([13, 32].indexOf(e.keyCode) >= 0) {
+        if ([13].indexOf(e.keyCode) >= 0) {
           e.preventDefault();
           e.stopPropagation();
           if (this.state.listening) {
