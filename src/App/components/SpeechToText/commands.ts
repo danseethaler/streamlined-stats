@@ -35,13 +35,15 @@ export const getCommands = (): VoiceCommands[] => {
     .map(stat => ({
       shorthand: stat.shorthand,
       regex:
-        '(' + stat.commandNames.map(group => group.join('|')).join(') (') + ')',
+        '(' +
+        stat.commandNames.map(group => group.join('|')).join(') *(') +
+        ')',
     }));
 
   const playerCommands = commandGroupings.map(commandGrouping =>
     playerGroupings.map(playerGroup => ({
       type: VoiceCommandType.playerStat,
-      regex: `^${playerGroup.regex} ${commandGrouping.regex}$`,
+      regex: `^${playerGroup.regex} *${commandGrouping.regex}$`,
       shorthand: commandGrouping.shorthand,
       player: playerGroup.player,
     }))
