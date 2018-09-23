@@ -1,5 +1,5 @@
 import styled from 'react-emotion';
-import {colors} from '../../components/theme';
+import {colors} from '../../../components/theme';
 
 export const Table = styled.table({
   width: '100%',

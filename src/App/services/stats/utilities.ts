@@ -1,11 +1,11 @@
-import {flatten} from 'lodash';
-import {GameRedux, StatTypes} from '../../../redux/redux.definitions';
+import {filter, flatten, map, some, values} from 'lodash';
+import {SetsType, SetType, StatTypes} from '../../../redux/redux.definitions';
 
-export const getFlatStatsFromGames = (games: GameRedux[]) =>
-  flatten(games.map(({stats}) => stats));
+export const getFlatStatsFromSets = (sets: SetsType) =>
+  flatten(map(sets, ({stats}) => values(stats)));
 
-export const getStatCount = statShorthands => (name, games: GameRedux[]) =>
-  getFlatStatsFromGames(games).reduce((statCount, stat) => {
+export const getStatCount = statShorthands => (name, sets: SetsType) =>
+  getFlatStatsFromSets(sets).reduce((statCount, stat) => {
     if (stat.type === StatTypes.playerStat) {
       if (stat.player === name) {
         if (statShorthands.indexOf(stat.shorthand) >= 0) {
@@ -17,10 +17,11 @@ export const getStatCount = statShorthands => (name, games: GameRedux[]) =>
     return statCount;
   }, 0);
 
-export const getPlayerGamesCount = (name: string, games: GameRedux[]): number =>
-  games.filter(game => didPlayerPlayInGame(name, game)).length;
+export const getPlayerSetsCount = (name: string, sets: SetsType): number =>
+  filter(sets, set => didPlayerPlayInSet(name, set)).length;
 
-export const didPlayerPlayInGame = (name: string, game: GameRedux) =>
-  game.stats.find(
+export const didPlayerPlayInSet = (name: string, set: SetType): boolean =>
+  some(
+    set.stats,
     stat => stat.type === StatTypes.playerStat && stat.player === name
   );

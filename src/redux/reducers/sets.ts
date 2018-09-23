@@ -1,52 +1,52 @@
 import produce from 'immer';
 import {
-  ADD_GAME,
+  ADD_SET,
   ADD_STAT,
+  TOGGLE_ADJUSTMENT_LAST_STAT,
   UNDO_LAST_STAT,
   UPDATE_STATS_ORDER,
-  TOGGLE_ADJUSTMENT_LAST_STAT,
 } from '../constants';
-import {GamesRedux, StatTypes} from '../redux.definitions';
+import {SetsType, StatTypes} from '../redux.definitions';
 
 const initialState = {};
 
-export default (state = initialState, action): GamesRedux =>
+export default (state = initialState, action): SetsType =>
   produce(state, newState => {
     switch (action.type) {
-      case ADD_GAME:
-        newState[action.game.id] = action.game;
+      case ADD_SET:
+        newState[action.set.id] = action.set;
         break;
 
       case ADD_STAT:
-        const statGame = newState[action.game];
-        const lastStat = statGame.stats[0];
+        const statSet = newState[action.set];
+        const lastStat = statSet.stats[0];
 
         if (lastStat) {
           // Change BHA to AST on kill
           if (lastStat.shorthand === 'BHA' && action.stat.shorthand === 'K') {
-            statGame.stats[0].shorthand = 'AST';
+            statSet.stats[0].shorthand = 'AST';
           }
 
           // Change BS to BA on double block
           const lastStatIsBlock = ['BS', 'BA'].indexOf(lastStat.shorthand) >= 0;
           if (lastStatIsBlock && action.stat.shorthand === 'BS') {
-            statGame.stats[0].shorthand = 'BA';
+            statSet.stats[0].shorthand = 'BA';
             action.stat.shorthand = 'BA';
           }
         }
 
-        statGame.stats.unshift(action.stat);
+        statSet.stats.unshift(action.stat);
         break;
 
       case UNDO_LAST_STAT:
-        const undoGame = newState[action.game];
-        undoGame.stats.shift();
+        const undoSet = newState[action.set];
+        undoSet.stats.shift();
 
         break;
 
       case TOGGLE_ADJUSTMENT_LAST_STAT:
-        const priorGame = newState[action.game];
-        const priorStat = priorGame.stats.shift();
+        const priorSet = newState[action.set];
+        const priorStat = priorSet.stats.shift();
 
         if (!priorStat) {
           break;
@@ -55,12 +55,12 @@ export default (state = initialState, action): GamesRedux =>
         if (priorStat.type === StatTypes.playerStat) {
           priorStat.adjustment = !priorStat.adjustment;
         }
-        priorGame.stats.unshift(priorStat);
+        priorSet.stats.unshift(priorStat);
 
         break;
 
       case UPDATE_STATS_ORDER:
-        newState[action.game].stats = action.stats;
+        newState[action.set].stats = action.stats;
 
         break;
     }

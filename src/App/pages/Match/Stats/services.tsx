@@ -1,8 +1,9 @@
 import {map} from 'lodash';
 import React from 'react';
-import {GameRedux} from '../../../redux/redux.definitions';
-import players, {PlayerType} from '../../services/players';
-import {getStatCategoryDefinitions} from '../../services/stats/categories';
+import {SetType} from '../../../../redux/redux.definitions';
+import {TOP_BAR_HEIGHT} from '../../../components/Bits/TopBar';
+import players, {PlayerType} from '../../../services/players';
+import {getStatCategoryDefinitions} from '../../../services/stats/categories';
 import calculatePlayerStats from './calculatePlayerStats';
 import {ThSticky} from './components';
 
@@ -16,22 +17,23 @@ interface CalculatedPlayerStats extends PlayerType {
 }
 
 const getStatsByPlayer = (
-  games: GameRedux[],
+  sets: SetType[],
   useMaxpreps
 ): CalculatedPlayerStats[] =>
   players.map(player => ({
     ...player,
-    stats: calculatePlayerStats(player.name, games, useMaxpreps),
+    stats: calculatePlayerStats(player.name, sets, useMaxpreps),
   }));
 
 const statDefinitions = getStatCategoryDefinitions();
 
 const HeaderRowCategoryName = ({useMaxpreps}) => (
   <tr>
-    <ThSticky>#</ThSticky>
-    <ThSticky>Name</ThSticky>
+    <ThSticky offset={TOP_BAR_HEIGHT}>#</ThSticky>
+    <ThSticky offset={TOP_BAR_HEIGHT}>Name</ThSticky>
     {statDefinitions.map(category => (
       <ThSticky
+        offset={TOP_BAR_HEIGHT}
         key={category.name}
         colSpan={
           category.stats.filter(
@@ -48,15 +50,15 @@ const HeaderRowCategoryName = ({useMaxpreps}) => (
 
 const HeaderRowCategoryStat = ({useMaxpreps}) => (
   <tr>
-    <ThSticky offset={39} />
-    <ThSticky offset={39} />
+    <ThSticky offset={103} />
+    <ThSticky offset={103} />
     {statDefinitions.map(({stats}) =>
       stats
         .filter(
           ({maxPrepsCalculator}) => !useMaxpreps || maxPrepsCalculator !== null
         )
         .map(stat => (
-          <ThSticky offset={39} key={stat.shorthand}>
+          <ThSticky offset={103} key={stat.shorthand}>
             {stat.shorthand}
           </ThSticky>
         ))
@@ -96,8 +98,8 @@ const totalsRow = playerStats => {
   );
 };
 
-export const buildStatsTable = (games: GameRedux[], useMaxpreps: boolean) => {
-  const playerStats = getStatsByPlayer(games, useMaxpreps);
+export const buildStatsTable = (sets: SetType[], useMaxpreps: boolean) => {
+  const playerStats = getStatsByPlayer(sets, useMaxpreps);
 
   return (
     <table

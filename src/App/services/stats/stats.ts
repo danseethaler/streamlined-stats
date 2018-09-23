@@ -8,8 +8,8 @@ import {
   StatResultTypes,
 } from './stats.definitions';
 import {
-  getFlatStatsFromGames,
-  getPlayerGamesCount,
+  getFlatStatsFromSets,
+  getPlayerSetsCount,
   getStatCount,
 } from './utilities';
 
@@ -145,7 +145,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Sets Played',
         shorthand: 'SP',
-        calculator: getPlayerGamesCount,
+        calculator: getPlayerSetsCount,
         result: StatResultTypes.nill,
         description: 'Total number of sets played.',
         recordingType: StatRecordingType.calculated,
@@ -202,8 +202,8 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Service Rotation Points',
         shorthand: 'PTS',
-        calculator: (name, games) => {
-          const statsArray = getFlatStatsFromGames(games);
+        calculator: (name, sets) => {
+          const statsArray = getFlatStatsFromSets(sets);
 
           let isServing = false;
 

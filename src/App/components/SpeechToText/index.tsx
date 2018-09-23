@@ -5,18 +5,18 @@ import {
   addStatAction,
   toggleAdjustmentLastStatAction,
   undoLastStatAction,
-} from '../../../redux/actions/games';
-import {GameRedux, StatType, StatTypes} from '../../../redux/redux.definitions';
+} from '../../../redux/actions/sets';
+import {SetType, StatType, StatTypes} from '../../../redux/redux.definitions';
 import {getSpeechMatchCommands, VoiceCommandType} from './commands';
 import {Microphone} from './components';
 
 const speechApiAvailabled = () => 'webkitSpeechRecognition' in window;
 
 interface SpeechToTextProps {
-  addStat: (game: string, stat: StatType) => void;
-  undoLastStat: (game: string) => void;
-  toggleAdjustmentLastStat: (game: string) => void;
-  game: GameRedux;
+  addStat: (set: string, stat: StatType) => void;
+  undoLastStat: (set: string) => void;
+  toggleAdjustmentLastStat: (set: string) => void;
+  set: SetType;
 }
 
 class SpeechToText extends React.Component<
@@ -74,13 +74,13 @@ class SpeechToText extends React.Component<
           return;
         }
 
-        const {game} = this.props;
+        const {set} = this.props;
 
         console.log('voiceCommand', voiceCommand);
 
         switch (voiceCommand.type) {
           case VoiceCommandType.playerStat:
-            this.props.addStat(game.id, {
+            this.props.addStat(set.id, {
               type: StatTypes.playerStat,
               player: voiceCommand.player,
               shorthand: voiceCommand.shorthand,
@@ -88,25 +88,25 @@ class SpeechToText extends React.Component<
             break;
 
           case VoiceCommandType.pointAdjustment:
-            this.props.addStat(game.id, {
+            this.props.addStat(set.id, {
               type: StatTypes.pointAdjustment,
               team: voiceCommand.team,
             });
             break;
 
           case VoiceCommandType.timeout:
-            this.props.addStat(game.id, {
+            this.props.addStat(set.id, {
               type: StatTypes.timeout,
               team: voiceCommand.team,
             });
             break;
 
           case VoiceCommandType.undo:
-            this.props.undoLastStat(game.id);
+            this.props.undoLastStat(set.id);
             break;
 
           case VoiceCommandType.adjustment:
-            this.props.toggleAdjustmentLastStat(game.id);
+            this.props.toggleAdjustmentLastStat(set.id);
             break;
 
           default:

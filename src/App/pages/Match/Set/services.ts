@@ -1,13 +1,15 @@
+import {reduce} from 'lodash';
 import {
   StatType,
   StatTypes,
   UsOrOpponent,
-} from '../../../redux/redux.definitions';
-import {getStatDefinition} from '../../services/stats/categories';
-import {StatResultTypes} from '../../services/stats/stats.definitions';
+} from '../../../../redux/redux.definitions';
+import {getStatDefinition} from '../../../services/stats/categories';
+import {StatResultTypes} from '../../../services/stats/stats.definitions';
 
 export const getScores = (stats: StatType[]) =>
-  stats.reduce(
+  reduce(
+    stats,
     (pointObject, stat) => {
       if (stat.type === StatTypes.pointAdjustment) {
         pointObject[stat.team]++;

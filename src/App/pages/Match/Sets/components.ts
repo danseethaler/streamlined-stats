@@ -5,7 +5,7 @@ export const MatchesContainer = styled.div({
   flexDirection: 'column',
 });
 
-export const gameLink = css({
+export const linkCss = css({
   textDecoration: 'none',
   padding: '0.2em',
 });

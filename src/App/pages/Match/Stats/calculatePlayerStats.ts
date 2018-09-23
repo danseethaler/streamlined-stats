@@ -1,16 +1,12 @@
-import {GameRedux} from '../../../redux/redux.definitions';
-import {getStatDefinitions} from '../../services/stats/categories';
+import {SetType} from '../../../../redux/redux.definitions';
+import {getStatDefinitions} from '../../../services/stats/categories';
 
 interface PlayerStat {
   shorthand: string;
   value: number;
 }
 
-export default (
-  name,
-  games: GameRedux[],
-  useMaxpreps: boolean
-): PlayerStat[] => {
+export default (name, sets: SetType[], useMaxpreps: boolean): PlayerStat[] => {
   const playerStats = [];
 
   getStatDefinitions().forEach(
@@ -21,9 +17,9 @@ export default (
 
       let value;
       if (useMaxpreps && maxPrepsCalculator) {
-        value = maxPrepsCalculator(name, games);
+        value = maxPrepsCalculator(name, sets);
       } else {
-        value = calculator(name, games);
+        value = calculator(name, sets);
       }
 
       playerStats.push({shorthand, value});

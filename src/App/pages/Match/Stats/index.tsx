@@ -1,60 +1,57 @@
-import {filter, map, remove} from 'lodash';
+import {remove} from 'lodash';
 import React from 'react';
 import {IoIosArrowBack} from 'react-icons/io';
-import {GamesRedux} from '../../../redux/redux.definitions';
-import ButtonNew from '../../components/ButtonNew';
+import {SetType} from '../../../../redux/redux.definitions';
+import ButtonNew from '../../../components/ButtonNew';
 import {buildStatsTable} from './services';
 
 interface MatchStatsProps {
-  games: GamesRedux;
+  sets: SetType[];
 }
 
 interface MatchStatsState {
-  selectedGames: string[];
+  selectedSets: string[];
   useMaxPreps: boolean;
 }
 
 class MatchStats extends React.Component<MatchStatsProps, MatchStatsState> {
   public state = {
-    selectedGames: [],
+    selectedSets: this.props.sets.map(({id}) => id),
     useMaxPreps: true,
   };
 
   public handleInputChange = ({target}) => {
     const {name} = target;
 
-    let selectedGames;
+    let selectedSets;
     if (target.checked) {
-      selectedGames = [...this.state.selectedGames, name];
+      selectedSets = [...this.state.selectedSets, name];
     } else {
-      selectedGames = remove(
-        this.state.selectedGames,
-        gameId => gameId !== name
-      );
+      selectedSets = remove(this.state.selectedSets, setId => setId !== name);
     }
 
-    this.setState({selectedGames});
+    this.setState({selectedSets});
   };
 
   public render() {
-    const selectedGames = filter(
-      this.props.games,
-      (game, gameId) => this.state.selectedGames.indexOf(gameId) >= 0
+    const selectedSets = this.props.sets.filter(
+      set => this.state.selectedSets.indexOf(set.id) >= 0
     );
 
     return (
       <div>
         <div>
           <ul>
-            {map(this.props.games, (game, gameId) => (
-              <li key={gameId}>
+            {this.props.sets.map(set => (
+              <li key={set.id}>
                 <label>
                   <input
-                    name={gameId}
+                    name={set.id}
                     onChange={this.handleInputChange}
+                    checked={this.state.selectedSets.indexOf(set.id) >= 0}
                     type="checkbox"
                   />
-                  {game.opponent} - {game.set}
+                  {set.setNumber}
                 </label>
               </li>
             ))}
@@ -67,7 +64,7 @@ class MatchStats extends React.Component<MatchStatsProps, MatchStatsState> {
             this.setState({useMaxPreps: !this.state.useMaxPreps});
           }}
         />
-        {buildStatsTable(selectedGames, this.state.useMaxPreps)}
+        {buildStatsTable(selectedSets, this.state.useMaxPreps)}
       </div>
     );
   }

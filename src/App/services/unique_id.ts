@@ -7,12 +7,12 @@ const s4 = () => {
 };
 
 export const getUniqueId = () => {
-  const {games} = store.getState();
+  const {sets, matches} = store.getState();
 
   let id;
   do {
     id = s4();
-  } while (id in games);
+  } while (id in sets || id in matches);
 
   return id;
 };

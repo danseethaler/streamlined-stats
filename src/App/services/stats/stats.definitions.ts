@@ -1,4 +1,4 @@
-import {GameRedux} from '../../../redux/redux.definitions';
+import {SetsType} from '../../../redux/redux.definitions';
 
 export const enum StatRecordingType {
   manual = 'manual',
@@ -15,9 +15,9 @@ export interface StatDefinitionType {
   name: string;
   shorthand: string;
   commandNames?: string[][];
-  calculator: (name: string, games: GameRedux[]) => any;
+  calculator: (name: string, sets: SetsType) => any;
   description: string;
-  maxPrepsCalculator?: (name: string, games: GameRedux[]) => any | null;
+  maxPrepsCalculator?: (name: string, sets: SetsType) => any | null;
   recordingType: StatRecordingType;
   result: StatResultTypes;
   raking?: boolean;

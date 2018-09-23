@@ -19,8 +19,10 @@ const colors = {
   accent: '#8E83A3',
 };
 
-export default styled.button<{type: ButtonTypes}>(props => {
-  const backgroundColor = colors[props.type] || colors.gray;
+export default styled.button<{type: ButtonTypes; disabled?: boolean}>(props => {
+  const backgroundColor = props.disabled
+    ? colors.gray
+    : colors[props.type] || colors.gray;
 
   return {
     backgroundColor,
@@ -36,7 +38,7 @@ export default styled.button<{type: ButtonTypes}>(props => {
     color: '#fff',
     boxShadow: '0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08)',
     '@media (hover)': {
-      ':hover': {
+      [`:not(${props.disabled}):hover`]: {
         backgroundColor: hexToRgb(backgroundColor, 1, 0.8),
         transform: 'translateY(-1px)',
         boxShadow: '0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08)',

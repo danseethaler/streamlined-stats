@@ -3,44 +3,42 @@ import {Link} from 'react-router-dom';
 import {Hr} from '../../components/Bits';
 import Button, {ButtonTypes} from '../../components/Button';
 import Modal from '../../components/Modal';
-import AddGame from './AddGame';
-import Games from './Games';
+import Matches from './Matches';
+import AddMatch from './AddMatch';
 
 interface HomeState {
-  addGameModalOpen: boolean;
-  stateString: string;
+  addMatchModalOpen: boolean;
 }
 
 class Home extends React.Component<{}, HomeState> {
   public state = {
-    addGameModalOpen: false,
-    stateString: '',
+    addMatchModalOpen: false,
   };
 
   public render() {
-    const {addGameModalOpen} = this.state;
+    const {addMatchModalOpen} = this.state;
 
     return (
       <div>
         <Button
           type={ButtonTypes.primary}
           onClick={() => {
-            this.setState({addGameModalOpen: true});
+            this.setState({addMatchModalOpen: true});
           }}
         >
-          New Set
+          New Match
         </Button>
         <Link to="/admin">Admin</Link>
         <Modal
-          open={addGameModalOpen}
-          title="Add Set"
+          open={addMatchModalOpen}
+          title="Create New Match"
           overlayClickCallback={() => {
-            this.setState({addGameModalOpen: false});
+            this.setState({addMatchModalOpen: false});
           }}
-          content={<AddGame />}
+          content={<AddMatch />}
         />
         <Hr />
-        <Games />
+        <Matches />
       </div>
     );
   }

@@ -1,5 +1,5 @@
 export default {
-  games: {
+  sets: {
     '2646': {
       id: '2646',
       opponent: 'Jordan',

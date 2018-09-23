@@ -28,13 +28,24 @@ export interface PointAdjustmentStat {
 
 export type StatType = PlayerStat | TimeoutStat | PointAdjustmentStat;
 
-export interface GameRedux {
+export interface SetType {
   id: string;
-  opponent: string;
-  set: number;
+  matchId: string;
+  setNumber: number;
   stats: StatType[];
 }
 
-export interface GamesRedux {
-  [key: string]: GameRedux;
+export interface SetsType {
+  [key: string]: SetType;
+}
+
+export interface MatchType {
+  id: string;
+  opponent: string;
+  home: boolean;
+  date: string;
+}
+
+export interface MatchesType {
+  [key: string]: MatchType;
 }

@@ -1,46 +1,19 @@
 import React from 'react';
 import styled from 'react-emotion';
-import {SortableElement, SortableHandle} from 'react-sortable-hoc';
 import {
   StatType,
   StatTypes,
   UsOrOpponent,
-} from '../../../redux/redux.definitions';
-import {colors} from '../../components/theme';
-import {Paragraph3} from '../../components/Typography';
-import {getStatDefinition} from '../../services/stats/categories';
-import {StatResultTypes} from '../../services/stats/stats.definitions';
+} from '../../../../../redux/redux.definitions';
+import {colors} from '../../../../components/theme';
+import {Paragraph3} from '../../../../components/Typography';
+import {getStatDefinition} from '../../../../services/stats/categories';
+import {StatResultTypes} from '../../../../services/stats/stats.definitions';
 
-export const GameContainer = styled.div({
-  marginTop: 64,
-});
-
-export const HeaderContainer = styled.div({
-  display: 'flex',
-  justifyContent: 'space-between',
-  backgroundColor: '#fff',
-  boxShadow: '0 4px 12px -2px rgba(0, 0, 0, 0.1)',
-  position: 'fixed',
-  top: '0',
-  left: '0',
-  right: '0',
-});
-
-export const PointsContainer = styled.div({
+export const StatListContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-around',
-  padding: '0.3em 1em',
-});
-
-export const StatButton = styled.div({
-  padding: '0.5em',
-  cursor: 'pointer',
-  '@media (hover)': {
-    ':hover': {
-      backgroundColor: colors.lightCoolGray,
-    },
-  },
+  alignItems: 'center',
 });
 
 const StatContainerStyle = styled.div({
@@ -68,13 +41,6 @@ const StatusDot = styled.div<{status: string}>(({status}) => ({
   borderRadius: 4,
   backgroundColor: dotColors[status] || dotColors.nill,
 }));
-
-const SortHandler = SortableHandle(
-  styled.span({
-    cursor: 'move',
-    marginLeft: 24,
-  })
-);
 
 export const StatTextWithDot = ({text, status}) => (
   <div
@@ -112,11 +78,10 @@ const StatContainer = ({text, status, adjustment = false}) => (
   <StatContainerStyle>
     <StatTextWithDot text={text} status={status} />
     <AdjustmentBox adjustment={adjustment} />
-    <SortHandler>:::</SortHandler>
   </StatContainerStyle>
 );
 
-export const SortableStatItem = SortableElement((stat: StatType) => {
+export const StatItem = (stat: StatType) => {
   switch (stat.type) {
     case StatTypes.playerStat:
       return (
@@ -145,4 +110,4 @@ export const SortableStatItem = SortableElement((stat: StatType) => {
         />
       );
   }
-});
+};

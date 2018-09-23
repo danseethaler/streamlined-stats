@@ -1,13 +1,16 @@
 import {combineReducers} from 'redux';
-import {GamesRedux} from '../redux.definitions';
-import games from './games';
+import {MatchesType, SetsType} from '../redux.definitions';
+import matches from './matches';
+import sets from './sets';
 
-interface ReducerState {
-  games: GamesRedux;
+export interface RootState {
+  matches: MatchesType;
+  sets: SetsType;
 }
 
-const rootReducer = combineReducers<ReducerState, any>({
-  games,
+const rootReducer = combineReducers<RootState, any>({
+  sets,
+  matches,
 });
 
 export default rootReducer;
