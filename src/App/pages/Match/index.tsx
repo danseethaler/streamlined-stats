@@ -10,7 +10,7 @@ import {ContentContainer} from '../../components/Bits/ContentContainer';
 import {HeaderContainer, HeaderSegment} from '../../components/Bits/TopBar';
 import Button, {ButtonTypes} from '../../components/Button';
 import {colors} from '../../components/theme';
-import {Headline4, Paragraph3} from '../../components/Typography';
+import {Headline4, Paragraph2} from '../../components/Typography';
 import {getUniqueId} from '../../services/unique_id';
 import {PointsContainer} from './components';
 import {getMatchSet, getMatchSets} from './services';
@@ -91,25 +91,28 @@ class Match extends React.Component<MatchProps, MatchState> {
 
                 return (
                   <PointsContainer>
-                    <Paragraph3>
-                      {reduxMatch.opponent} {scores.opponent}
-                    </Paragraph3>
-                    <Paragraph3>Us {scores.us}</Paragraph3>
+                    <Paragraph2>
+                      {scores.us} to {scores.opponent}
+                    </Paragraph2>
                   </PointsContainer>
                 );
               }}
             />
+            <Route
+              path={`/match/${reduxMatch.id}`}
+              render={() => (
+                <Button
+                  type={ButtonTypes.primary}
+                  onClick={() => {
+                    this.addSet();
+                  }}
+                  disabled={!this.canAddSet()}
+                >
+                  Add Set
+                </Button>
+              )}
+            />
           </Switch>
-
-          <Button
-            type={ButtonTypes.primary}
-            onClick={() => {
-              this.addSet();
-            }}
-            disabled={!this.canAddSet()}
-          >
-            Add Set
-          </Button>
         </HeaderContainer>
         <Switch>
           <Route
