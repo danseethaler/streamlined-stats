@@ -32,6 +32,9 @@ class Home extends React.Component<{}, HomeState> {
               New Match
             </Button>
             <Link to="/admin">Admin</Link>
+            <Link style={{marginLeft: '1em'}} to="/stats-info">
+              Stats Info
+            </Link>
           </div>
         </HeaderContainer>
         <Modal

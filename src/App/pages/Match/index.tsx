@@ -1,5 +1,5 @@
 import React from 'react';
-import {IoIosArrowBack} from 'react-icons/io';
+import {IoIosAdd, IoIosArrowBack, IoMdAddCircle} from 'react-icons/io';
 import {connect} from 'react-redux';
 import {Redirect, Route, RouteComponentProps, Switch} from 'react-router';
 import {Link} from 'react-router-dom';
@@ -99,17 +99,39 @@ class Match extends React.Component<MatchProps, MatchState> {
               }}
             />
             <Route
+              exact
               path={`/match/${reduxMatch.id}`}
               render={() => (
-                <Button
-                  type={ButtonTypes.primary}
-                  onClick={() => {
-                    this.addSet();
-                  }}
-                  disabled={!this.canAddSet()}
-                >
-                  Add Set
-                </Button>
+                <HeaderSegment>
+                  <Button
+                    type={ButtonTypes.primary}
+                    styleOverrides={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    onClick={() => {
+                      this.addSet();
+                    }}
+                    disabled={!this.canAddSet()}
+                  >
+                    <IoMdAddCircle
+                      style={{marginRight: '0.5em'}}
+                      size={18}
+                      color={colors.white}
+                    />{' '}
+                    Add Set
+                  </Button>
+
+                  <Button
+                    type={ButtonTypes.accent}
+                    onClick={() => {
+                      this.props.history.push(`/match/${reduxMatch.id}/stats`);
+                    }}
+                  >
+                    Show Stats
+                  </Button>
+                </HeaderSegment>
               )}
             />
           </Switch>

@@ -1,5 +1,6 @@
 import styled from 'react-emotion';
 import {hexToRgb} from '../../services/styles';
+import {StyleType} from '../theme';
 
 export const enum ButtonTypes {
   success = 'success',
@@ -19,7 +20,11 @@ const colors = {
   accent: '#8E83A3',
 };
 
-export default styled.button<{type: ButtonTypes; disabled?: boolean}>(props => {
+export default styled.button<{
+  type: ButtonTypes;
+  disabled?: boolean;
+  styleOverrides?: StyleType;
+}>(props => {
   const backgroundColor = props.disabled
     ? colors.gray
     : colors[props.type] || colors.gray;
@@ -48,5 +53,6 @@ export default styled.button<{type: ButtonTypes; disabled?: boolean}>(props => {
     ':active': {
       transform: 'translateY(1px)',
     },
+    ...props.styleOverrides,
   };
 });
