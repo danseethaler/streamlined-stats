@@ -16,7 +16,6 @@ export interface StatDefinitionType {
   shorthand: string;
   commandNames?: string[][];
   calculator: (name: string, sets: SetsType) => any;
-  description: string;
   maxPrepsCalculator?: (name: string, sets: SetsType) => any | null;
   recordingType: StatRecordingType;
   result: StatResultTypes;
