@@ -73,7 +73,11 @@ class AddMatch extends React.Component<AddMatchProps, AddMatchState> {
 
   public render() {
     return (
-      <form onSubmit={e => e.preventDefault()}>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+        }}
+      >
         <Paragraph3>Opponent</Paragraph3>
         <TextInput innerRef={this.opponentRef} type="text" />
 

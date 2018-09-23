@@ -69,7 +69,8 @@ class Match extends React.Component<MatchProps, MatchState> {
               textAlign: 'center',
             }}
           >
-            {reduxMatch.opponent}
+            {reduxMatch.opponent} - {reduxMatch.date}
+            {!reduxMatch.home && ' (away)'}
           </Headline4>
 
           <Switch>
