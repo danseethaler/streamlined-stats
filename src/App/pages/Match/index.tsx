@@ -1,12 +1,15 @@
 import React from 'react';
+import {IoIosArrowBack} from 'react-icons/io';
 import {connect} from 'react-redux';
-import {Route, RouteComponentProps, Switch, Redirect} from 'react-router';
+import {Redirect, Route, RouteComponentProps, Switch} from 'react-router';
+import {Link} from 'react-router-dom';
 import {addSetAction} from '../../../redux/actions/sets';
 import {RootState} from '../../../redux/reducers';
 import {MatchType, SetType} from '../../../redux/redux.definitions';
 import {ContentContainer} from '../../components/Bits/ContentContainer';
-import {HeaderContainer} from '../../components/Bits/TopBar';
+import {HeaderContainer, HeaderSegment} from '../../components/Bits/TopBar';
 import Button, {ButtonTypes} from '../../components/Button';
+import {colors} from '../../components/theme';
 import {Headline4, Paragraph3} from '../../components/Typography';
 import {getUniqueId} from '../../services/unique_id';
 import {PointsContainer} from './components';
@@ -54,7 +57,7 @@ class Match extends React.Component<MatchProps, MatchState> {
   };
 
   public render() {
-    const {reduxMatch} = this.props;
+    const {reduxMatch, match} = this.props;
 
     if (!reduxMatch) {
       return <Redirect to="/" />;
@@ -63,20 +66,26 @@ class Match extends React.Component<MatchProps, MatchState> {
     return (
       <ContentContainer>
         <HeaderContainer>
-          <Headline4
-            style={{
-              padding: '1em',
-              textAlign: 'center',
-            }}
-          >
-            {reduxMatch.opponent} - {reduxMatch.date}
-            {!reduxMatch.home && ' (away)'}
-          </Headline4>
+          <HeaderSegment>
+            <Link to={match.params.setId ? `/match/${reduxMatch.id}` : '/'}>
+              <IoIosArrowBack size={24} color={colors.gray} />
+            </Link>
+            <Headline4
+              style={{
+                display: 'flex',
+                padding: '1em 1em 1em 0.3em',
+                textAlign: 'center',
+              }}
+            >
+              {reduxMatch.opponent} - {reduxMatch.date}
+              {!reduxMatch.home && ' (away)'}
+            </Headline4>
+          </HeaderSegment>
 
           <Switch>
             <Route
               path={`/match/${reduxMatch.id}/set/:setId`}
-              render={({match}) => {
+              render={() => {
                 const setId = match.params.setId;
                 const scores = getScores(getMatchSet(setId).stats);
 
@@ -105,7 +114,7 @@ class Match extends React.Component<MatchProps, MatchState> {
         <Switch>
           <Route
             path={`/match/${reduxMatch.id}/set/:setId`}
-            component={({match}) => <Set setId={match.params.setId} />}
+            component={() => <Set setId={match.params.setId} />}
           />
           <Route
             path={`/match/${reduxMatch.id}/stats`}

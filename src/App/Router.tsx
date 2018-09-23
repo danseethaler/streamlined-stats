@@ -7,6 +7,7 @@ import StatsInfo from './pages/StatsInfo';
 
 export default () => (
   <Switch>
+    <Route path="/match/:matchId/set/:setId" component={Match} />} />
     <Route path="/match/:matchId" component={Match} />} />
     <Route path="/admin" component={Admin} />} />
     <Route path="/stats-info" component={StatsInfo} />} />

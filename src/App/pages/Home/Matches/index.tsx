@@ -18,7 +18,7 @@ class Matches extends React.Component<MatchesProps> {
         {orderBy(this.props.matches, ['date']).map(match => (
           <ShadowDiv key={match.id}>
             <Link to={'/match/' + match.id} className={linkCss}>
-              {match.opponent} - {match.date}
+              {match.date} - {match.opponent}
             </Link>
           </ShadowDiv>
         ))}

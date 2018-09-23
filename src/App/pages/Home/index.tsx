@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Hr} from '../../components/Bits';
+import {ContentContainer} from '../../components/Bits/ContentContainer';
+import {HeaderContainer} from '../../components/Bits/TopBar';
 import Button, {ButtonTypes} from '../../components/Button';
 import Modal from '../../components/Modal';
-import Matches from './Matches';
 import AddMatch from './AddMatch';
+import Matches from './Matches';
 
 interface HomeState {
   addMatchModalOpen: boolean;
@@ -20,15 +21,19 @@ class Home extends React.Component<{}, HomeState> {
 
     return (
       <div>
-        <Button
-          type={ButtonTypes.primary}
-          onClick={() => {
-            this.setState({addMatchModalOpen: true});
-          }}
-        >
-          New Match
-        </Button>
-        <Link to="/admin">Admin</Link>
+        <HeaderContainer>
+          <div>
+            <Button
+              type={ButtonTypes.primary}
+              onClick={() => {
+                this.setState({addMatchModalOpen: true});
+              }}
+            >
+              New Match
+            </Button>
+            <Link to="/admin">Admin</Link>
+          </div>
+        </HeaderContainer>
         <Modal
           open={addMatchModalOpen}
           title="Create New Match"
@@ -37,8 +42,9 @@ class Home extends React.Component<{}, HomeState> {
           }}
           content={<AddMatch />}
         />
-        <Hr />
-        <Matches />
+        <ContentContainer>
+          <Matches />
+        </ContentContainer>
       </div>
     );
   }
