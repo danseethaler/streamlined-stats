@@ -12,12 +12,14 @@ import {TRANSITION_ALL} from '../../../../components/constants';
 import SpeechToText, {
   listeningColors,
   SpeechToTextChildProps,
+  ListenerStatuses,
 } from '../../../../components/SpeechToText';
 import {VoiceCommandType} from '../../../../components/SpeechToText/commands';
 import {colors} from '../../../../components/theme';
 import {Paragraph2, Paragraph3} from '../../../../components/Typography';
 import {getStatDefinition} from '../../../../services/stats/categories';
 import {StatResultTypes} from '../../../../services/stats/stats.definitions';
+import Spinner from '../../../../components/Spinner';
 
 export const StatListContainer = styled.div({
   display: 'flex',
@@ -120,15 +122,23 @@ const ReRecordBase = ({
         listenerStatus,
         startListening,
         stopListening,
-      }: SpeechToTextChildProps) => (
-        <IoMdUndo
-          onMouseDown={startListening}
-          onMouseUp={stopListening}
-          size={32}
-          color={listeningColors[listenerStatus]}
-          className={ReRecordStyle}
-        />
-      )}
+      }: SpeechToTextChildProps) =>
+        listenerStatus === ListenerStatuses.processing ? (
+          <Spinner
+            size={22}
+            color={colors.affirmative}
+            className={ReRecordStyle}
+          />
+        ) : (
+          <IoMdUndo
+            onMouseDown={startListening}
+            onMouseUp={stopListening}
+            size={32}
+            color={listeningColors[listenerStatus]}
+            className={ReRecordStyle}
+          />
+        )
+      }
     </SpeechToText>
   </div>
 );
@@ -164,6 +174,7 @@ export const StatItem = ({index, setId, ...stat}) => {
             text={`Timeout - ${stat.team}`}
             status="alternative"
           />
+          <ReRecord setId={setId} index={index} />
         </StatContainer>
       );
 
@@ -179,6 +190,7 @@ export const StatItem = ({index, setId, ...stat}) => {
             }
             text={text}
           />
+          <ReRecord setId={setId} index={index} />
         </StatContainer>
       );
 

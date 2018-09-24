@@ -54,7 +54,7 @@ export const getCommands = (): VoiceCommands[] => {
   const otherCommands = [
     {
       type: VoiceCommandType.pointAdjustment,
-      regex: `^(add point|add points|adding points)$`,
+      regex: `^(add point|add points|adding points|opponent error)$`,
       team: UsOrOpponent.us,
     },
     {
