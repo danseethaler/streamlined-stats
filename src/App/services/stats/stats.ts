@@ -435,6 +435,7 @@ const statDefinitions: StatCategoryType[] = [
             ...flatten(
               digArray.map(dig => errorArray.map(error => dig + ' ' + error))
             ),
+            'dig',
             'dig error',
             'diggler',
             'take care',
@@ -446,8 +447,8 @@ const statDefinitions: StatCategoryType[] = [
             'digging are',
             'digger',
             'bigger',
+            'dick',
             'dare to',
-            'dig',
             'big',
           ],
         ],

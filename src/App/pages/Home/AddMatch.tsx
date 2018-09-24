@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import {connect} from 'react-redux';
 import {RouteComponentProps, withRouter} from 'react-router';
@@ -35,6 +36,7 @@ class AddMatch extends React.Component<AddMatchProps, AddMatchState> {
 
   public componentDidMount() {
     this.opponentRef.current.select();
+    this.dateRef.current.value = moment().format('YYYY-MM-DD');
   }
 
   public validateForm = () => {

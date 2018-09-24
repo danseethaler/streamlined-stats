@@ -9,7 +9,7 @@ const jerseyVoiceAlternativesMap = [
   ['5', 'five', '5:00'],
   ['6', 'six'],
   ['7', 'seven'],
-  ['8', 'eight', 'date'],
+  ['8', 'eight', 'date', 'eat', 'each'],
   ['9', 'nine'],
   ['10', 'ten'],
   ['11', 'eleven'],
