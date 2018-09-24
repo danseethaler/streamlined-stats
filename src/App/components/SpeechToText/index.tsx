@@ -1,30 +1,28 @@
 import React from 'react';
-import {IoIosMic} from 'react-icons/io';
-import {connect} from 'react-redux';
-import {
-  addStatAction,
-  toggleAdjustmentLastStatAction,
-  undoLastStatAction,
-} from '../../../redux/actions/sets';
-import {SetType, StatType, StatTypes} from '../../../redux/redux.definitions';
+import {StatTypes} from '../../../redux/redux.definitions';
 import {getSpeechMatchCommands, VoiceCommandType} from './commands';
-import {Microphone} from './components';
 
 const speechApiAvailabled = () => 'webkitSpeechRecognition' in window;
 let recognitionRunning = false;
 
+export interface SpeechToTextChildProps {
+  listening: boolean;
+  startListening: () => void;
+  stopListening: () => void;
+}
+
 interface SpeechToTextProps {
-  addStat: (set: string, stat: StatType) => void;
-  undoLastStat: (set: string) => void;
-  toggleAdjustmentLastStat: (set: string) => void;
-  set: SetType;
+  onCommand: (command: any) => void;
+  children: React.SFC<SpeechToTextChildProps>;
+}
+
+interface SpeechToTextState {
+  listening: boolean;
 }
 
 class SpeechToText extends React.Component<
   SpeechToTextProps,
-  {
-    listening: boolean;
-  }
+  SpeechToTextState
 > {
   public state = {
     listening: false,
@@ -37,8 +35,6 @@ class SpeechToText extends React.Component<
       console.log('Web Speech API is not supported on this browser.');
       return;
     }
-    window.addEventListener('keydown', this.handleKeyDown);
-    window.addEventListener('keyup', this.handleKeyUp);
 
     this.recognition = new window.webkitSpeechRecognition();
     this.recognition.continuous = false;
@@ -80,13 +76,23 @@ class SpeechToText extends React.Component<
         return;
       }
 
-      const {set} = this.props;
-
       console.log('voiceCommand', voiceCommand);
 
       switch (voiceCommand.type) {
+        case VoiceCommandType.undo:
+          this.props.onCommand({
+            type: VoiceCommandType.undo,
+          });
+          break;
+
+        case VoiceCommandType.adjustment:
+          this.props.onCommand({
+            type: VoiceCommandType.adjustment,
+          });
+          break;
+
         case VoiceCommandType.playerStat:
-          this.props.addStat(set.id, {
+          this.props.onCommand({
             type: StatTypes.playerStat,
             player: voiceCommand.player,
             shorthand: voiceCommand.shorthand,
@@ -94,29 +100,21 @@ class SpeechToText extends React.Component<
           break;
 
         case VoiceCommandType.pointAdjustment:
-          this.props.addStat(set.id, {
+          this.props.onCommand({
             type: StatTypes.pointAdjustment,
             team: voiceCommand.team,
           });
           break;
 
         case VoiceCommandType.timeout:
-          this.props.addStat(set.id, {
+          this.props.onCommand({
             type: StatTypes.timeout,
             team: voiceCommand.team,
           });
           break;
 
-        case VoiceCommandType.undo:
-          this.props.undoLastStat(set.id);
-          break;
-
-        case VoiceCommandType.adjustment:
-          this.props.toggleAdjustmentLastStat(set.id);
-          break;
-
         case VoiceCommandType.noMatch:
-          this.props.addStat(set.id, {
+          this.props.onCommand({
             type: StatTypes.noMatch,
             results: voiceCommand.results,
           });
@@ -128,42 +126,19 @@ class SpeechToText extends React.Component<
     };
   }
 
-  public handleKeyDown = e => {
-    if ([13].indexOf(e.keyCode) >= 0) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (!this.state.listening) {
-        this.startSpeech();
-      }
-    }
-  };
-
-  public handleKeyUp = e => {
-    if ([13].indexOf(e.keyCode) >= 0) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (this.state.listening) {
-        this.stopSpeech();
-      }
-    }
-  };
-
   public componentWillUnmount() {
     if (this.recognition) {
       this.recognition.stop();
     }
-
-    window.removeEventListener('keydown', this.handleKeyDown);
-    window.removeEventListener('keyup', this.handleKeyUp);
   }
 
-  public startSpeech = () => {
+  public startListening = () => {
     if (!recognitionRunning) {
       this.recognition.start();
     }
   };
 
-  public stopSpeech = () => {
+  public stopListening = () => {
     if (recognitionRunning) {
       this.recognition.stop();
     }
@@ -174,27 +149,12 @@ class SpeechToText extends React.Component<
       return null;
     }
 
-    return (
-      <Microphone
-        active={this.state.listening}
-        onMouseDown={() => {
-          this.startSpeech();
-        }}
-        onMouseUp={() => {
-          this.stopSpeech();
-        }}
-      >
-        <IoIosMic size={32} color="#FFFFFF" />
-      </Microphone>
-    );
+    return this.props.children({
+      listening: this.state.listening,
+      startListening: this.startListening,
+      stopListening: this.stopListening,
+    });
   }
 }
 
-export default connect(
-  null,
-  {
-    addStat: addStatAction,
-    undoLastStat: undoLastStatAction,
-    toggleAdjustmentLastStat: toggleAdjustmentLastStatAction,
-  }
-)(SpeechToText);
+export default SpeechToText;
