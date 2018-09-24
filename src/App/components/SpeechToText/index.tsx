@@ -1,15 +1,27 @@
 import React from 'react';
 import {StatTypes} from '../../../redux/redux.definitions';
 import {getSpeechMatchCommands, VoiceCommandType} from './commands';
+import {colors} from '../theme';
 
 const speechApiAvailabled = () => 'webkitSpeechRecognition' in window;
-let recognitionRunning = false;
+
+export const enum ListenerStatuses {
+  listening = 'listening',
+  processing = 'processing',
+  ready = 'ready',
+}
 
 export interface SpeechToTextChildProps {
-  listening: boolean;
+  listenerStatus: ListenerStatuses;
   startListening: () => void;
   stopListening: () => void;
 }
+
+export const listeningColors = {
+  [ListenerStatuses.ready]: colors.gray,
+  [ListenerStatuses.listening]: colors.primary,
+  [ListenerStatuses.processing]: colors.affirmative,
+};
 
 interface SpeechToTextProps {
   onCommand: (command: any) => void;
@@ -17,7 +29,7 @@ interface SpeechToTextProps {
 }
 
 interface SpeechToTextState {
-  listening: boolean;
+  listenerStatus: ListenerStatuses;
 }
 
 class SpeechToText extends React.Component<
@@ -25,7 +37,7 @@ class SpeechToText extends React.Component<
   SpeechToTextState
 > {
   public state = {
-    listening: false,
+    listenerStatus: ListenerStatuses.ready,
   };
 
   private recognition: any;
@@ -43,23 +55,20 @@ class SpeechToText extends React.Component<
     this.recognition.maxAlternatives = 10;
 
     this.recognition.onstart = () => {
-      recognitionRunning = true;
-      this.setState({listening: true});
+      this.setState({listenerStatus: ListenerStatuses.listening});
+    };
+
+    this.recognition.onaudioend = () => {
+      this.setState({listenerStatus: ListenerStatuses.processing});
+    };
+
+    this.recognition.onend = () => {
+      this.setState({listenerStatus: ListenerStatuses.ready});
     };
 
     this.recognition.onerror = e => {
-      recognitionRunning = false;
       console.log('errored', e);
-      this.setState({listening: false});
-    };
-
-    this.recognition.onaudioend = e => {
-      this.setState({listening: false});
-    };
-
-    this.recognition.onend = e => {
-      recognitionRunning = false;
-      // this.setState({listening: false});
+      this.setState({listenerStatus: ListenerStatuses.ready});
     };
 
     this.recognition.onresult = event => {
@@ -128,18 +137,24 @@ class SpeechToText extends React.Component<
 
   public componentWillUnmount() {
     if (this.recognition) {
+      this.recognition.onstart = null;
+      this.recognition.onaudioend = null;
+      this.recognition.onend = null;
+      this.recognition.onerror = null;
+      this.recognition.onresult = null;
+
       this.recognition.stop();
     }
   }
 
   public startListening = () => {
-    if (!recognitionRunning) {
+    if (this.state.listenerStatus === ListenerStatuses.ready) {
       this.recognition.start();
     }
   };
 
   public stopListening = () => {
-    if (recognitionRunning) {
+    if (this.state.listenerStatus === ListenerStatuses.listening) {
       this.recognition.stop();
     }
   };
@@ -150,7 +165,7 @@ class SpeechToText extends React.Component<
     }
 
     return this.props.children({
-      listening: this.state.listening,
+      listenerStatus: this.state.listenerStatus,
       startListening: this.startListening,
       stopListening: this.stopListening,
     });

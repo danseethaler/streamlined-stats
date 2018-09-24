@@ -1,6 +1,13 @@
 import React from 'react';
+import {IoIosMic} from 'react-icons/io';
 import Button, {ButtonTypes} from '../../../components/Button';
-import {SpeechToTextChildProps} from '../../../components/SpeechToText';
+import {TRANSITION_ALL} from '../../../components/constants';
+import {
+  ListenerStatuses,
+  listeningColors,
+  SpeechToTextChildProps,
+} from '../../../components/SpeechToText';
+import Spinner from '../../../components/Spinner';
 import {colors} from '../../../components/theme';
 
 class Microphone extends React.Component<SpeechToTextChildProps> {
@@ -18,9 +25,7 @@ class Microphone extends React.Component<SpeechToTextChildProps> {
     if ([13].indexOf(e.keyCode) >= 0) {
       e.preventDefault();
       e.stopPropagation();
-      if (!this.props.listening) {
-        this.props.startListening();
-      }
+      this.props.startListening();
     }
   };
 
@@ -28,14 +33,12 @@ class Microphone extends React.Component<SpeechToTextChildProps> {
     if ([13].indexOf(e.keyCode) >= 0) {
       e.preventDefault();
       e.stopPropagation();
-      if (this.props.listening) {
-        this.props.stopListening();
-      }
+      this.props.stopListening();
     }
   };
 
   public render() {
-    const {listening, startListening, stopListening, children} = this.props;
+    const {listenerStatus, startListening, stopListening} = this.props;
 
     return (
       <Button
@@ -47,14 +50,17 @@ class Microphone extends React.Component<SpeechToTextChildProps> {
           bottom: 24,
           right: 24,
           padding: '13px 16px',
-          backgroundColor: listening
-            ? colors.purple
-            : colors.extraLightCoolGray,
+          transition: TRANSITION_ALL,
+          backgroundColor: listeningColors[listenerStatus],
           color: colors.white,
-          borderRadius: 48,
+          borderRadius: 96,
         }}
       >
-        {children}
+        {listenerStatus === ListenerStatuses.processing ? (
+          <Spinner />
+        ) : (
+          <IoIosMic size={64} color="#FFFFFF" />
+        )}
       </Button>
     );
   }

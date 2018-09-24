@@ -1,5 +1,4 @@
 import React from 'react';
-import {IoIosMic} from 'react-icons/io';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
 import {
@@ -9,11 +8,11 @@ import {
 } from '../../../../redux/actions/sets';
 import {RootState} from '../../../../redux/reducers';
 import {SetType, StatType} from '../../../../redux/redux.definitions';
+import LeaderBoard from '../../../components/LeaderBoard';
 import SpeechToText from '../../../components/SpeechToText';
 import {VoiceCommandType} from '../../../components/SpeechToText/commands';
 import Microphone from './Microphone';
 import StatsList from './StatsList';
-import LeaderBoard from '../../../components/LeaderBoard';
 
 interface SetProps extends RouteComponentProps<any> {
   set: SetType;
@@ -46,11 +45,7 @@ class Set extends React.Component<SetProps> {
         <div style={{flex: 1}}>
           <StatsList set={set} />
           <SpeechToText onCommand={this.handleCommand}>
-            {props => (
-              <Microphone {...props}>
-                <IoIosMic size={32} color="#FFFFFF" />
-              </Microphone>
-            )}
+            {props => <Microphone {...props} />}
           </SpeechToText>
         </div>
       </React.Fragment>

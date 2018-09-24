@@ -4,12 +4,13 @@ import {IoMdUndo} from 'react-icons/io';
 import {connect} from 'react-redux';
 import {
   removeStatAction,
-  updateStatAction,
   toggleStatAdjustmentAction,
+  updateStatAction,
 } from '../../../../../redux/actions/sets';
 import {StatTypes, UsOrOpponent} from '../../../../../redux/redux.definitions';
 import {TRANSITION_ALL} from '../../../../components/constants';
 import SpeechToText, {
+  listeningColors,
   SpeechToTextChildProps,
 } from '../../../../components/SpeechToText';
 import {VoiceCommandType} from '../../../../components/SpeechToText/commands';
@@ -115,12 +116,16 @@ const ReRecordBase = ({
         }
       }}
     >
-      {({listening, startListening, stopListening}: SpeechToTextChildProps) => (
+      {({
+        listenerStatus,
+        startListening,
+        stopListening,
+      }: SpeechToTextChildProps) => (
         <IoMdUndo
           onMouseDown={startListening}
           onMouseUp={stopListening}
           size={32}
-          color={listening ? colors.primary : colors.gray}
+          color={listeningColors[listenerStatus]}
           className={ReRecordStyle}
         />
       )}

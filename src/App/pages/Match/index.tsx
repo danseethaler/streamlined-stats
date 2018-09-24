@@ -92,7 +92,8 @@ class Match extends React.Component<MatchProps, MatchState> {
               path={`/match/${reduxMatch.id}/set/:setId`}
               render={() => {
                 const setId = match.params.setId;
-                const scores = getScores(getMatchSet(setId).stats);
+                const set = getMatchSet(setId);
+                const scores = getScores(set.stats);
 
                 return (
                   <PointsContainer>

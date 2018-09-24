@@ -28,6 +28,11 @@ const initialState = {};
 
 export default (state = initialState, action): SetsType =>
   produce(state, newState => {
+    if (action.type === ADD_SET) {
+      newState[action.setId] = action.set;
+      return;
+    }
+
     const actionSet = newState[action.setId];
     if (!actionSet) {
       return;
@@ -36,10 +41,6 @@ export default (state = initialState, action): SetsType =>
     const mostRecentStat = actionSet.stats[0];
 
     switch (action.type) {
-      case ADD_SET:
-        newState[action.setId] = action.set;
-        break;
-
       case UPDATE_STAT:
         const priorStat = actionSet.stats[action.index + 1];
         if (priorStat) {

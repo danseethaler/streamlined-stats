@@ -25,7 +25,7 @@ class StatList extends React.Component<StatListProps, StatListState> {
         {set.stats
           .slice(0, this.state.showAll ? 1000 : 10)
           .map((stat, index) => (
-            <StatItem key={stat['id']} setId={set.id} index={index} {...stat} />
+            <StatItem key={index} setId={set.id} index={index} {...stat} />
           ))}
         {set.stats.length === 0 && <Headline3>Add a stat</Headline3>}
         {set.stats.length > 10 && (
