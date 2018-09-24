@@ -2,6 +2,7 @@ export const enum StatTypes {
   timeout = 'timeout',
   playerStat = 'playerStat',
   pointAdjustment = 'pointAdjustment',
+  noMatch = 'noMatch',
 }
 
 export interface PlayerStat {
@@ -26,7 +27,16 @@ export interface PointAdjustmentStat {
   team: UsOrOpponent;
 }
 
-export type StatType = PlayerStat | TimeoutStat | PointAdjustmentStat;
+export interface NoMatchStat {
+  type: StatTypes.noMatch;
+  results: string[];
+}
+
+export type StatType =
+  | PlayerStat
+  | TimeoutStat
+  | PointAdjustmentStat
+  | NoMatchStat;
 
 export interface SetType {
   id: string;

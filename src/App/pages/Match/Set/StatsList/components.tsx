@@ -8,7 +8,7 @@ import {
 } from '../../../../../redux/redux.definitions';
 import {TRANSITION_ALL} from '../../../../components/constants';
 import {colors} from '../../../../components/theme';
-import {Paragraph2} from '../../../../components/Typography';
+import {Paragraph2, Paragraph3} from '../../../../components/Typography';
 import {getStatDefinition} from '../../../../services/stats/categories';
 import {StatResultTypes} from '../../../../services/stats/stats.definitions';
 
@@ -18,7 +18,7 @@ export const StatListContainer = styled.div({
   alignItems: 'center',
 });
 
-const buttonContainer = css({
+const reRecordContainer = css({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -28,7 +28,7 @@ const buttonContainer = css({
 
 const StatContainer = styled.div({
   display: 'flex',
-  minWidth: 300,
+  width: 300,
   alignItems: 'center',
   justifyContent: 'space-between',
   padding: '0.3em 0.3em 0.3em 0.7em',
@@ -36,7 +36,7 @@ const StatContainer = styled.div({
   backgroundColor: colors.xxLightCoolGray,
   borderRadius: 24,
   ':hover': {
-    [`& .${buttonContainer}`]: {
+    [`& .${reRecordContainer}`]: {
       opacity: 1,
     },
   },
@@ -47,6 +47,7 @@ const dotColors = {
   error: colors.negative,
   nill: colors.mediumCoolGray,
   alternative: colors.tertiary,
+  noMatch: colors.purple,
 };
 
 const StatusDot = styled.div<{status: string}>(({status}) => ({
@@ -104,7 +105,7 @@ export const StatItem = (stat: StatType) => {
             status={getStatDefinition(stat.shorthand).result}
           />
           {stat.adjustment && <AdjustmentBox>adj</AdjustmentBox>}
-          <div className={buttonContainer}>
+          <div className={reRecordContainer}>
             <ReRecord />
           </div>
         </StatContainer>
@@ -132,6 +133,41 @@ export const StatItem = (stat: StatType) => {
             }
             text={text}
           />
+        </StatContainer>
+      );
+
+    case StatTypes.noMatch:
+      return (
+        <StatContainer>
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                width: 'calc(300px - 1em)',
+              }}
+            >
+              <StatTextWithDot status="noMatch" text="No Match" />
+              <div className={reRecordContainer}>
+                <ReRecord />
+              </div>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                flexWrap: 'wrap',
+                height: 140,
+              }}
+            >
+              {stat.results.map(result => (
+                <Paragraph3 key={result} style={{marginBottom: '0.3em'}}>
+                  {result}
+                </Paragraph3>
+              ))}
+            </div>
+          </div>
         </StatContainer>
       );
   }

@@ -10,6 +10,7 @@ export const enum VoiceCommandType {
   pointAdjustment = 'pointAdjustment',
   undo = 'undo',
   adjustment = 'adjustment',
+  noMatch = 'noMatch',
 }
 
 interface VoiceCommands {
@@ -18,6 +19,7 @@ interface VoiceCommands {
   shorthand?: string;
   player?: string;
   team?: UsOrOpponent;
+  results?: string[];
 }
 
 export const getCommands = (): VoiceCommands[] => {
@@ -92,6 +94,9 @@ export const getSpeechMatchCommands = results => {
   return (
     commands.find(({regex}) =>
       results.find(result => new RegExp(regex, 'i').test(result))
-    ) || null
+    ) || {
+      type: VoiceCommandType.noMatch,
+      results,
+    }
   );
 };

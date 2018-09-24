@@ -115,6 +115,13 @@ class SpeechToText extends React.Component<
           this.props.toggleAdjustmentLastStat(set.id);
           break;
 
+        case VoiceCommandType.noMatch:
+          this.props.addStat(set.id, {
+            type: StatTypes.noMatch,
+            results: voiceCommand.results,
+          });
+          break;
+
         default:
           break;
       }
