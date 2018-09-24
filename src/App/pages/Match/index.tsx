@@ -1,14 +1,15 @@
 import React from 'react';
-import {IoIosAdd, IoIosArrowBack, IoMdAddCircle} from 'react-icons/io';
+import {IoIosArrowBack, IoMdAddCircle} from 'react-icons/io';
 import {connect} from 'react-redux';
 import {Redirect, Route, RouteComponentProps, Switch} from 'react-router';
 import {Link} from 'react-router-dom';
 import {addSetAction} from '../../../redux/actions/sets';
 import {RootState} from '../../../redux/reducers';
-import {MatchType, SetType} from '../../../redux/redux.definitions';
+import {MatchType, SetsType, SetType} from '../../../redux/redux.definitions';
 import {ContentContainer} from '../../components/Bits/ContentContainer';
 import {HeaderContainer, HeaderSegment} from '../../components/Bits/TopBar';
 import Button, {ButtonTypes} from '../../components/Button';
+import LeaderBoard from '../../components/LeaderBoard';
 import {colors} from '../../components/theme';
 import {Headline4, Paragraph2} from '../../components/Typography';
 import {getUniqueId} from '../../services/unique_id';
@@ -21,6 +22,7 @@ import Stats from './Stats';
 
 interface MatchProps extends RouteComponentProps<any> {
   reduxMatch: MatchType;
+  sets: SetsType;
   matchId: string;
   addSet: (set: SetType) => void;
 }
@@ -139,7 +141,15 @@ class Match extends React.Component<MatchProps, MatchState> {
         <Switch>
           <Route
             path={`/match/${reduxMatch.id}/set/:setId`}
-            component={() => <Set setId={match.params.setId} />}
+            component={() => (
+              <React.Fragment>
+                <div style={{flex: 1}}>
+                  <Set setId={match.params.setId} />
+                </div>
+
+                <LeaderBoard sets={[this.props.sets[match.params.setId]]} />
+              </React.Fragment>
+            )}
           />
           <Route
             path={`/match/${reduxMatch.id}/stats`}
@@ -147,10 +157,15 @@ class Match extends React.Component<MatchProps, MatchState> {
           />
           <Route
             render={() => (
-              <Sets
-                matchId={reduxMatch.id}
-                sets={getMatchSets(reduxMatch.id)}
-              />
+              <React.Fragment>
+                <div style={{flex: 1}}>
+                  <Sets
+                    matchId={reduxMatch.id}
+                    sets={getMatchSets(reduxMatch.id)}
+                  />
+                </div>
+                <LeaderBoard sets={getMatchSets(reduxMatch.id)} />
+              </React.Fragment>
             )}
           />
         </Switch>
@@ -160,8 +175,9 @@ class Match extends React.Component<MatchProps, MatchState> {
 }
 
 export default connect(
-  ({matches}: RootState, props: MatchProps) => ({
+  ({matches, sets}: RootState, props: MatchProps) => ({
     reduxMatch: matches[props.match.params.matchId],
+    sets,
   }),
   {
     addSet: addSetAction,

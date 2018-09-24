@@ -14,7 +14,7 @@ interface MatchesProps {
 class Matches extends React.Component<MatchesProps> {
   public render() {
     return (
-      <div>
+      <div style={{flex: 1}}>
         {orderBy(this.props.matches, ['date']).map(match => (
           <ShadowDiv key={match.id}>
             <Link to={'/match/' + match.id} className={linkCss}>
