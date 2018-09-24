@@ -1,12 +1,18 @@
 import React from 'react';
 import styled, {css} from 'react-emotion';
 import {IoMdUndo} from 'react-icons/io';
+import {connect} from 'react-redux';
 import {
-  StatType,
-  StatTypes,
-  UsOrOpponent,
-} from '../../../../../redux/redux.definitions';
+  removeStatAction,
+  updateStatAction,
+  toggleStatAdjustmentAction,
+} from '../../../../../redux/actions/sets';
+import {StatTypes, UsOrOpponent} from '../../../../../redux/redux.definitions';
 import {TRANSITION_ALL} from '../../../../components/constants';
+import SpeechToText, {
+  SpeechToTextChildProps,
+} from '../../../../components/SpeechToText';
+import {VoiceCommandType} from '../../../../components/SpeechToText/commands';
 import {colors} from '../../../../components/theme';
 import {Paragraph2, Paragraph3} from '../../../../components/Typography';
 import {getStatDefinition} from '../../../../services/stats/categories';
@@ -84,18 +90,54 @@ const ReRecordStyle = css({
   cursor: 'pointer',
 });
 
-const ReRecord = () => (
-  <IoMdUndo
-    onClick={() => {
-      console.log('here');
-    }}
-    size={32}
-    color={colors.gray}
-    className={ReRecordStyle}
-  />
+const ReRecordBase = ({
+  index,
+  setId,
+  updateStat,
+  removeStat,
+  toggleStatAdjustment,
+}) => (
+  <div className={reRecordContainer}>
+    <SpeechToText
+      onCommand={command => {
+        switch (command.type) {
+          case VoiceCommandType.noMatch:
+            break;
+
+          case VoiceCommandType.adjustment:
+            return toggleStatAdjustment(setId, index);
+
+          case VoiceCommandType.remove:
+            return removeStat(setId, index);
+
+          default:
+            return updateStat(setId, index, command);
+        }
+      }}
+    >
+      {({listening, startListening, stopListening}: SpeechToTextChildProps) => (
+        <IoMdUndo
+          onMouseDown={startListening}
+          onMouseUp={stopListening}
+          size={32}
+          color={listening ? colors.primary : colors.gray}
+          className={ReRecordStyle}
+        />
+      )}
+    </SpeechToText>
+  </div>
 );
 
-export const StatItem = (stat: StatType) => {
+const ReRecord = connect(
+  null,
+  {
+    updateStat: updateStatAction,
+    removeStat: removeStatAction,
+    toggleStatAdjustment: toggleStatAdjustmentAction,
+  }
+)(ReRecordBase);
+
+export const StatItem = ({index, setId, ...stat}) => {
   switch (stat.type) {
     case StatTypes.playerStat:
       return (
@@ -105,9 +147,8 @@ export const StatItem = (stat: StatType) => {
             status={getStatDefinition(stat.shorthand).result}
           />
           {stat.adjustment && <AdjustmentBox>adj</AdjustmentBox>}
-          <div className={reRecordContainer}>
-            <ReRecord />
-          </div>
+
+          <ReRecord setId={setId} index={index} />
         </StatContainer>
       );
 
@@ -149,9 +190,7 @@ export const StatItem = (stat: StatType) => {
               }}
             >
               <StatTextWithDot status="noMatch" text="No Match" />
-              <div className={reRecordContainer}>
-                <ReRecord />
-              </div>
+              <ReRecord setId={setId} index={index} />
             </div>
             <div
               style={{

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import {IoIosArrowBack, IoMdAddCircle} from 'react-icons/io';
 import {connect} from 'react-redux';
@@ -79,7 +80,7 @@ class Match extends React.Component<MatchProps, MatchState> {
                 textAlign: 'center',
               }}
             >
-              {reduxMatch.opponent} - {reduxMatch.date}
+              {reduxMatch.opponent} - {moment(reduxMatch.date).format('MM/D')}
               {!reduxMatch.home && ' (away)'}
             </Headline4>
           </HeaderSegment>
@@ -143,11 +144,11 @@ class Match extends React.Component<MatchProps, MatchState> {
             path={`/match/${reduxMatch.id}/set/:setId`}
             component={() => (
               <React.Fragment>
+                <LeaderBoard sets={[this.props.sets[match.params.setId]]} />
+
                 <div style={{flex: 1}}>
                   <Set setId={match.params.setId} />
                 </div>
-
-                <LeaderBoard sets={[this.props.sets[match.params.setId]]} />
               </React.Fragment>
             )}
           />

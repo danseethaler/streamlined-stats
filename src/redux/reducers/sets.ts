@@ -1,66 +1,75 @@
 import produce from 'immer';
+import {uniqueId} from 'lodash';
 import {
   ADD_SET,
   ADD_STAT,
-  TOGGLE_ADJUSTMENT_LAST_STAT,
-  UNDO_LAST_STAT,
-  UPDATE_STATS_ORDER,
+  REMOVE_STAT,
+  TOGGLE_STAT_ADJUSTMENT,
+  UPDATE_STAT,
 } from '../constants';
 import {SetsType, StatTypes} from '../redux.definitions';
+
+const updatePriorStat = (priorStat, newStat) => {
+  // Change BHA to AST on kill
+  if (priorStat.shorthand === 'BHA' && newStat.shorthand === 'K') {
+    priorStat.shorthand = 'AST';
+  }
+
+  // Change BS to BA on double block
+  const previousStatIsBlock = ['BS', 'BA'].indexOf(priorStat.shorthand) >= 0;
+  if (previousStatIsBlock && newStat.shorthand === 'BS') {
+    priorStat.shorthand = 'BA';
+    newStat.shorthand = 'BA';
+    newStat.adjustment = true;
+  }
+};
 
 const initialState = {};
 
 export default (state = initialState, action): SetsType =>
   produce(state, newState => {
+    const actionSet = newState[action.setId];
+    if (!actionSet) {
+      return;
+    }
+
+    const mostRecentStat = actionSet.stats[0];
+
     switch (action.type) {
       case ADD_SET:
-        newState[action.set.id] = action.set;
+        newState[action.setId] = action.set;
+        break;
+
+      case UPDATE_STAT:
+        const priorStat = actionSet.stats[action.index + 1];
+        if (priorStat) {
+          updatePriorStat(priorStat, action.stat);
+        }
+        actionSet.stats[action.index] = action.stat;
+
         break;
 
       case ADD_STAT:
-        const statSet = newState[action.set];
-        const lastStat = statSet.stats[0];
-
-        if (lastStat) {
-          // Change BHA to AST on kill
-          if (lastStat.shorthand === 'BHA' && action.stat.shorthand === 'K') {
-            statSet.stats[0].shorthand = 'AST';
-          }
-
-          // Change BS to BA on double block
-          const lastStatIsBlock = ['BS', 'BA'].indexOf(lastStat.shorthand) >= 0;
-          if (lastStatIsBlock && action.stat.shorthand === 'BS') {
-            statSet.stats[0].shorthand = 'BA';
-            action.stat.shorthand = 'BA';
-          }
+        if (mostRecentStat) {
+          updatePriorStat(mostRecentStat, action.stat);
         }
 
-        statSet.stats.unshift(action.stat);
+        actionSet.stats.unshift(action.stat);
         break;
 
-      case UNDO_LAST_STAT:
-        const undoSet = newState[action.set];
-        undoSet.stats.shift();
-
+      case REMOVE_STAT:
+        actionSet.stats.splice(action.index, 1);
         break;
 
-      case TOGGLE_ADJUSTMENT_LAST_STAT:
-        const priorSet = newState[action.set];
-        const priorStat = priorSet.stats.shift();
+      case TOGGLE_STAT_ADJUSTMENT:
+        const adjustmentStat = actionSet.stats[action.index];
 
-        if (!priorStat) {
+        if (!adjustmentStat || adjustmentStat.type !== StatTypes.playerStat) {
           break;
         }
 
-        if (priorStat.type === StatTypes.playerStat) {
-          priorStat.adjustment = !priorStat.adjustment;
-        }
-        priorSet.stats.unshift(priorStat);
-
-        break;
-
-      case UPDATE_STATS_ORDER:
-        newState[action.set].stats = action.stats;
+        adjustmentStat.adjustment = !adjustmentStat.adjustment;
+        actionSet.stats[action.index] = adjustmentStat;
 
         break;
     }

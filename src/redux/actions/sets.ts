@@ -1,36 +1,39 @@
 import {
   ADD_SET,
   ADD_STAT,
-  TOGGLE_ADJUSTMENT_LAST_STAT,
-  UNDO_LAST_STAT,
-  UPDATE_STATS_ORDER,
+  TOGGLE_STAT_ADJUSTMENT,
+  REMOVE_STAT,
+  UPDATE_STAT,
 } from '../constants';
 import {StatType} from '../redux.definitions';
 
 export const addSetAction = set => ({
   type: ADD_SET,
+  setId: set.id,
   set,
 });
 
-export const addStatAction = (set, stat: StatType, insertBefore = false) => ({
+export const addStatAction = (setId, stat: StatType) => ({
   type: ADD_STAT,
-  set,
+  setId,
   stat,
-  insertBefore,
 });
 
-export const undoLastStatAction = set => ({
-  type: UNDO_LAST_STAT,
-  set,
+export const updateStatAction = (setId, index, stat: StatType) => ({
+  type: UPDATE_STAT,
+  setId,
+  index,
+  stat,
 });
 
-export const toggleAdjustmentLastStatAction = set => ({
-  type: TOGGLE_ADJUSTMENT_LAST_STAT,
-  set,
+export const removeStatAction = (setId, index) => ({
+  type: REMOVE_STAT,
+  setId,
+  index,
 });
 
-export const updateStatsOrderAction = (set, stats) => ({
-  type: UPDATE_STATS_ORDER,
-  set,
-  stats,
+export const toggleStatAdjustmentAction = (setId, index) => ({
+  type: TOGGLE_STAT_ADJUSTMENT,
+  setId,
+  index,
 });

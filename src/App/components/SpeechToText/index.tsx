@@ -79,9 +79,9 @@ class SpeechToText extends React.Component<
       console.log('voiceCommand', voiceCommand);
 
       switch (voiceCommand.type) {
-        case VoiceCommandType.undo:
+        case VoiceCommandType.remove:
           this.props.onCommand({
-            type: VoiceCommandType.undo,
+            type: VoiceCommandType.remove,
           });
           break;
 

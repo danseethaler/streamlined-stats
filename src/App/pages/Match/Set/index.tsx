@@ -3,8 +3,8 @@ import {IoIosMic} from 'react-icons/io';
 import {connect} from 'react-redux';
 import {
   addStatAction,
-  toggleAdjustmentLastStatAction,
-  undoLastStatAction,
+  removeStatAction,
+  toggleStatAdjustmentAction,
 } from '../../../../redux/actions/sets';
 import {RootState} from '../../../../redux/reducers';
 import {SetType, StatType} from '../../../../redux/redux.definitions';
@@ -16,20 +16,18 @@ import StatsList from './StatsList';
 interface SetProps {
   set: SetType;
   addStat: (set: string, stat: StatType) => void;
-  undoLastStat: (set: string) => void;
-  toggleAdjustmentLastStat: (set: string) => void;
+  removeStat: (set: string, index: number) => void;
+  toggleStatAdjustment: (set: string, index: number) => void;
 }
 
 class Set extends React.Component<SetProps> {
   public handleCommand = command => {
-    console.log('command', command);
-
     switch (command.type) {
-      case VoiceCommandType.undo:
-        return this.props.undoLastStat(this.props.set.id);
+      case VoiceCommandType.remove:
+        return this.props.removeStat(this.props.set.id, 0);
 
       case VoiceCommandType.adjustment:
-        return this.props.toggleAdjustmentLastStat(this.props.set.id);
+        return this.props.toggleStatAdjustment(this.props.set.id, 0);
 
       default:
         return this.props.addStat(this.props.set.id, command);
@@ -58,7 +56,7 @@ export default connect(
   }),
   {
     addStat: addStatAction,
-    undoLastStat: undoLastStatAction,
-    toggleAdjustmentLastStat: toggleAdjustmentLastStatAction,
+    removeStat: removeStatAction,
+    toggleStatAdjustment: toggleStatAdjustmentAction,
   }
 )(Set);

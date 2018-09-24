@@ -8,7 +8,7 @@ export const enum VoiceCommandType {
   timeout = 'timeout',
   playerStat = 'playerStat',
   pointAdjustment = 'pointAdjustment',
-  undo = 'undo',
+  remove = 'remove',
   adjustment = 'adjustment',
   noMatch = 'noMatch',
 }
@@ -73,7 +73,7 @@ export const getCommands = (): VoiceCommands[] => {
       team: UsOrOpponent.opponent,
     },
     {
-      type: VoiceCommandType.undo,
+      type: VoiceCommandType.remove,
       regex: `^(undo|cancel|remove|delete)$`,
       team: UsOrOpponent.opponent,
     },
