@@ -1,4 +1,5 @@
 import {orderBy} from 'lodash';
+import moment from 'moment';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -18,7 +19,8 @@ class Matches extends React.Component<MatchesProps> {
         {orderBy(this.props.matches, ['date']).map(match => (
           <ShadowDiv key={match.id}>
             <Link to={'/match/' + match.id} className={linkCss}>
-              {match.date} - {match.opponent} {!match.home && '(away)'}
+              {moment(match.date).format('MM/DD')} - {match.opponent}{' '}
+              {!match.home && '(away)'}
             </Link>
           </ShadowDiv>
         ))}

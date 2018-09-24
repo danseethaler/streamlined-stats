@@ -36,7 +36,7 @@ class StatList extends React.Component<StatListProps, StatListState> {
               this.setState({showAll: !this.state.showAll});
             }}
           >
-            Toggle All
+            {this.state.showAll ? 'Hide older stats' : 'Show all stats'}
           </Button>
         )}
       </StatListContainer>
