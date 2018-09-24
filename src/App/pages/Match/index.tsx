@@ -66,6 +66,8 @@ class Match extends React.Component<MatchProps, MatchState> {
       return <Redirect to="/" />;
     }
 
+    const matchSets = getMatchSets(reduxMatch.id);
+
     return (
       <ContentContainer>
         <HeaderContainer>
@@ -140,32 +142,18 @@ class Match extends React.Component<MatchProps, MatchState> {
           </Switch>
         </HeaderContainer>
         <Switch>
-          <Route
-            path={`/match/${reduxMatch.id}/set/:setId`}
-            component={() => (
-              <React.Fragment>
-                <LeaderBoard sets={[this.props.sets[match.params.setId]]} />
-
-                <div style={{flex: 1}}>
-                  <Set setId={match.params.setId} />
-                </div>
-              </React.Fragment>
-            )}
-          />
+          <Route path={`/match/${reduxMatch.id}/set/:setId`} component={Set} />
           <Route
             path={`/match/${reduxMatch.id}/stats`}
-            component={() => <Stats sets={getMatchSets(reduxMatch.id)} />}
+            render={() => <Stats sets={matchSets} />}
           />
           <Route
             render={() => (
               <React.Fragment>
                 <div style={{flex: 1}}>
-                  <Sets
-                    matchId={reduxMatch.id}
-                    sets={getMatchSets(reduxMatch.id)}
-                  />
+                  <Sets matchId={reduxMatch.id} sets={matchSets} />
                 </div>
-                <LeaderBoard sets={getMatchSets(reduxMatch.id)} />
+                <LeaderBoard sets={matchSets} />
               </React.Fragment>
             )}
           />
