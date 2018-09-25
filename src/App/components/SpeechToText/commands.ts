@@ -23,13 +23,9 @@ interface VoiceCommands {
 }
 
 export const getCommands = (): VoiceCommands[] => {
-  // TODO: Remove alternateNames once jersey numbers prove effective
-  const playerGroupings = players.map(({name, jersey, alternateNames}) => ({
+  const playerGroupings = players.map(({name, jersey}) => ({
     player: name,
-    regex:
-      '(' +
-      [...getJerseyVoiceAlternatives(jersey), ...alternateNames].join('|') +
-      ')',
+    regex: '(' + getJerseyVoiceAlternatives(jersey).join('|') + ')',
   }));
 
   const commandGroupings = getFlatStatDefinitions(true)
