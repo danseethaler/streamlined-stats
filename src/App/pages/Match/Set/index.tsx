@@ -11,6 +11,7 @@ import {SetType, StatType} from '../../../../redux/redux.definitions';
 import LeaderBoard from '../../../components/LeaderBoard';
 import SpeechToText from '../../../components/SpeechToText';
 import {VoiceCommandType} from '../../../components/SpeechToText/commands';
+import {RecordStatsContainer} from './components';
 import Microphone from './Microphone';
 import StatsList from './StatsList';
 
@@ -42,12 +43,12 @@ class Set extends React.Component<SetProps> {
       <React.Fragment>
         <LeaderBoard sets={[set]} />
 
-        <div style={{flex: 1}}>
-          <StatsList set={set} />
+        <RecordStatsContainer>
           <SpeechToText onCommand={this.handleCommand}>
             {props => <Microphone {...props} />}
           </SpeechToText>
-        </div>
+          <StatsList set={set} />
+        </RecordStatsContainer>
       </React.Fragment>
     );
   }

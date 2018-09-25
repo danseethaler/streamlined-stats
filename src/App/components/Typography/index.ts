@@ -92,6 +92,10 @@ export const Paragraph5 = styled.p({
   margin: 0,
 });
 
+export const Monospace = styled.span({
+  fontFamily: 'monospace',
+});
+
 export const centered = css({
   textAlign: 'center',
 });

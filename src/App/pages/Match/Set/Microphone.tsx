@@ -46,9 +46,6 @@ class Microphone extends React.Component<SpeechToTextChildProps> {
         onMouseUp={stopListening}
         type={ButtonTypes.success}
         style={{
-          position: 'fixed',
-          bottom: 24,
-          right: 24,
           padding: '13px 16px',
           transition: TRANSITION_ALL,
           backgroundColor: listeningColors[listenerStatus],
