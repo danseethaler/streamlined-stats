@@ -14,7 +14,7 @@ import LeaderBoard from '../../components/LeaderBoard';
 import {colors} from '../../components/theme';
 import {Headline4, Paragraph2} from '../../components/Typography';
 import {getUniqueId} from '../../services/unique_id';
-import {PointsContainer} from './components';
+import {PointsContainer, PointSquare} from './components';
 import {getMatchSet, getMatchSets} from './services';
 import Set from './Set';
 import {getScores} from './Set/services';
@@ -59,6 +59,24 @@ class Match extends React.Component<MatchProps, MatchState> {
     this.props.history.push(`/match/${reduxMatch.id}/set/${id}`);
   };
 
+  public getHeaderText = (): string => {
+    const {reduxMatch, match} = this.props;
+
+    let headerText = `${reduxMatch.opponent} - `;
+
+    if (match.params.setId) {
+      headerText += 'Set ' + getMatchSet(match.params.setId).setNumber;
+    } else {
+      headerText += moment(reduxMatch.date).format('MM/D');
+
+      if (!reduxMatch.home) {
+        headerText += ' (away)';
+      }
+    }
+
+    return headerText;
+  };
+
   public render() {
     const {reduxMatch, match} = this.props;
 
@@ -82,8 +100,7 @@ class Match extends React.Component<MatchProps, MatchState> {
                 textAlign: 'center',
               }}
             >
-              {reduxMatch.opponent} - {moment(reduxMatch.date).format('MM/D')}
-              {!reduxMatch.home && ' (away)'}
+              {this.getHeaderText()}
             </Headline4>
           </HeaderSegment>
 
@@ -97,9 +114,18 @@ class Match extends React.Component<MatchProps, MatchState> {
 
                 return (
                   <PointsContainer>
-                    <Paragraph2>
-                      {scores.us} to {scores.opponent}
-                    </Paragraph2>
+                    <PointSquare>
+                      <Paragraph2>Home</Paragraph2>
+                      <Headline4>
+                        {reduxMatch.home ? scores.us : scores.opponent}
+                      </Headline4>
+                    </PointSquare>
+                    <PointSquare>
+                      <Paragraph2>Away</Paragraph2>
+                      <Headline4>
+                        {reduxMatch.home ? scores.opponent : scores.us}
+                      </Headline4>
+                    </PointSquare>
                   </PointsContainer>
                 );
               }}
