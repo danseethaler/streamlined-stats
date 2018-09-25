@@ -4,6 +4,7 @@ import {
   TOGGLE_STAT_ADJUSTMENT,
   REMOVE_STAT,
   UPDATE_STAT,
+  CLEAR_ALL_STATS,
 } from '../constants';
 import {StatType} from '../redux.definitions';
 
@@ -30,6 +31,11 @@ export const removeStatAction = (setId, index) => ({
   type: REMOVE_STAT,
   setId,
   index,
+});
+
+export const clearStatsAction = setId => ({
+  type: CLEAR_ALL_STATS,
+  setId,
 });
 
 export const toggleStatAdjustmentAction = (setId, index) => ({

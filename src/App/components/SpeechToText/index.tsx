@@ -80,17 +80,18 @@ class SpeechToText extends React.Component<
 
       const voiceCommand = getSpeechMatchCommands(results);
 
-      if (!voiceCommand) {
-        console.warn('No match!');
-        return;
-      }
-
-      console.log('voiceCommand', voiceCommand);
+      console.log(JSON.stringify(voiceCommand, null, 4));
 
       switch (voiceCommand.type) {
         case VoiceCommandType.remove:
           this.props.onCommand({
             type: VoiceCommandType.remove,
+          });
+          break;
+
+        case VoiceCommandType.clearAll:
+          this.props.onCommand({
+            type: VoiceCommandType.clearAll,
           });
           break;
 
@@ -127,9 +128,6 @@ class SpeechToText extends React.Component<
             type: StatTypes.noMatch,
             results: voiceCommand.results,
           });
-          break;
-
-        default:
           break;
       }
     };

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
 import {
   addStatAction,
+  clearStatsAction,
   removeStatAction,
   toggleStatAdjustmentAction,
 } from '../../../../redux/actions/sets';
@@ -17,8 +18,9 @@ import StatsList from './StatsList';
 
 interface SetProps extends RouteComponentProps<any> {
   set: SetType;
-  addStat: (set: string, stat: StatType) => void;
-  removeStat: (set: string, index: number) => void;
+  addStat: (setId: string, stat: StatType) => void;
+  removeStat: (setId: string, index: number) => void;
+  clearStats: (setId: string) => void;
   toggleStatAdjustment: (set: string, index: number) => void;
 }
 
@@ -27,6 +29,9 @@ class Set extends React.Component<SetProps> {
     switch (command.type) {
       case VoiceCommandType.remove:
         return this.props.removeStat(this.props.set.id, 0);
+
+      case VoiceCommandType.clearAll:
+        return this.props.clearStats(this.props.set.id);
 
       case VoiceCommandType.adjustment:
         return this.props.toggleStatAdjustment(this.props.set.id, 0);
@@ -61,6 +66,7 @@ export default connect(
   {
     addStat: addStatAction,
     removeStat: removeStatAction,
+    clearStats: clearStatsAction,
     toggleStatAdjustment: toggleStatAdjustmentAction,
   }
 )(Set);

@@ -1,8 +1,8 @@
 import produce from 'immer';
-import {uniqueId} from 'lodash';
 import {
   ADD_SET,
   ADD_STAT,
+  CLEAR_ALL_STATS,
   REMOVE_STAT,
   TOGGLE_STAT_ADJUSTMENT,
   UPDATE_STAT,
@@ -60,6 +60,10 @@ export default (state = initialState, action): SetsType =>
 
       case REMOVE_STAT:
         actionSet.stats.splice(action.index, 1);
+        break;
+
+      case CLEAR_ALL_STATS:
+        actionSet.stats = [];
         break;
 
       case TOGGLE_STAT_ADJUSTMENT:

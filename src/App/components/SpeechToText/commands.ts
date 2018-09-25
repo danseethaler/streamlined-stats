@@ -11,18 +11,19 @@ export const enum VoiceCommandType {
   remove = 'remove',
   adjustment = 'adjustment',
   noMatch = 'noMatch',
+  clearAll = 'clearAll',
 }
 
-interface VoiceCommands {
+interface VoiceCommand {
   type: VoiceCommandType;
-  regex: string;
+  regex?: string;
   shorthand?: string;
   player?: string;
   team?: UsOrOpponent;
   results?: string[];
 }
 
-export const getCommands = (): VoiceCommands[] => {
+export const getCommands = (): VoiceCommand[] => {
   const playerGroupings = players.map(({name, jersey}) => ({
     player: name,
     regex: '(' + getJerseyVoiceAlternatives(jersey).join('|') + ')',
@@ -74,6 +75,10 @@ export const getCommands = (): VoiceCommands[] => {
       team: UsOrOpponent.opponent,
     },
     {
+      type: VoiceCommandType.clearAll,
+      regex: `^clear all stats$`,
+    },
+    {
       type: VoiceCommandType.adjustment,
       regex: `^(adjustment|adjustments|address book)$`,
     },
@@ -84,15 +89,17 @@ export const getCommands = (): VoiceCommands[] => {
 
 const commands = getCommands();
 
-export const getSpeechMatchCommands = results => {
-  console.log(JSON.stringify(results, null, 4));
-
-  return (
-    commands.find(({regex}) =>
-      results.find(result => new RegExp(regex, 'i').test(result))
-    ) || {
-      type: VoiceCommandType.noMatch,
-      results,
-    }
+export const getSpeechMatchCommands = (results): VoiceCommand => {
+  const command = commands.find(({regex}) =>
+    results.find(result => new RegExp(regex, 'i').test(result))
   );
+
+  if (command) {
+    return {...command, ...{regex: undefined}};
+  }
+
+  return {
+    type: VoiceCommandType.noMatch,
+    results,
+  };
 };

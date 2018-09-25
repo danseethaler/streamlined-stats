@@ -21,6 +21,7 @@ const receiving = [
   'perception',
   'receiving',
   'receive',
+  'sieving',
 ];
 
 const error = [
