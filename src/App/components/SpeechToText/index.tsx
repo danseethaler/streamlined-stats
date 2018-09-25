@@ -78,9 +78,13 @@ class SpeechToText extends React.Component<
         results[k] = SpeechRecognitionResult[k].transcript.trim().toLowerCase();
       }
 
+      console.log(JSON.stringify(results, null, 4));
+
       const voiceCommand = getSpeechMatchCommands(results);
 
       console.log(JSON.stringify(voiceCommand, null, 4));
+
+      console.log('\n------------------\n');
 
       switch (voiceCommand.type) {
         case VoiceCommandType.remove:

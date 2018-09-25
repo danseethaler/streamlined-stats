@@ -115,15 +115,15 @@ class Match extends React.Component<MatchProps, MatchState> {
                 return (
                   <PointsContainer>
                     <PointSquare>
-                      <Paragraph2>Home</Paragraph2>
+                      <Paragraph2>GUEST</Paragraph2>
                       <Headline4>
-                        {reduxMatch.home ? scores.us : scores.opponent}
+                        {reduxMatch.home ? scores.opponent : scores.us}
                       </Headline4>
                     </PointSquare>
                     <PointSquare>
-                      <Paragraph2>Away</Paragraph2>
+                      <Paragraph2>HOME</Paragraph2>
                       <Headline4>
-                        {reduxMatch.home ? scores.opponent : scores.us}
+                        {reduxMatch.home ? scores.us : scores.opponent}
                       </Headline4>
                     </PointSquare>
                   </PointsContainer>
