@@ -13,7 +13,7 @@ const numberAlternates = [
     'and three',
     'in 3',
   ],
-  ['4', 'four', 'for', 'poor'],
+  ['4', 'four', 'for', 'or', 'poor'],
   ['5', 'five', '5:00'],
   ['6', 'six'],
   ['7', 'seven'],

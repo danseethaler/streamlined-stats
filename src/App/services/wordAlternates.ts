@@ -35,6 +35,7 @@ const error = [
   'near',
   'terror',
   'errors',
+  'hour',
 ];
 
 const ace = [
@@ -56,6 +57,7 @@ const ace = [
 
 const kill = [
   'kill',
+  'k',
   'chill',
   'killed',
   'kilo',
@@ -79,10 +81,12 @@ const freeball = [
   'pretty ball',
   'brie bowl',
   'pre bowl',
-  'free ball',
   'brie ball',
   'pre ball',
   'friebel',
+  'fremont',
+  'freemont',
+  '3 ball',
 ];
 
 const attempt = [
@@ -106,7 +110,9 @@ const attempt = [
   'attempts',
   'attempted',
   'a temps',
+  '10',
   '10th',
+  '/10',
   'to 10',
   'and 10',
   'tent',
@@ -137,8 +143,6 @@ const dig = [
   'days',
   'thin',
   'dear',
-  '30',
-  '3d',
   'greg',
   'bag',
   'dick',
@@ -169,7 +173,9 @@ const ballHandling = [
   'mandolin',
   'hand ling',
   'hand sing',
+  'hand',
   'handles',
+  'man doing',
   'ball handling',
   'ball handeling',
   'all handling',
