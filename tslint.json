@@ -4,6 +4,7 @@
     "interface-name": false,
     "object-literal-sort-keys": false,
     "ordered-imports": false,
-    "no-console": false
+    "no-console": false,
+    "prefer-for-of": false
   }
 }

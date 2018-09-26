@@ -90,12 +90,16 @@ export const getCommands = (): VoiceCommand[] => {
 const commands = getCommands();
 
 export const getSpeechMatchCommands = (results): VoiceCommand => {
-  const command = commands.find(({regex}) =>
-    results.find(result => new RegExp(regex, 'i').test(result))
-  );
+  let command;
 
-  if (command) {
-    return {...command, ...{regex: undefined}};
+  for (let index = 0; index < results.length; index++) {
+    command = commands.find(({regex}) =>
+      new RegExp(regex, 'i').test(results[index])
+    );
+
+    if (command) {
+      return {...command, ...{regex: undefined}};
+    }
   }
 
   return {
