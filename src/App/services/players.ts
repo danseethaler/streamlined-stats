@@ -114,7 +114,7 @@ const players = [
     height: '5-11',
   },
   {
-    jersey: [20],
+    jersey: [20, 3],
     name: 'Rachel',
     photoPath: require('../../assets/photos/rachel.png'),
     nameFull: 'Rachel Tucker',
