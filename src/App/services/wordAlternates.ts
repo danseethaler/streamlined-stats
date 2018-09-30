@@ -139,8 +139,6 @@ const dig = [
   'did you',
   'dirty',
   'dead',
-  'day',
-  'days',
   'thin',
   'dear',
   'greg',
