@@ -37,7 +37,21 @@ module.exports = (env, options) => {
     devtool: isDev ? 'inline-source-map' : false,
     entry: ['babel-polyfill', './src'],
     output: {
+      filename: isDev
+        ? '[name].[hash].bundle.js'
+        : '[name].[contenthash].bundle.js',
       publicPath: '/',
+    },
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          node_modules: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendor',
+            chunks: 'all',
+          },
+        },
+      },
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.json'],
