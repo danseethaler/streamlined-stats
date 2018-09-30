@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, {css} from 'react-emotion';
-import {IoMdUndo, IoMdPlay} from 'react-icons/io';
+import {IoIosMic, IoMdPlay} from 'react-icons/io';
 import {connect} from 'react-redux';
 import {
   removeStatAction,
@@ -10,16 +10,16 @@ import {
 import {StatTypes, UsOrOpponent} from '../../../../../redux/redux.definitions';
 import {TRANSITION_ALL} from '../../../../components/constants';
 import SpeechToText, {
+  ListenerStatuses,
   listeningColors,
   SpeechToTextChildProps,
-  ListenerStatuses,
 } from '../../../../components/SpeechToText';
 import {VoiceCommandType} from '../../../../components/SpeechToText/commands';
+import Spinner from '../../../../components/Spinner';
 import {colors} from '../../../../components/theme';
 import {Paragraph2, Paragraph3} from '../../../../components/Typography';
 import {getStatDefinition} from '../../../../services/stats/categories';
 import {StatResultTypes} from '../../../../services/stats/stats.definitions';
-import Spinner from '../../../../components/Spinner';
 
 export const StatListContainer = styled.div({
   display: 'flex',
@@ -30,7 +30,8 @@ export const StatListContainer = styled.div({
 const reRecordContainer = css({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'flex-end',
+  minWidth: 74,
   transition: TRANSITION_ALL,
   opacity: 0,
 });
@@ -87,6 +88,7 @@ const AdjustmentBox = styled.span({
 });
 
 const ReRecordStyle = css({
+  display: 'flex',
   backgroundColor: colors.extraLightCoolGray,
   borderRadius: '2em',
   padding: 5,
@@ -100,16 +102,16 @@ const ReRecordBase = ({
   updateStat,
   removeStat,
   toggleStatAdjustment,
-  audioUrl,
+  stat,
 }) => (
   <div className={reRecordContainer}>
-    {audioUrl && (
+    {stat.audioUrl && (
       <IoMdPlay
         size={32}
         color={colors.gray}
         className={ReRecordStyle}
         onClick={() => {
-          new Audio(audioUrl).play();
+          new Audio(stat.audioUrl).play();
         }}
       />
     )}
@@ -117,6 +119,10 @@ const ReRecordBase = ({
       onCommand={command => {
         switch (command.type) {
           case VoiceCommandType.noMatch:
+            return updateStat(setId, index, {
+              ...stat,
+              audioUrl: command.audioUrl,
+            });
             break;
 
           case VoiceCommandType.adjustment:
@@ -136,13 +142,11 @@ const ReRecordBase = ({
         stopListening,
       }: SpeechToTextChildProps) =>
         listenerStatus === ListenerStatuses.processing ? (
-          <Spinner
-            size={22}
-            color={colors.affirmative}
-            className={ReRecordStyle}
-          />
+          <div className={ReRecordStyle}>
+            <Spinner size={22} color={colors.affirmative} />
+          </div>
         ) : (
-          <IoMdUndo
+          <IoIosMic
             onMouseDown={startListening}
             onMouseUp={stopListening}
             size={32}
@@ -175,7 +179,7 @@ export const StatItem = ({index, setId, ...stat}) => {
           />
           {stat.adjustment && <AdjustmentBox>adj</AdjustmentBox>}
 
-          <ReRecord setId={setId} audioUrl={stat.audioUrl} index={index} />
+          <ReRecord setId={setId} stat={stat} index={index} />
         </StatContainer>
       );
 
@@ -186,7 +190,7 @@ export const StatItem = ({index, setId, ...stat}) => {
             text={`Timeout - ${stat.team}`}
             status="alternative"
           />
-          <ReRecord setId={setId} audioUrl={stat.audioUrl} index={index} />
+          <ReRecord setId={setId} stat={stat} index={index} />
         </StatContainer>
       );
 
@@ -202,7 +206,7 @@ export const StatItem = ({index, setId, ...stat}) => {
             }
             text={text}
           />
-          <ReRecord setId={setId} audioUrl={stat.audioUrl} index={index} />
+          <ReRecord setId={setId} stat={stat} index={index} />
         </StatContainer>
       );
 
@@ -219,22 +223,24 @@ export const StatItem = ({index, setId, ...stat}) => {
               }}
             >
               <StatTextWithDot status="noMatch" text="No Match" />
-              <ReRecord setId={setId} audioUrl={stat.audioUrl} index={index} />
+              <ReRecord setId={setId} stat={stat} index={index} />
             </div>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                flexWrap: 'wrap',
-                height: 140,
-              }}
-            >
-              {stat.results.map(result => (
-                <Paragraph3 key={result} style={{marginBottom: '0.3em'}}>
-                  {result}
-                </Paragraph3>
-              ))}
-            </div>
+            {!stat.audioUrl && (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flexWrap: 'wrap',
+                  height: 140,
+                }}
+              >
+                {stat.results.map(result => (
+                  <Paragraph3 key={result} style={{marginBottom: '0.3em'}}>
+                    {result}
+                  </Paragraph3>
+                ))}
+              </div>
+            )}
           </div>
         </StatContainer>
       );

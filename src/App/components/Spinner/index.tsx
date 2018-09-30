@@ -14,16 +14,15 @@ const getRingClassName = (size, color) =>
   css({
     display: 'inline-block',
     position: 'relative',
-    width: size * 1.2,
-    height: size * 1.2,
+    width: size,
+    height: size,
     '& div': {
       boxSizing: 'border-box',
       display: 'block',
       position: 'absolute',
       width: size,
       height: size,
-      margin: size / 10.16,
-      border: `${size / 10.16}px solid #fff`,
+      border: `${size / 10}px solid #fff`,
       borderRadius: '50%',
       animation: `${ringKeyframe} 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite`,
       borderColor: `${color} transparent transparent transparent`,
@@ -39,8 +38,8 @@ const getRingClassName = (size, color) =>
     },
   });
 
-const Spinner = ({size = 51, color = '#fff', className = ''}) => (
-  <div className={getRingClassName(size, color) + ' ' + className}>
+const Spinner = ({size = 51, color = '#fff'}) => (
+  <div className={getRingClassName(size, color)}>
     <div />
     <div />
     <div />

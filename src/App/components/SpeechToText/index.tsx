@@ -98,14 +98,12 @@ class SpeechToText extends React.Component<
         case VoiceCommandType.remove:
           this.props.onCommand({
             type: VoiceCommandType.remove,
-            audioUrl: this.state.audioUrl,
           });
           break;
 
         case VoiceCommandType.clearAll:
           this.props.onCommand({
             type: VoiceCommandType.clearAll,
-            audioUrl: this.state.audioUrl,
           });
           break;
 
