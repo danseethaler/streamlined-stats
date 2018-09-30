@@ -1,7 +1,8 @@
 import React from 'react';
 import {StatTypes} from '../../../redux/redux.definitions';
-import {getSpeechMatchCommands, VoiceCommandType} from './commands';
 import {colors} from '../theme';
+import {getSpeechMatchCommands, VoiceCommandType} from './commands';
+import {recordAudio} from './services';
 
 const speechApiAvailabled = () => 'webkitSpeechRecognition' in window;
 
@@ -30,6 +31,7 @@ interface SpeechToTextProps {
 
 interface SpeechToTextState {
   listenerStatus: ListenerStatuses;
+  audioUrl: string;
 }
 
 class SpeechToText extends React.Component<
@@ -38,28 +40,34 @@ class SpeechToText extends React.Component<
 > {
   public state = {
     listenerStatus: ListenerStatuses.ready,
+    audioUrl: '',
   };
 
   private recognition: any;
+  private audioRecording: any;
 
-  public componentDidMount() {
+  public async componentDidMount() {
     if (!speechApiAvailabled()) {
       console.log('Web Speech API is not supported on this browser.');
       return;
     }
 
+    this.audioRecording = await recordAudio();
     this.recognition = new window.webkitSpeechRecognition();
     this.recognition.continuous = false;
     this.recognition.lang = 'en-US';
     this.recognition.interimResults = false;
     this.recognition.maxAlternatives = 10;
 
-    this.recognition.onstart = () => {
-      this.setState({listenerStatus: ListenerStatuses.listening});
+    this.recognition.onstart = async () => {
+      this.setState({listenerStatus: ListenerStatuses.listening, audioUrl: ''});
+      this.audioRecording.start();
     };
 
-    this.recognition.onaudioend = () => {
+    this.recognition.onaudioend = async () => {
       this.setState({listenerStatus: ListenerStatuses.processing});
+      const audioUrl = await this.audioRecording.stop();
+      this.setState({audioUrl});
     };
 
     this.recognition.onend = () => {
@@ -90,24 +98,28 @@ class SpeechToText extends React.Component<
         case VoiceCommandType.remove:
           this.props.onCommand({
             type: VoiceCommandType.remove,
+            audioUrl: this.state.audioUrl,
           });
           break;
 
         case VoiceCommandType.clearAll:
           this.props.onCommand({
             type: VoiceCommandType.clearAll,
+            audioUrl: this.state.audioUrl,
           });
           break;
 
         case VoiceCommandType.adjustment:
           this.props.onCommand({
             type: VoiceCommandType.adjustment,
+            audioUrl: this.state.audioUrl,
           });
           break;
 
         case VoiceCommandType.playerStat:
           this.props.onCommand({
             type: StatTypes.playerStat,
+            audioUrl: this.state.audioUrl,
             player: voiceCommand.player,
             shorthand: voiceCommand.shorthand,
           });
@@ -116,6 +128,7 @@ class SpeechToText extends React.Component<
         case VoiceCommandType.pointAdjustment:
           this.props.onCommand({
             type: StatTypes.pointAdjustment,
+            audioUrl: this.state.audioUrl,
             team: voiceCommand.team,
           });
           break;
@@ -123,6 +136,7 @@ class SpeechToText extends React.Component<
         case VoiceCommandType.timeout:
           this.props.onCommand({
             type: StatTypes.timeout,
+            audioUrl: this.state.audioUrl,
             team: voiceCommand.team,
           });
           break;
@@ -130,6 +144,7 @@ class SpeechToText extends React.Component<
         case VoiceCommandType.noMatch:
           this.props.onCommand({
             type: StatTypes.noMatch,
+            audioUrl: this.state.audioUrl,
             results: voiceCommand.results,
           });
           break;

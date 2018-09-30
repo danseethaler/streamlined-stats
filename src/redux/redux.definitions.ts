@@ -7,28 +7,27 @@ export const enum StatTypes {
 
 export interface PlayerStat {
   type: StatTypes.playerStat;
+  audioUrl?: string;
   shorthand: string;
   player: string;
   adjustment?: boolean;
 }
 
-export const enum UsOrOpponent {
-  us = 'us',
-  opponent = 'opponent',
-}
-
 export interface TimeoutStat {
   type: StatTypes.timeout;
+  audioUrl?: string;
   team: UsOrOpponent;
 }
 
 export interface PointAdjustmentStat {
   type: StatTypes.pointAdjustment;
+  audioUrl?: string;
   team: UsOrOpponent;
 }
 
 export interface NoMatchStat {
   type: StatTypes.noMatch;
+  audioUrl?: string;
   results: string[];
 }
 
@@ -58,4 +57,9 @@ export interface MatchType {
 
 export interface MatchesType {
   [key: string]: MatchType;
+}
+
+export const enum UsOrOpponent {
+  us = 'us',
+  opponent = 'opponent',
 }

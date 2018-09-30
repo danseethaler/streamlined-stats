@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, {css} from 'react-emotion';
-import {IoMdUndo} from 'react-icons/io';
+import {IoMdUndo, IoMdPlay} from 'react-icons/io';
 import {connect} from 'react-redux';
 import {
   removeStatAction,
@@ -89,7 +89,8 @@ const AdjustmentBox = styled.span({
 const ReRecordStyle = css({
   backgroundColor: colors.extraLightCoolGray,
   borderRadius: '2em',
-  padding: 4,
+  padding: 5,
+  marginLeft: 5,
   cursor: 'pointer',
 });
 
@@ -99,8 +100,19 @@ const ReRecordBase = ({
   updateStat,
   removeStat,
   toggleStatAdjustment,
+  audioUrl,
 }) => (
   <div className={reRecordContainer}>
+    {audioUrl && (
+      <IoMdPlay
+        size={32}
+        color={colors.gray}
+        className={ReRecordStyle}
+        onClick={() => {
+          new Audio(audioUrl).play();
+        }}
+      />
+    )}
     <SpeechToText
       onCommand={command => {
         switch (command.type) {
@@ -163,7 +175,7 @@ export const StatItem = ({index, setId, ...stat}) => {
           />
           {stat.adjustment && <AdjustmentBox>adj</AdjustmentBox>}
 
-          <ReRecord setId={setId} index={index} />
+          <ReRecord setId={setId} audioUrl={stat.audioUrl} index={index} />
         </StatContainer>
       );
 
@@ -174,7 +186,7 @@ export const StatItem = ({index, setId, ...stat}) => {
             text={`Timeout - ${stat.team}`}
             status="alternative"
           />
-          <ReRecord setId={setId} index={index} />
+          <ReRecord setId={setId} audioUrl={stat.audioUrl} index={index} />
         </StatContainer>
       );
 
@@ -190,7 +202,7 @@ export const StatItem = ({index, setId, ...stat}) => {
             }
             text={text}
           />
-          <ReRecord setId={setId} index={index} />
+          <ReRecord setId={setId} audioUrl={stat.audioUrl} index={index} />
         </StatContainer>
       );
 
@@ -207,7 +219,7 @@ export const StatItem = ({index, setId, ...stat}) => {
               }}
             >
               <StatTextWithDot status="noMatch" text="No Match" />
-              <ReRecord setId={setId} index={index} />
+              <ReRecord setId={setId} audioUrl={stat.audioUrl} index={index} />
             </div>
             <div
               style={{

@@ -1,3 +1,5 @@
+import produce from 'immer';
+import {forEach} from 'lodash';
 import {LOCAL_STORAGE_KEY} from './constants';
 
 export const loadState = () => {
@@ -12,9 +14,17 @@ export const loadState = () => {
   }
 };
 
+const sanitizeState = state =>
+  produce(state, cleanState => {
+    forEach(cleanState.sets, ({stats}) =>
+      stats.map(stat => delete stat.audioUrl)
+    );
+  });
+
 export const saveState = state => {
   try {
-    const serializedState = JSON.stringify(state);
+    const cleanState = sanitizeState(state);
+    const serializedState = JSON.stringify(cleanState);
     localStorage.setItem(LOCAL_STORAGE_KEY, serializedState);
   } catch (error) {
     console.log('Error saving redux state:');
