@@ -3,7 +3,6 @@ export interface PlayerType {
   name: string;
   nameFull: string;
   year: string;
-  photoPath: string;
   positions: string[];
   height: string;
   captain?: boolean;
@@ -16,7 +15,6 @@ const players = [
   {
     jersey: [2],
     name: 'Juliann',
-    photoPath: require('../../assets/photos/juliann.png'),
     nameFull: 'Juliann De Jesus',
     year: 'Sr.',
     positions: ['RS', 'OH'],
@@ -25,7 +23,6 @@ const players = [
   {
     jersey: [4],
     name: 'Emma',
-    photoPath: require('../../assets/photos/emma.png'),
     nameFull: 'Emma Downing',
     year: 'Jr.',
     positions: ['MB', 'RS'],
@@ -34,7 +31,6 @@ const players = [
   {
     jersey: [5],
     name: 'Macy',
-    photoPath: require('../../assets/photos/macy.png'),
     nameFull: 'Macy Henry',
     year: 'Sr.',
     positions: ['S', 'RS'],
@@ -44,7 +40,6 @@ const players = [
   {
     jersey: [6],
     name: 'Kennedy',
-    photoPath: require('../../assets/photos/kennedy.png'),
     nameFull: 'Kennedy Herold-Rhoe',
     year: 'Sr.',
     positions: ['DS'],
@@ -53,7 +48,6 @@ const players = [
   {
     jersey: [7],
     name: 'Kat',
-    photoPath: require('../../assets/photos/kat.png'),
     nameFull: 'Kat Dameron',
     year: 'Jr.',
     positions: ['DS'],
@@ -62,7 +56,6 @@ const players = [
   {
     jersey: [8],
     name: 'Celeste',
-    photoPath: require('../../assets/photos/celeste.png'),
     nameFull: 'Celeste Pasley',
     year: 'Jr.',
     positions: ['OH', 'MB', 'OPP'],
@@ -71,7 +64,6 @@ const players = [
   {
     jersey: [9],
     name: 'Cailyn',
-    photoPath: require('../../assets/photos/cailyn.png'),
     nameFull: 'Cailyn Thornton',
     year: 'Jr.',
     positions: ['OH', 'DS'],
@@ -80,7 +72,6 @@ const players = [
   {
     jersey: [10],
     name: 'Victoria',
-    photoPath: require('../../assets/photos/victoria.png'),
     nameFull: 'Victoria Dalehite',
     year: 'Jr.',
     positions: ['OH', 'RS'],
@@ -89,7 +80,6 @@ const players = [
   {
     jersey: [11],
     name: 'Lydia',
-    photoPath: require('../../assets/photos/lydia.png'),
     nameFull: 'Lydia Wood',
     year: 'Fr.',
     positions: ['MH', 'OH'],
@@ -98,7 +88,6 @@ const players = [
   {
     jersey: [18],
     name: 'Colby',
-    photoPath: require('../../assets/photos/colby.png'),
     nameFull: 'Colby Rabalais',
     year: 'Sr.',
     positions: ['OH', 'DS'],
@@ -107,7 +96,6 @@ const players = [
   {
     jersey: [19],
     name: 'Sarah',
-    photoPath: require('../../assets/photos/sarah.png'),
     nameFull: 'Sarah McCuiston',
     year: 'Sr.',
     positions: ['MB', 'OH'],
@@ -116,7 +104,6 @@ const players = [
   {
     jersey: [20, 3],
     name: 'Rachel',
-    photoPath: require('../../assets/photos/rachel.png'),
     nameFull: 'Rachel Tucker',
     year: 'Sr.',
     positions: ['LB'],
@@ -126,7 +113,6 @@ const players = [
   {
     jersey: [1, 17],
     name: 'Marlee',
-    photoPath: require('../../assets/photos/marlee.png'),
     nameFull: 'Marlee Rakouskas-Rhoe',
     year: 'So.',
     positions: ['DS', 'OH'],
@@ -135,7 +121,6 @@ const players = [
   {
     jersey: [12, 14],
     name: 'Haylee',
-    photoPath: require('../../assets/photos/haylee.png'),
     nameFull: 'Haylee Cothran',
     year: 'So.',
     positions: ['DS', 'OH'],
@@ -144,7 +129,6 @@ const players = [
   {
     jersey: [15, 16],
     name: 'Hannah',
-    photoPath: require('../../assets/photos/hannah.png'),
     nameFull: 'Hannah Weaks',
     year: 'Sr.',
     positions: ['RS', 'OH'],
