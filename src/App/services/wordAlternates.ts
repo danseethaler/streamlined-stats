@@ -148,9 +148,10 @@ const dig = [
 
 const digError = [
   ...flatten(
-    dig.map(digItem => error.map(errorItem => digItem + ' ' + errorItem))
+    dig.map(digItem => error.map(errorItem => `${digItem} ${errorItem}`))
   ),
-  'dig error',
+  'digger',
+  'bigger',
   'diggler',
   'take care',
   'figure',
@@ -158,9 +159,6 @@ const digError = [
   'duke energy',
   'duke are',
   'digging are',
-  'digging are',
-  'digger',
-  'bigger',
 ];
 
 const ballHandling = [
@@ -196,7 +194,10 @@ const block = [
   'locking',
 ];
 
+const assist = ['assisted', 'assist', 'assist', 'cyst', 'cysts', 'cyst'];
+
 const wordAlternates = {
+  assist,
   service,
   receiving,
   error,

@@ -187,6 +187,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Assisted Block',
         shorthand: 'BA',
+        commandNames: [wordAlternates.block, wordAlternates.assist],
         calculator: getStatCount(['BA']),
         result: StatResultTypes.point,
         recordingType: StatRecordingType.manual,
@@ -214,6 +215,7 @@ const statDefinitions: StatCategoryType[] = [
       },
       {
         name: 'Handling Assist',
+        commandNames: [wordAlternates.ballHandling, wordAlternates.assist],
         shorthand: 'AST',
         calculator: getStatCount(['AST']),
         result: StatResultTypes.nill,
