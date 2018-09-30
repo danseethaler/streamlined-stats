@@ -46,6 +46,21 @@ export const styles = {
   primaryButtonBackground: `linear-gradient(135deg, ${colors.green}, #71eb9b)`,
 };
 
+export const mq = {
+  min: [
+    '@media (min-width: 576px)',
+    '@media (min-width: 768px)',
+    '@media (min-width: 992px)',
+    '@media (min-width: 1200px)',
+  ],
+  max: [
+    '@media (max-width: 575px)',
+    '@media (max-width: 767px)',
+    '@media (max-width: 991px)',
+    '@media (max-width: 1199px)',
+  ],
+};
+
 export type StyleType =
   | TemplateStringsArray
   | CSSObject

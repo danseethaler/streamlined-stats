@@ -1,9 +1,4 @@
-import styled, {css} from 'react-emotion';
-
-export const MatchesContainer = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-});
+import {css} from 'react-emotion';
 
 export const linkCss = css({
   textDecoration: 'none',

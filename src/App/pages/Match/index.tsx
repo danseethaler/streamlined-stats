@@ -14,9 +14,10 @@ import LeaderBoard from '../../components/LeaderBoard';
 import {colors} from '../../components/theme';
 import {Headline4, Paragraph2} from '../../components/Typography';
 import {getUniqueId} from '../../services/unique_id';
-import {PointsContainer, PointSquare} from './components';
+import {Columns, PointsContainer, PointSquare} from './components';
 import {getMatchSet, getMatchSets} from './services';
-import Set from './Set';
+import EditSet from './Set/EditSet';
+import ReviewSet from './Set/ReviewSet';
 import {getScores} from './Set/services';
 import Sets from './Sets';
 import Stats from './Stats';
@@ -169,19 +170,24 @@ class Match extends React.Component<MatchProps, MatchState> {
           </Switch>
         </HeaderContainer>
         <Switch>
-          <Route path={`/match/${reduxMatch.id}/set/:setId`} component={Set} />
+          <Route
+            path={`/match/${reduxMatch.id}/set/:setId/edit`}
+            component={EditSet}
+          />
+          <Route
+            path={`/match/${reduxMatch.id}/set/:setId/:playerName?`}
+            component={ReviewSet}
+          />
           <Route
             path={`/match/${reduxMatch.id}/stats`}
             render={() => <Stats sets={matchSets} />}
           />
           <Route
             render={() => (
-              <React.Fragment>
-                <div style={{flex: 1}}>
-                  <Sets matchId={reduxMatch.id} sets={matchSets} />
-                </div>
+              <Columns>
+                <Sets matchId={reduxMatch.id} sets={matchSets} />
                 <LeaderBoard sets={matchSets} />
-              </React.Fragment>
+              </Columns>
             )}
           />
         </Switch>

@@ -80,6 +80,11 @@ export const StatTextWithDot = ({text, status}) => (
   </div>
 );
 
+const Timestamp = styled.span({
+  color: colors.gray,
+  padding: '0px 3px',
+});
+
 const AdjustmentBox = styled.span({
   color: colors.gray,
   padding: '0px 3px',
@@ -168,7 +173,13 @@ const ReRecord = connect(
   }
 )(ReRecordBase);
 
-export const StatItem = ({index, setId, ...stat}) => {
+export const StatItem = ({index, setId, stat, showTimestamp = ''}) => {
+  const rightContent = showTimestamp ? (
+    <Timestamp>{showTimestamp}</Timestamp>
+  ) : (
+    <ReRecord setId={setId} stat={stat} index={index} />
+  );
+
   switch (stat.type) {
     case StatTypes.playerStat:
       return (
@@ -179,7 +190,7 @@ export const StatItem = ({index, setId, ...stat}) => {
           />
           {stat.adjustment && <AdjustmentBox>adj</AdjustmentBox>}
 
-          <ReRecord setId={setId} stat={stat} index={index} />
+          {rightContent}
         </StatContainer>
       );
 
@@ -190,7 +201,7 @@ export const StatItem = ({index, setId, ...stat}) => {
             text={`Timeout - ${stat.team}`}
             status="alternative"
           />
-          <ReRecord setId={setId} stat={stat} index={index} />
+          {rightContent}
         </StatContainer>
       );
 
@@ -206,7 +217,7 @@ export const StatItem = ({index, setId, ...stat}) => {
             }
             text={text}
           />
-          <ReRecord setId={setId} stat={stat} index={index} />
+          {rightContent}
         </StatContainer>
       );
 
@@ -223,7 +234,7 @@ export const StatItem = ({index, setId, ...stat}) => {
               }}
             >
               <StatTextWithDot status="noMatch" text="No Match" />
-              <ReRecord setId={setId} stat={stat} index={index} />
+              {rightContent}
             </div>
             {!stat.audioUrl && (
               <div

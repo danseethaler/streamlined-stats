@@ -7,9 +7,7 @@ interface LeaderBoardProps {
 
 class LeaderBoard extends React.Component<LeaderBoardProps> {
   public render() {
-    return (
-      <div style={{flex: 1}}>LeaderBoard for {this.props.sets.length} sets</div>
-    );
+    return <div>LeaderBoard for {this.props.sets.length} sets</div>;
   }
 }
 

@@ -26,7 +26,7 @@ class StatList extends React.Component<StatListProps, StatListState> {
         {set.stats
           .slice(0, this.state.showAll ? 1000 : 10)
           .map((stat, index) => (
-            <StatItem key={index} setId={set.id} index={index} {...stat} />
+            <StatItem key={index} setId={set.id} index={index} stat={stat} />
           ))}
         {set.stats.length === 0 && (
           <Paragraph2 style={{color: colors.lightGray, marginTop: 20}}>

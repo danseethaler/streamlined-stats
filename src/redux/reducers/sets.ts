@@ -5,6 +5,7 @@ import {
   CLEAR_ALL_STATS,
   REMOVE_STAT,
   TOGGLE_STAT_ADJUSTMENT,
+  UPDATE_SET,
   UPDATE_STAT,
 } from '../constants';
 import {SetsType, StatTypes} from '../redux.definitions';
@@ -41,13 +42,19 @@ export default (state = initialState, action): SetsType =>
     const mostRecentStat = actionSet.stats[0];
 
     switch (action.type) {
+      case UPDATE_SET:
+        Object.assign(actionSet, action.updates);
+        break;
+
       case UPDATE_STAT:
         if (action.stat.type === StatTypes.playerStat) {
           const priorStat = actionSet.stats[action.index + 1];
           if (priorStat) {
             updatePriorStat(priorStat, action.stat);
           }
-          actionSet.stats[action.index] = action.stat;
+          const currentStat = actionSet.stats[action.index];
+          // Get currentState to maintain the timestamp
+          actionSet.stats[action.index] = {...currentStat, ...action.stat};
         }
 
         break;

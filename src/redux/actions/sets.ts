@@ -1,10 +1,11 @@
 import {
   ADD_SET,
   ADD_STAT,
-  TOGGLE_STAT_ADJUSTMENT,
-  REMOVE_STAT,
-  UPDATE_STAT,
   CLEAR_ALL_STATS,
+  REMOVE_STAT,
+  TOGGLE_STAT_ADJUSTMENT,
+  UPDATE_SET,
+  UPDATE_STAT,
 } from '../constants';
 import {StatType} from '../redux.definitions';
 
@@ -14,10 +15,16 @@ export const addSetAction = set => ({
   set,
 });
 
+export const updateSetAction = (setId, updates) => ({
+  type: UPDATE_SET,
+  setId,
+  updates,
+});
+
 export const addStatAction = (setId, stat: StatType) => ({
   type: ADD_STAT,
   setId,
-  stat,
+  stat: {...stat, ...{timestamp: Date.now()}},
 });
 
 export const updateStatAction = (setId, index, stat: StatType) => ({

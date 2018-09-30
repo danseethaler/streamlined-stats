@@ -9,15 +9,17 @@ import {
 } from '../../../../redux/actions/sets';
 import {RootState} from '../../../../redux/reducers';
 import {SetType, StatType} from '../../../../redux/redux.definitions';
-import LeaderBoard from '../../../components/LeaderBoard';
 import SpeechToText from '../../../components/SpeechToText';
 import {VoiceCommandType} from '../../../components/SpeechToText/commands';
+import {Columns} from '../components';
 import {RecordStatsContainer} from './components';
 import Microphone from './Microphone';
+import RecordingStart from './RecordingStart';
 import StatsList from './StatsList';
 
 interface SetProps extends RouteComponentProps<any> {
   set: SetType;
+  playerName?: string;
   addStat: (setId: string, stat: StatType) => void;
   removeStat: (setId: string, index: number) => void;
   clearStats: (setId: string) => void;
@@ -45,8 +47,8 @@ class Set extends React.Component<SetProps> {
     const {set} = this.props;
 
     return (
-      <React.Fragment>
-        <LeaderBoard sets={[set]} />
+      <Columns>
+        <RecordingStart set={set} />
 
         <RecordStatsContainer>
           <SpeechToText onCommand={this.handleCommand}>
@@ -54,7 +56,7 @@ class Set extends React.Component<SetProps> {
           </SpeechToText>
           <StatsList set={set} />
         </RecordStatsContainer>
-      </React.Fragment>
+      </Columns>
     );
   }
 }
