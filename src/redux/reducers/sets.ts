@@ -42,11 +42,13 @@ export default (state = initialState, action): SetsType =>
 
     switch (action.type) {
       case UPDATE_STAT:
-        const priorStat = actionSet.stats[action.index + 1];
-        if (priorStat) {
-          updatePriorStat(priorStat, action.stat);
+        if (action.stat.type === StatTypes.playerStat) {
+          const priorStat = actionSet.stats[action.index + 1];
+          if (priorStat) {
+            updatePriorStat(priorStat, action.stat);
+          }
+          actionSet.stats[action.index] = action.stat;
         }
-        actionSet.stats[action.index] = action.stat;
 
         break;
 
