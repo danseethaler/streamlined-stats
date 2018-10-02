@@ -114,6 +114,13 @@ class SpeechToText extends React.Component<
           });
           break;
 
+        case VoiceCommandType.review:
+          this.props.onCommand({
+            type: VoiceCommandType.review,
+            audioUrl: this.state.audioUrl,
+          });
+          break;
+
         case VoiceCommandType.playerStat:
           this.props.onCommand({
             type: StatTypes.playerStat,

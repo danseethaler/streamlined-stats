@@ -5,7 +5,7 @@ import {
   addStatAction,
   clearStatsAction,
   removeStatAction,
-  toggleStatAdjustmentAction,
+  toggleStatFlagAction,
 } from '../../../../redux/actions/sets';
 import {RootState} from '../../../../redux/reducers';
 import {SetType, StatType} from '../../../../redux/redux.definitions';
@@ -23,7 +23,11 @@ interface SetProps extends RouteComponentProps<any> {
   addStat: (setId: string, stat: StatType) => void;
   removeStat: (setId: string, index: number) => void;
   clearStats: (setId: string) => void;
-  toggleStatAdjustment: (set: string, index: number) => void;
+  toggleStatFlag: (
+    set: string,
+    index: number,
+    flag: 'adjustment' | 'review'
+  ) => void;
 }
 
 class Set extends React.Component<SetProps> {
@@ -36,7 +40,10 @@ class Set extends React.Component<SetProps> {
         return this.props.clearStats(this.props.set.id);
 
       case VoiceCommandType.adjustment:
-        return this.props.toggleStatAdjustment(this.props.set.id, 0);
+        return this.props.toggleStatFlag(this.props.set.id, 0, 'adjustment');
+
+      case VoiceCommandType.review:
+        return this.props.toggleStatFlag(this.props.set.id, 0, 'review');
 
       default:
         return this.props.addStat(this.props.set.id, command);
@@ -69,6 +76,6 @@ export default connect(
     addStat: addStatAction,
     removeStat: removeStatAction,
     clearStats: clearStatsAction,
-    toggleStatAdjustment: toggleStatAdjustmentAction,
+    toggleStatFlag: toggleStatFlagAction,
   }
 )(Set);

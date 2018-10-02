@@ -10,6 +10,7 @@ export const enum VoiceCommandType {
   pointAdjustment = 'pointAdjustment',
   remove = 'remove',
   adjustment = 'adjustment',
+  review = 'review',
   noMatch = 'noMatch',
   clearAll = 'clearAll',
 }
@@ -81,6 +82,10 @@ export const getCommands = (): VoiceCommand[] => {
     {
       type: VoiceCommandType.adjustment,
       regex: `^(adjustment|adjustments|address book)$`,
+    },
+    {
+      type: VoiceCommandType.review,
+      regex: `^(review|reviews)$`,
     },
   ];
 

@@ -4,7 +4,7 @@ import {
   ADD_STAT,
   CLEAR_ALL_STATS,
   REMOVE_STAT,
-  TOGGLE_STAT_ADJUSTMENT,
+  TOGGLE_STAT_FLAG,
   UPDATE_SET,
   UPDATE_STAT,
 } from '../constants';
@@ -79,15 +79,22 @@ export default (state = initialState, action): SetsType =>
         actionSet.stats = [];
         break;
 
-      case TOGGLE_STAT_ADJUSTMENT:
-        const adjustmentStat = actionSet.stats[action.index];
+      case TOGGLE_STAT_FLAG:
+        const flagStat = actionSet.stats[action.index];
 
-        if (!adjustmentStat || adjustmentStat.type !== StatTypes.playerStat) {
+        if (!flagStat) {
           break;
         }
 
-        adjustmentStat.adjustment = !adjustmentStat.adjustment;
-        actionSet.stats[action.index] = adjustmentStat;
+        if (
+          action.flag === 'adjustment' &&
+          flagStat.type !== StatTypes.playerStat
+        ) {
+          break;
+        }
+
+        flagStat[action.flag] = !flagStat[action.flag];
+        actionSet.stats[action.index] = flagStat;
 
         break;
     }

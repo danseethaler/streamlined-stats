@@ -3,7 +3,7 @@ import {
   ADD_STAT,
   CLEAR_ALL_STATS,
   REMOVE_STAT,
-  TOGGLE_STAT_ADJUSTMENT,
+  TOGGLE_STAT_FLAG,
   UPDATE_SET,
   UPDATE_STAT,
 } from '../constants';
@@ -45,8 +45,13 @@ export const clearStatsAction = setId => ({
   setId,
 });
 
-export const toggleStatAdjustmentAction = (setId, index) => ({
-  type: TOGGLE_STAT_ADJUSTMENT,
+export const toggleStatFlagAction = (
   setId,
   index,
+  flag: 'adjustment' | 'review'
+) => ({
+  type: TOGGLE_STAT_FLAG,
+  setId,
+  index,
+  flag,
 });

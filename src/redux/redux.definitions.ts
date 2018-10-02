@@ -12,27 +12,31 @@ export interface PlayerStat {
   shorthand: string;
   player: string;
   adjustment?: boolean;
+  review?: boolean;
 }
 
 export interface TimeoutStat {
   type: StatTypes.timeout;
   timestamp: number;
-  audioUrl?: string;
   team: UsOrOpponent;
+  audioUrl?: string;
+  review?: boolean;
 }
 
 export interface PointAdjustmentStat {
   type: StatTypes.pointAdjustment;
   timestamp: number;
-  audioUrl?: string;
   team: UsOrOpponent;
+  audioUrl?: string;
+  review?: boolean;
 }
 
 export interface NoMatchStat {
   type: StatTypes.noMatch;
   timestamp: number;
-  audioUrl?: string;
   results: string[];
+  audioUrl?: string;
+  review?: boolean;
 }
 
 export type StatType =

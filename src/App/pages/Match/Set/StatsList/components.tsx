@@ -4,7 +4,7 @@ import {IoIosMic, IoMdPlay} from 'react-icons/io';
 import {connect} from 'react-redux';
 import {
   removeStatAction,
-  toggleStatAdjustmentAction,
+  toggleStatFlagAction,
   updateStatAction,
 } from '../../../../../redux/actions/sets';
 import {StatTypes, UsOrOpponent} from '../../../../../redux/redux.definitions';
@@ -106,7 +106,7 @@ const ReRecordBase = ({
   setId,
   updateStat,
   removeStat,
-  toggleStatAdjustment,
+  toggleStatFlag,
   stat,
 }) => (
   <div className={reRecordContainer}>
@@ -128,10 +128,12 @@ const ReRecordBase = ({
               ...stat,
               audioUrl: command.audioUrl,
             });
-            break;
 
           case VoiceCommandType.adjustment:
-            return toggleStatAdjustment(setId, index);
+            return toggleStatFlag(setId, index, 'adjustment');
+
+          case VoiceCommandType.review:
+            return toggleStatFlag(setId, index, 'review');
 
           case VoiceCommandType.remove:
             return removeStat(setId, index);
@@ -169,7 +171,7 @@ const ReRecord = connect(
   {
     updateStat: updateStatAction,
     removeStat: removeStatAction,
-    toggleStatAdjustment: toggleStatAdjustmentAction,
+    toggleStatFlag: toggleStatFlagAction,
   }
 )(ReRecordBase);
 
@@ -188,6 +190,7 @@ export const StatItem = ({index, setId, stat, showTimestamp = ''}) => {
             text={`${stat.shorthand} - ${stat.player}`}
             status={getStatDefinition(stat.shorthand).result}
           />
+          {stat.review && <AdjustmentBox>review</AdjustmentBox>}
           {stat.adjustment && <AdjustmentBox>adj</AdjustmentBox>}
 
           {rightContent}
@@ -201,6 +204,7 @@ export const StatItem = ({index, setId, stat, showTimestamp = ''}) => {
             text={`Timeout - ${stat.team}`}
             status="alternative"
           />
+          {stat.review && <AdjustmentBox>review</AdjustmentBox>}
           {rightContent}
         </StatContainer>
       );
@@ -217,6 +221,7 @@ export const StatItem = ({index, setId, stat, showTimestamp = ''}) => {
             }
             text={text}
           />
+          {stat.review && <AdjustmentBox>review</AdjustmentBox>}
           {rightContent}
         </StatContainer>
       );
@@ -234,6 +239,7 @@ export const StatItem = ({index, setId, stat, showTimestamp = ''}) => {
               }}
             >
               <StatTextWithDot status="noMatch" text="No Match" />
+              {stat.review && <AdjustmentBox>review</AdjustmentBox>}
               {rightContent}
             </div>
             {!stat.audioUrl && (
