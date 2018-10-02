@@ -47,7 +47,11 @@ export default (state = initialState, action): SetsType =>
         break;
 
       case UPDATE_STAT:
-        if (action.stat.type === StatTypes.playerStat) {
+        if (
+          action.stat.type === StatTypes.playerStat ||
+          action.stat.type === StatTypes.timeout ||
+          action.stat.type === StatTypes.pointAdjustment
+        ) {
           const priorStat = actionSet.stats[action.index + 1];
           if (priorStat) {
             updatePriorStat(priorStat, action.stat);

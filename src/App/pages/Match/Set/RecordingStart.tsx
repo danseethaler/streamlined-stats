@@ -24,7 +24,7 @@ const RecordingStart = ({set, updateSet}: RecordingStartProps) => (
     </Button>
     {set.recordingStartTime && (
       <Paragraph3>
-        Start Time: {moment(set.recordingStartTime).format('H:mma')}
+        Start Time: {moment(set.recordingStartTime).format('h:mma')}
       </Paragraph3>
     )}
   </div>

@@ -57,7 +57,7 @@ class Match extends React.Component<MatchProps, MatchState> {
       stats: [],
     });
 
-    this.props.history.push(`/match/${reduxMatch.id}/set/${id}`);
+    this.props.history.push(`/match/${reduxMatch.id}/set/${id}/edit`);
   };
 
   public getHeaderText = (): string => {

@@ -33,9 +33,13 @@ const PlayerTimedStats = ({
   playerName,
   history,
 }: PlayerTimedStatsProps) => {
-  const playerStats = (set.stats.filter(
-    ({type}) => type === StatTypes.playerStat
-  ) as PlayerStat[]).filter(({player}) => !playerName || player === playerName);
+  let stats = set.stats;
+
+  if (playerName) {
+    stats = (set.stats.filter(
+      ({type}) => type === StatTypes.playerStat
+    ) as PlayerStat[]).filter(({player}) => player === playerName);
+  }
 
   return (
     <StatListContainer>
@@ -58,8 +62,8 @@ const PlayerTimedStats = ({
           </option>
         ))}
       </Select>
-      {playerStats.length ? (
-        playerStats.map((stat, index) => (
+      {stats.length ? (
+        stats.map((stat, index) => (
           <StatItem
             key={index}
             setId={set.id}
