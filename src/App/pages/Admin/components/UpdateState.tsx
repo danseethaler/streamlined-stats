@@ -2,7 +2,7 @@ import React from 'react';
 import {LOCAL_STORAGE_KEY} from '../../../../redux/constants';
 import {ShadowDiv} from '../../../components/Bits';
 import Button, {ButtonTypes} from '../../../components/Button';
-import static_sets from '../static_sets';
+import storedState from '../stored_state';
 
 const UpdateState = () => (
   <ShadowDiv>
@@ -24,7 +24,7 @@ const UpdateState = () => (
     <Button
       type={ButtonTypes.gray}
       onClick={() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(static_sets));
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(storedState));
         window.location = window.location;
       }}
     >
