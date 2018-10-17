@@ -1,6 +1,7 @@
 import produce from 'immer';
 import {forEach} from 'lodash';
 import {LOCAL_STORAGE_KEY} from './constants';
+import storedState from '../App/pages/Admin/stored_state';
 
 const defaultState = {
   sets: {},
@@ -11,11 +12,11 @@ export const loadState = () => {
   try {
     const serializedState = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (serializedState === null) {
-      return defaultState;
+      return storedState;
     }
     return JSON.parse(serializedState);
   } catch (error) {
-    return defaultState;
+    return storedState;
   }
 };
 

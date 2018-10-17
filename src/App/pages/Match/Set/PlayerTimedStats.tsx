@@ -26,12 +26,14 @@ const getMinuteSecondDiff = (start, end) => {
 interface PlayerTimedStatsProps extends RouteComponentProps<any> {
   set: SetType;
   playerName: string;
+  goToVideoTime: (time: number) => void;
 }
 
 const PlayerTimedStats = ({
   set,
   playerName,
   history,
+  goToVideoTime,
 }: PlayerTimedStatsProps) => {
   let stats = set.stats;
 
@@ -71,6 +73,14 @@ const PlayerTimedStats = ({
               set.recordingStartTime,
               stat.timestamp
             )}
+            onClick={() => {
+              const seconds = moment(stat.timestamp).diff(
+                set.recordingStartTime,
+                'seconds'
+              );
+
+              goToVideoTime(seconds - 5);
+            }}
             index={index}
             stat={stat}
           />

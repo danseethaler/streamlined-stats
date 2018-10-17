@@ -49,6 +49,7 @@ export interface SetType {
   id: string;
   matchId: string;
   setNumber: number;
+  youtubeVideoId?: string;
   recordingStartTime?: number;
   stats: StatType[];
 }

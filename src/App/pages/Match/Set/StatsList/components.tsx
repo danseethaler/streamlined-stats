@@ -25,6 +25,13 @@ export const StatListContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  position: 'absolute',
+  right: 0,
+  top: 70,
+  bottom: 0,
+  height: 'calc(100vh - 70px)',
+  overflowY: 'auto',
+  overflowX: 'hidden',
 });
 
 const reRecordContainer = css({
@@ -45,6 +52,7 @@ const StatContainer = styled.div({
   marginTop: '0.5em',
   backgroundColor: colors.xxLightCoolGray,
   borderRadius: 24,
+  cursor: 'pointer',
   ':hover': {
     [`& .${reRecordContainer}`]: {
       opacity: 1,
@@ -175,7 +183,13 @@ const ReRecord = connect(
   }
 )(ReRecordBase);
 
-export const StatItem = ({index, setId, stat, showTimestamp = ''}) => {
+export const StatItem = ({
+  index,
+  setId,
+  stat,
+  showTimestamp = '',
+  onClick = () => null,
+}) => {
   const rightContent = showTimestamp ? (
     <Timestamp>{showTimestamp}</Timestamp>
   ) : (
@@ -185,7 +199,7 @@ export const StatItem = ({index, setId, stat, showTimestamp = ''}) => {
   switch (stat.type) {
     case StatTypes.playerStat:
       return (
-        <StatContainer>
+        <StatContainer onClick={onClick}>
           <StatTextWithDot
             text={`${stat.shorthand} - ${stat.player}`}
             status={getStatDefinition(stat.shorthand).result}

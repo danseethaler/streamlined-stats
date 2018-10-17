@@ -7,3 +7,9 @@ export const RecordStatsContainer = styled.div({
   alignItems: 'center',
   justifyContent: 'flex-start',
 });
+
+export const VideoContainer = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  maxWidth: '50vw',
+});
