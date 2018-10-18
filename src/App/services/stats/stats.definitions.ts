@@ -14,6 +14,7 @@ export const enum StatResultTypes {
 export interface StatDefinitionType {
   name: string;
   shorthand: string;
+  maxPrepsId: string;
   commandNames?: string[][];
   calculator: (name: string, sets: SetsType) => any;
   maxPrepsCalculator?: (name: string, sets: SetsType) => any | null;

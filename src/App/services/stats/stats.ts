@@ -21,6 +21,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Sets Played',
         shorthand: 'SP',
+        maxPrepsId: 'MatchGamesPlayed',
         calculator: getPlayerSetsCount,
         result: StatResultTypes.nill,
         recordingType: StatRecordingType.calculated,
@@ -33,6 +34,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Service Attempt',
         commandNames: [wordAlternates.service, wordAlternates.attempt],
+        maxPrepsId: 'TotalServes',
         shorthand: 'SA',
         calculator: getStatCount(['SA', 'A', 'SE']),
         result: StatResultTypes.nill,
@@ -41,6 +43,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Ace',
         commandNames: [wordAlternates.ace],
+        maxPrepsId: 'ServingAces',
         shorthand: 'A',
         calculator: getStatCount(['A']),
         result: StatResultTypes.point,
@@ -49,6 +52,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Service Error',
         commandNames: [wordAlternates.service, wordAlternates.error],
+        maxPrepsId: 'ServingErrors',
         shorthand: 'SE',
         calculator: getStatCount(['SE']),
         result: StatResultTypes.error,
@@ -57,6 +61,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Service Rotation Points',
         shorthand: 'PTS',
+        maxPrepsId: 'ServingPoints',
         calculator: (name, sets) => {
           const statsArray = getFlatStatsFromSets(sets);
 
@@ -101,6 +106,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Attack Attempt',
         commandNames: [wordAlternates.attempt],
+        maxPrepsId: 'AttacksAttempts',
         shorthand: 'ATT',
         calculator: getStatCount(['ATT', 'K', 'E']),
         result: StatResultTypes.nill,
@@ -109,6 +115,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Kill',
         commandNames: [wordAlternates.kill],
+        maxPrepsId: 'AttacksKills',
         shorthand: 'K',
         calculator: getStatCount(['K']),
         result: StatResultTypes.point,
@@ -117,6 +124,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Attack Error',
         commandNames: [wordAlternates.error],
+        maxPrepsId: 'AttacksErrors',
         shorthand: 'E',
         calculator: getStatCount(['E']),
         result: StatResultTypes.error,
@@ -125,6 +133,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Freeball',
         commandNames: [wordAlternates.freeball],
+        maxPrepsId: null,
         shorthand: 'FB',
         calculator: getStatCount(['FB']),
         maxPrepsCalculator: null,
@@ -139,6 +148,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Receiving 1',
         commandNames: [wordAlternates.receiving, numberAlternates[1]],
+        maxPrepsId: 'ServingReceivedSuccess',
         shorthand: 'R1',
         calculator: getStatCount(['R1']),
         maxPrepsCalculator: getStatCount(['R1', 'R2', 'R3']),
@@ -148,6 +158,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Receiving 2',
         commandNames: [wordAlternates.receiving, numberAlternates[2]],
+        maxPrepsId: null,
         shorthand: 'R2',
         calculator: getStatCount(['R2']),
         maxPrepsCalculator: null,
@@ -157,6 +168,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Receiving 3',
         commandNames: [wordAlternates.receiving, numberAlternates[3]],
+        maxPrepsId: null,
         shorthand: 'R3',
         calculator: getStatCount(['R3']),
         maxPrepsCalculator: null,
@@ -166,6 +178,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Receiving Error',
         commandNames: [wordAlternates.receiving, wordAlternates.error],
+        maxPrepsId: 'ServingReceivedErrors',
         shorthand: 'RE',
         calculator: getStatCount(['RE']),
         result: StatResultTypes.error,
@@ -179,6 +192,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Solo Block',
         commandNames: [wordAlternates.block],
+        maxPrepsId: 'BlocksSolo',
         shorthand: 'BS',
         calculator: getStatCount(['BS']),
         result: StatResultTypes.point,
@@ -188,6 +202,7 @@ const statDefinitions: StatCategoryType[] = [
         name: 'Assisted Block',
         shorthand: 'BA',
         commandNames: [wordAlternates.block, wordAlternates.assist],
+        maxPrepsId: 'BlocksAssists',
         calculator: getStatCount(['BA']),
         result: StatResultTypes.point,
         recordingType: StatRecordingType.manual,
@@ -195,6 +210,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Blocking Error',
         commandNames: [wordAlternates.block, wordAlternates.error],
+        maxPrepsId: 'BlocksErrors',
         shorthand: 'BE',
         calculator: getStatCount(['BE']),
         result: StatResultTypes.error,
@@ -208,6 +224,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Handling Attempt',
         commandNames: [wordAlternates.ballHandling],
+        maxPrepsId: 'BallHandlingAttempt',
         shorthand: 'BHA',
         calculator: getStatCount(['BHA', 'AST', 'BHE']),
         result: StatResultTypes.nill,
@@ -216,6 +233,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Handling Assist',
         commandNames: [wordAlternates.ballHandling, wordAlternates.assist],
+        maxPrepsId: 'Assists',
         shorthand: 'AST',
         calculator: getStatCount(['AST']),
         result: StatResultTypes.nill,
@@ -224,6 +242,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Handling Error',
         commandNames: [wordAlternates.ballHandling, wordAlternates.error],
+        maxPrepsId: 'AssistsErrors',
         shorthand: 'BHE',
         calculator: getStatCount(['BHE']),
         result: StatResultTypes.error,
@@ -237,6 +256,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Dig',
         commandNames: [wordAlternates.dig],
+        maxPrepsId: 'Digs',
         shorthand: 'D',
         calculator: getStatCount(['D']),
         result: StatResultTypes.nill,
@@ -245,6 +265,7 @@ const statDefinitions: StatCategoryType[] = [
       {
         name: 'Dig Error',
         commandNames: [wordAlternates.digError],
+        maxPrepsId: 'DigsErrors',
         shorthand: 'DE',
         calculator: getStatCount(['DE']),
         result: StatResultTypes.error,
