@@ -12,11 +12,11 @@ interface PlayerStat {
   value: number;
 }
 
-interface CalculatedPlayerStats extends PlayerType {
+export interface CalculatedPlayerStats extends PlayerType {
   stats: PlayerStat[];
 }
 
-const getStatsByPlayer = (
+export const getStatsByPlayer = (
   sets: SetType[],
   useMaxpreps
 ): CalculatedPlayerStats[] =>

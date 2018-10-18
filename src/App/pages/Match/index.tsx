@@ -15,7 +15,7 @@ import {colors} from '../../components/theme';
 import {Headline4, Paragraph2} from '../../components/Typography';
 import {getUniqueId} from '../../services/unique_id';
 import {Columns, PointsContainer, PointSquare} from './components';
-import {getMatchSet, getMatchSets} from './services';
+import {downloadMaxPrepsExport, getMatchSet, getMatchSets} from './services';
 import EditSet from './Set/EditSet';
 import ReviewSet from './Set/ReviewSet';
 import {getScores} from './Set/services';
@@ -185,7 +185,17 @@ class Match extends React.Component<MatchProps, MatchState> {
           <Route
             render={() => (
               <Columns>
-                <Sets matchId={reduxMatch.id} sets={matchSets} />
+                <div>
+                  <Sets matchId={reduxMatch.id} sets={matchSets} />
+                  <Button
+                    type={ButtonTypes.primary}
+                    onClick={() => {
+                      downloadMaxPrepsExport(matchSets);
+                    }}
+                  >
+                    Download MaxPreps Export
+                  </Button>
+                </div>
                 <LeaderBoard sets={matchSets} />
               </Columns>
             )}
