@@ -11,5 +11,5 @@ export const download = (content, fileName, contentType) => {
 export default () => {
   const state = store.getState();
 
-  download(JSON.stringify(state), 'streamlined_stats.json', 'text/json');
+  download(JSON.stringify(state), 'spoken_stats.json', 'text/json');
 };
