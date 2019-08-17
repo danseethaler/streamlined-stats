@@ -11,6 +11,8 @@ import {RootState} from '../../../../redux/reducers';
 import {SetType, StatType} from '../../../../redux/redux.definitions';
 import SpeechToText from '../../../components/SpeechToText';
 import {VoiceCommandType} from '../../../components/SpeechToText/commands';
+import players from '../../../services/players';
+import statDefinitions from '../../../services/stats/stats';
 import {Columns} from '../components';
 import {RecordStatsContainer} from './components';
 import Microphone from './Microphone';
@@ -55,7 +57,42 @@ class Set extends React.Component<SetProps> {
 
     return (
       <Columns>
-        <RecordingStart set={set} />
+        <RecordStatsContainer>
+          <RecordingStart set={set} />
+
+          <table>
+            <tbody>
+              {players.map(player => (
+                <tr key={player.name}>
+                  <td style={{textAlign: 'right'}}>
+                    <b>{player.jersey.join('/')}</b>
+                  </td>
+                  <td>{player.name}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </RecordStatsContainer>
+        <RecordStatsContainer style={{flex: 1}}>
+          <table>
+            <tbody>
+              {statDefinitions.map(statGroup => (
+                <React.Fragment key={statGroup.name}>
+                  <tr>
+                    <th style={{textAlign: 'left'}}>
+                      <b>{statGroup.name}</b>
+                    </th>
+                  </tr>
+                  {statGroup.stats.map(stat => (
+                    <tr key={stat.name}>
+                      <td>{stat.name}</td>
+                    </tr>
+                  ))}
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        </RecordStatsContainer>
 
         <RecordStatsContainer>
           <SpeechToText onCommand={this.handleCommand}>

@@ -104,7 +104,7 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.Attack,
     stats: [
       {
-        name: 'Attack Attempt',
+        name: 'Attempt',
         commandNames: [wordAlternates.attempt],
         maxPrepsId: 'AttacksAttempts',
         shorthand: 'ATT',
@@ -122,7 +122,7 @@ const statDefinitions: StatCategoryType[] = [
         recordingType: StatRecordingType.manual,
       },
       {
-        name: 'Attack Error',
+        name: 'Error',
         commandNames: [wordAlternates.error],
         maxPrepsId: 'AttacksErrors',
         shorthand: 'E',
