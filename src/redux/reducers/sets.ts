@@ -1,4 +1,7 @@
 import produce from 'immer';
+import _ from 'lodash';
+import {VoiceCommandType} from '../../App/components/SpeechToText/commands';
+import wordAlternates from '../../App/services/wordAlternates';
 import {
   ADD_SET,
   ADD_STAT,
@@ -66,6 +69,41 @@ export default (state = initialState, action): SetsType =>
       case ADD_STAT:
         if (mostRecentStat) {
           updatePriorStat(mostRecentStat, action.stat);
+        }
+
+        // TODO: this is a emporary HACK! Build a more robust sytem for
+        // "quick-update" commands
+        if (action.stat.type === VoiceCommandType.noMatch) {
+          if (
+            _.intersection(action.stat.results, wordAlternates.ace).length > 0
+          ) {
+            if (mostRecentStat.shorthand === 'SA') {
+              mostRecentStat.shorthand = 'A';
+              break;
+            }
+          }
+
+          if (
+            _.intersection(action.stat.results, wordAlternates.error).length > 0
+          ) {
+            if (mostRecentStat.shorthand === 'SA') {
+              mostRecentStat.shorthand = 'SE';
+              break;
+            }
+            if (mostRecentStat.shorthand === 'ATT') {
+              mostRecentStat.shorthand = 'E';
+              break;
+            }
+          }
+
+          if (
+            _.intersection(action.stat.results, wordAlternates.kill).length > 0
+          ) {
+            if (mostRecentStat.shorthand === 'ATT') {
+              mostRecentStat.shorthand = 'K';
+              break;
+            }
+          }
         }
 
         actionSet.stats.unshift(action.stat);
