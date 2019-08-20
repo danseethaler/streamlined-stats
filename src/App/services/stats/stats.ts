@@ -146,6 +146,16 @@ const statDefinitions: StatCategoryType[] = [
     name: StatCategories.Receiving,
     stats: [
       {
+        name: 'Receiving 0',
+        commandNames: [wordAlternates.receiving, numberAlternates[0]],
+        maxPrepsId: null,
+        shorthand: 'R0',
+        calculator: getStatCount(['R0']),
+        maxPrepsCalculator: null,
+        result: StatResultTypes.nill,
+        recordingType: StatRecordingType.manual,
+      },
+      {
         name: 'Receiving 1',
         commandNames: [wordAlternates.receiving, numberAlternates[1]],
         maxPrepsId: 'ServingReceivedSuccess',
