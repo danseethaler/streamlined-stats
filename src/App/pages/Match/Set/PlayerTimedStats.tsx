@@ -1,6 +1,6 @@
 import {padStart} from 'lodash';
 import moment from 'moment';
-import React from 'react';
+import React, {useState} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {
   PlayerStat,
@@ -10,7 +10,10 @@ import {
 import {Select} from '../../../components/Select';
 import {Paragraph2} from '../../../components/Typography';
 import players from '../../../services/players';
+import {getFlatStatDefinitions} from '../../../services/stats/categories';
 import {StatItem, StatListContainer} from './StatsList/components';
+
+const flatDefinitions = getFlatStatDefinitions();
 
 const getMinuteSecondDiff = (start, end) => {
   if (!start || !end) {
@@ -35,35 +38,64 @@ const PlayerTimedStats = ({
   history,
   goToVideoTime,
 }: PlayerTimedStatsProps) => {
+  const [statTypeFilter, setStatTypeFilter] = useState(null);
+
   let stats = set.stats;
 
   if (playerName) {
-    stats = (set.stats.filter(
-      ({type}) => type === StatTypes.playerStat
-    ) as PlayerStat[]).filter(({player}) => player === playerName);
+    stats = (stats as PlayerStat[]).filter(
+      ({type, player}) => type === StatTypes.playerStat && player === playerName
+    );
+  }
+
+  if (statTypeFilter) {
+    stats = (stats as PlayerStat[]).filter(
+      ({type, shorthand}) =>
+        type === StatTypes.playerStat && shorthand === statTypeFilter
+    );
   }
 
   return (
     <StatListContainer>
-      <Select
-        value={playerName}
-        onChange={({target}) => {
-          const currentPath = history.location.pathname;
-          const pathParts = currentPath.split('/');
-          const newPath = pathParts.slice(0, 5).join('/') + '/' + target.value;
+      <div>
+        <Select
+          value={playerName}
+          onChange={({target}) => {
+            const currentPath = history.location.pathname;
+            const pathParts = currentPath.split('/');
+            const newPath =
+              pathParts.slice(0, 5).join('/') + '/' + target.value;
 
-          history.replace(newPath);
-        }}
-      >
-        <option key={name} value="">
-          All Players
-        </option>
-        {players.map(({name}) => (
-          <option key={name} value={name}>
-            {name}
+            history.replace(newPath);
+          }}
+        >
+          <option key={name} value="">
+            All Players
           </option>
-        ))}
-      </Select>
+          {players.map(({name}) => (
+            <option key={name} value={name}>
+              {name}
+            </option>
+          ))}
+        </Select>
+      </div>
+      <div>
+        <Select
+          value={statTypeFilter}
+          onChange={({target}) => {
+            setStatTypeFilter(target.value);
+          }}
+        >
+          <option key={name} value="">
+            All Stats
+          </option>
+          {flatDefinitions.map(({name, shorthand}) => (
+            <option key={name} value={shorthand}>
+              {shorthand} - {name}
+            </option>
+          ))}
+        </Select>
+      </div>
       {stats.length ? (
         stats.map((stat, index) => (
           <StatItem
@@ -86,7 +118,9 @@ const PlayerTimedStats = ({
           />
         ))
       ) : (
-        <Paragraph2>No stats found for {playerName}</Paragraph2>
+        <Paragraph2>
+          No stats found for {playerName} - {statTypeFilter}
+        </Paragraph2>
       )}
     </StatListContainer>
   );
